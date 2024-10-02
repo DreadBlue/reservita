@@ -3,40 +3,34 @@
     <v-row>
       <v-col cols="7" sm="3">
         <NuxtLink to="/">
-          <!-- <img
-            src="../../assets/imgs/logoMain.png"
-            alt="logo"
-            style="width: 100%"
-          /> -->
+          <img src="/logo-cuadro-negro.png" alt="logo" style="width: 20%" />
         </NuxtLink>
       </v-col>
       <v-col class="d-flex flex-column d-sm-none align-end h-100">
-        <v-app-bar-nav-icon
-          variant="text"
-          @click.stop="drawer = !drawer"
-        ></v-app-bar-nav-icon>
+        <v-app-bar class="d-flex justify-space-between bg-white px-7" prominent>
+          <NuxtLink to="/">
+            <img src="/logo-cuadro-negro.png" alt="logo" style="width: 15%" />
+          </NuxtLink>
+          <v-app-bar-nav-icon
+            variant="text"
+            @click.stop="drawer = !drawer"
+          ></v-app-bar-nav-icon>
+        </v-app-bar>
 
         <v-navigation-drawer
           v-model="drawer"
           :location="$vuetify.display.mobile ? 'left' : undefined"
           temporary
-          style="width: 100%"
         >
           <v-list-item
             v-for="route in routes"
-            :to="route.route"
             :key="route.name"
-            :active="false"
+            :to="route.route"
             :title="route.name"
-            style="font-size: 4rem"
+            :active="false"
             variant="plain"
+            class="px-0"
           ></v-list-item>
-          <v-btn
-            v-if="signOutBtn"
-            class="bg-main color-white ma-5"
-            @click="signOut"
-            >Cerrar sesión</v-btn
-          >
         </v-navigation-drawer>
       </v-col>
       <v-col cols="9" class="d-none d-sm-flex justify-space-evenly pa-0">
@@ -74,28 +68,28 @@ export default {
     group: null,
     routes: [
       {
-        name: 'Inicio',
-        route: '/',
+        name: "INICIO",
+        route: "/",
       },
       {
-        name: 'Actividades',
-        route: '/actividades',
+        name: "ACTIVIDADES",
+        route: "/actividades",
       },
       {
-        name: 'Cabañas',
-        route: '/cabanas',
+        name: "EVENTOS EMPRESARIALES",
+        route: "/eventos-empresariales",
       },
       {
-        name: '¿Quienes somos?',
-        route: '/quienes-somos',
+        name: "EQUIPO",
+        route: "equipo",
       },
       {
-        name: 'Contacto',
-        route: '/contacto',
+        name: "CONTACTO",
+        route: "/contacto",
       },
       {
-        name: 'Mi reserva',
-        route: '/mireserva',
+        name: "MI RESERVA",
+        route: "/mireserva",
       },
     ],
   }),
@@ -109,8 +103,8 @@ export default {
         .catch((error) => {
           // An error happened.
         });
-      this.useGeneral.updateState(false, 'signOutButton');
-      return navigateTo('/admin');
+      this.useGeneral.updateState(false, "signOutButton");
+      return navigateTo("/admin");
     },
   },
   watch: {

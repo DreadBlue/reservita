@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     head: {
       title: 'La reservita',
       link: [{
-        rel: "icon", href: "/logo-e7954e35.ico", type:"image/x-icon"
+        rel: "icon", href: "/favicon.ico", type:"image/x-icon"
       }],
       script:[
        {
