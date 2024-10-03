@@ -5,7 +5,10 @@
                 <span class="text-white">{{ model.title }}</span>
             </v-col>
             <v-col cols="6" class="order-1">
-                'hola'
+                <div>
+                    <p>{{ model.title }}</p>
+                    <p>{{ model.description }}</p>
+                </div>
             </v-col>
         </v-row>
     </v-container>

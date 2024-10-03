@@ -1,11 +1,12 @@
 <template>
   <HomeBanner />
-  <GeneralBannerText />
+  <GeneralBannerText :model="modelThree"/>
   <GeneralPresentationCard :model="modelOne"/>
   <GeneralPresentationCard :model="modelTwo"/>
 </template>
 
 <script lang="ts" setup>
+
 const modelOne = {
   clases: 'order-2',
   title: 'Hola',
@@ -17,5 +18,9 @@ const modelTwo = {
   title: 'Hola',
   description: 'Hola',
   image: '/images/arborismo.webp',
+}
+const modelThree = {
+  clases: 'bg-main color-white',
+  description: 'Somos un ecoparque de aventura que ofrece experiencias de barranquismo, torrentismo y arborismo. Nos especializamos en brindar aventuras emocionantes y seguras, inmersas en la naturaleza, para aquellos que buscan desafiar sus límites y disfrutar de paisajes impresionantes.',
 }
 </script>

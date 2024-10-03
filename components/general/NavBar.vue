@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="pa-3">
     <v-row>
       <!-- Mobile -->
-      <v-col class="d-flex flex-column d-sm-none align-end h-100">
+      <v-col class="d-flex flex-column d-sm-none align-end h-100 bg-mywhite">
         <v-app-bar class="d-flex justify-space-between bg-white px-4" prominent>
           <NuxtLink to="/">
             <img src="/logo-completo-negro.png" alt="logo" style="width: 60%" class="pt-3" />
@@ -32,7 +32,7 @@
       </v-col>
       
       <!-- Desktop -->
-      <v-col cols="12" class="d-none d-sm-flex justify-space-between pa-0 px-7">
+      <v-col cols="12" class="d-none d-sm-flex justify-space-between pa-0 px-7 bg-mywhite">
         <v-list-item
           v-for="route in firstHalfRoutes"
           :key="route.name"
@@ -40,7 +40,7 @@
           :title="route.name"
           :active="false"
           variant="plain"
-          class="px-0"
+          class="px-0 color-myblack"
         ></v-list-item>
         
         <NuxtLink to="/" class="d-flex align-center v-col-2">
@@ -57,9 +57,9 @@
           class="px-0"
         ></v-list-item>
         
-        <div class="d-flex align-center">
+        <!-- <div class="d-flex align-center">
           <v-btn v-if="signOutBtn" class="bg-main color-white" @click="signOut">Cerrar sesión</v-btn>
-        </div>
+        </div> -->
       </v-col>
     </v-row>
   </v-container>
@@ -115,20 +115,20 @@ export default {
       return this.routes.slice(middleIndex);
     }
   },
-  methods: {
-    signOut() {
-      const auth = getAuth();
-      signOut(auth)
-        .then(() => {
-          //signout
-        })
-        .catch((error) => {
-          // An error happened.
-        });
-      this.useGeneral.updateState(false, "signOutButton");
-      return navigateTo("/admin");
-    },
-  },
+  // methods: {
+  //   signOut() {
+  //     const auth = getAuth();
+  //     signOut(auth)
+  //       .then(() => {
+  //         //signout
+  //       })
+  //       .catch((error) => {
+  //         // An error happened.
+  //       });
+  //     this.useGeneral.updateState(false, "signOutButton");
+  //     return navigateTo("/admin");
+  //   },
+  // },
   watch: {
     group() {
       this.drawer = false;

@@ -1,7 +1,7 @@
 <template>
   <v-container
     fluid
-    class="pa-0 mt-10 text-body-2 text-sm-footer"
+    class="pa-0 mt-0 text-body-2 text-sm-footer"
     style="color: white; font-size: 0.9rem"
   >
     <v-row class="bg-main px-15 mx-0">
@@ -13,14 +13,14 @@
       >
         <NuxtLink to="/">
           <img
-            src="../../assets/imgs/logo.svg"
+            src="/logo-cuadro.png"
             alt="Logo"
-            style="max-width: 80%"
+            style="max-width: 30%"
             class="pb-3"
           />
         </NuxtLink>
-        <span>Nimaima, Cundinamarca</span>
-        <span>reservas.abyayalahostel@gmail.com</span>
+        <span>Amagá, Antioquia</span>
+        <span>info@lareservita.com</span>
       </v-col>
       <v-col
         cols="6"
@@ -35,24 +35,18 @@
         <div class="w-25 pb-2">SIGUENOS</div>
         <div class="d-flex w-25 ga-4 justify-center">
           <NuxtLink
-            to="https://www.facebook.com/abyayalahostel"
-            style="color: white"
-          >
-            <v-icon icon="mdi-facebook"></v-icon>
-          </NuxtLink>
-          <NuxtLink
-            to="https://www.instagram.com/hostelabyayala/"
+            to="https://www.instagram.com/lareservita/"
             style="color: white"
           >
             <v-icon icon="mdi-instagram"></v-icon>
           </NuxtLink>
-          <NuxtLink to="https://wa.me/+573112269303" style="color: white">
+          <NuxtLink to="https://wa.me/+573117834136" style="color: white">
             <v-icon icon="mdi-whatsapp"></v-icon>
           </NuxtLink>
         </div>
       </v-col>
     </v-row>
-    <v-row class="bg-second mx-0 py-2">
+    <v-row class="bg-mywhite mx-0 py-2 color-myblack">
       <v-col
         cols="12"
         sm="5"
@@ -61,10 +55,12 @@
         <NuxtLink>Términos y condiciones</NuxtLink>
         <NuxtLink
           to="https://maps.app.goo.gl/guAsprxNM6qezkfNA"
-          style="text-decoration: none; color: white"
+          style="text-decoration: none;"
+          class="color-myblack"
           >Maps</NuxtLink
         >
-        <NuxtLink to="admin" style="text-decoration: none; color: white"
+        <NuxtLink to="admin" style="text-decoration: none;"
+        class="color-myblack"
           >Admin</NuxtLink
         >
       </v-col>
@@ -74,7 +70,7 @@
           <NuxtLink
             to="https://dreadblue.com"
             style="text-decoration: none"
-            class="color-third"
+            class="color-main"
             >Dread Blue SAS</NuxtLink
           >
         </div>

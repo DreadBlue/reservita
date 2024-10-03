@@ -6,7 +6,7 @@
           'weight': 900,
           'line-height': 6rem,
           'letter-spacing': 0,
-          'font-family': 'Raleway Variable',
+          'font-family': 'Merriweather Sans Variable',
           'text-transform': none
         ),
         'h2': (
@@ -14,7 +14,7 @@
             'weight': 900,
             'line-height': 3.75rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'h3': (
@@ -22,7 +22,7 @@
             'weight': 900,
             'line-height': 4rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'h4': (
@@ -30,7 +30,7 @@
             'weight': 900,
             'line-height': 3rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'h5': (
@@ -38,7 +38,7 @@
             'weight': 900,
             'line-height': 2rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'h6': (
@@ -46,7 +46,7 @@
             'weight': 900,
             'line-height': 2rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'subtitle': (
@@ -54,7 +54,7 @@
             'weight': 700,
             'line-height': 1.75rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'subtitle-1': (
@@ -62,7 +62,7 @@
             'weight': 700,
             'line-height': 1.75rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'subtitle-2': (
@@ -70,7 +70,7 @@
             'weight': 700,
             'line-height': 1.375rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'body': (
@@ -78,7 +78,7 @@
             'weight': 400,
             'line-height': 2rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'body-1': (
@@ -86,7 +86,7 @@
             'weight': 400,
             'line-height': 2rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'body-2': (
@@ -94,7 +94,7 @@
             'weight': 400,
             'line-height': 1.5rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'footer': (
@@ -102,7 +102,7 @@
             'weight': 400,
             'line-height': 1.5rem,
             'letter-spacing': 0,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'button': (
@@ -110,7 +110,7 @@
             'weight': 500,
             'line-height': 2.25rem,
             'letter-spacing': .0892857143em,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': uppercase
           ),
           'caption': (
@@ -118,7 +118,7 @@
             'weight': 400,
             'line-height': 1.25rem,
             'letter-spacing': .0333333333em,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': none
           ),
           'overline': (
@@ -126,45 +126,52 @@
             'weight': 500,
             'line-height': 2rem,
             'letter-spacing': .1666666667em,
-            'font-family': 'Raleway Variable',
+            'font-family': 'Merriweather Sans Variable',
             'text-transform': uppercase
           )
       ),
 );
 
 body {
-    font-family: 'Raleway Variable', sans-serif;
+    font-family: 'Merriweather Sans Variable', sans-serif;
     overflow: hidden;
+    background-color: #EDEDE3;
 }
-.font-raleway {
-    font-family: 'Raleway Variable', sans-serif;
+.font-Merriweather {
+    font-family: 'Merriweather Sans Variable', sans-serif;
 }
 
 .bg-main {
-    background-color: #00bbd6;
+    background-color: #37503D;
 }
 
 .bg-second {
-    background-color: #228fa2;
+    background-color: #163E73;
 }
 .bg-third {
-    background-color: #f1bb1b;
+    background-color: #707322;
 }
-.bg-mygrey {
-    background-color: #fafafa;
+.bg-mywhite {
+    background-color: #EDEDE3;
+}
+.bg-myblack {
+    background-color: #19261B;
 }
 .color-main {
-    color: #00bbd6;
+    color: #37503D;
 }
 
 .color-second {
-    color: #228fa2;
+    color: #163E73;
 }
 .color-third {
-    color: #f1bb1b;
+    color: #707322;
 }
 .color-white {
-    color: white;
+    color: #EDEDE3;
+}
+.color-myblack {
+    color: #19261B;
 }
 .texto-title {
     font-size: 2.5rem;
@@ -176,6 +183,10 @@ body {
 }
 .texto-main {
     font-size: 1.1rem;
+}
+
+.text-fun {
+    font-family: 'Exo 2 Variable', sans-serif;
 }
 
 .loader {
