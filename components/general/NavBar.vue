@@ -1,15 +1,11 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="7" sm="3">
-        <NuxtLink to="/">
-          <img src="/logo-cuadro-negro.png" alt="logo" style="width: 20%" />
-        </NuxtLink>
-      </v-col>
+      <!-- Mobile -->
       <v-col class="d-flex flex-column d-sm-none align-end h-100">
-        <v-app-bar class="d-flex justify-space-between bg-white px-7" prominent>
+        <v-app-bar class="d-flex justify-space-between bg-white px-4" prominent>
           <NuxtLink to="/">
-            <img src="/logo-cuadro-negro.png" alt="logo" style="width: 15%" />
+            <img src="/logo-completo-negro.png" alt="logo" style="width: 60%" class="pt-3" />
           </NuxtLink>
           <v-app-bar-nav-icon
             variant="text"
@@ -21,6 +17,7 @@
           v-model="drawer"
           :location="$vuetify.display.mobile ? 'left' : undefined"
           temporary
+          class="pa-4"
         >
           <v-list-item
             v-for="route in routes"
@@ -33,9 +30,11 @@
           ></v-list-item>
         </v-navigation-drawer>
       </v-col>
-      <v-col cols="9" class="d-none d-sm-flex justify-space-evenly pa-0">
+      
+      <!-- Desktop -->
+      <v-col cols="12" class="d-none d-sm-flex justify-space-between pa-0 px-7">
         <v-list-item
-          v-for="route in routes"
+          v-for="route in firstHalfRoutes"
           :key="route.name"
           :to="route.route"
           :title="route.name"
@@ -43,10 +42,23 @@
           variant="plain"
           class="px-0"
         ></v-list-item>
+        
+        <NuxtLink to="/" class="d-flex align-center v-col-2">
+          <img src="/logo-completo-negro.png" alt="logo" style="width: 100%"/>
+        </NuxtLink>
+        
+        <v-list-item
+          v-for="route in secondHalfRoutes"
+          :key="route.name"
+          :to="route.route"
+          :title="route.name"
+          :active="false"
+          variant="plain"
+          class="px-0"
+        ></v-list-item>
+        
         <div class="d-flex align-center">
-          <v-btn v-if="signOutBtn" class="bg-main color-white" @click="signOut"
-            >Cerrar sesión</v-btn
-          >
+          <v-btn v-if="signOutBtn" class="bg-main color-white" @click="signOut">Cerrar sesión</v-btn>
         </div>
       </v-col>
     </v-row>
@@ -93,6 +105,16 @@ export default {
       },
     ],
   }),
+  computed: {
+    firstHalfRoutes() {
+      const middleIndex = Math.ceil(this.routes.length / 2);
+      return this.routes.slice(0, middleIndex);
+    },
+    secondHalfRoutes() {
+      const middleIndex = Math.ceil(this.routes.length / 2);
+      return this.routes.slice(middleIndex);
+    }
+  },
   methods: {
     signOut() {
       const auth = getAuth();
