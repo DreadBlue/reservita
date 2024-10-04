@@ -20,8 +20,16 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 export const useBookingStore = defineStore("booking", {
   state: () => {
     return {
-      nombre: "",
-      celular: "",
+      nombre: '',
+      celular: '',
+      correo: '',
+      cedula: '',
+      disponibilidad: {
+        arborismo: 0,
+        cayoning: 0,
+        aventura: 0
+      },
+      max: '2025-04-30'
     };
   },
   actions: {
@@ -34,9 +42,9 @@ export const useBookingStore = defineStore("booking", {
       }
     },
     async createDatabase() {
-      const start = new Date('2024-10-15');
-      const end = new Date('2025-04-30');
-      
+      const start = new Date("2024-10-15");
+      const end = new Date("2025-04-30");
+
       for (
         let date = new Date(start);
         date <= end;
@@ -44,18 +52,48 @@ export const useBookingStore = defineStore("booking", {
       ) {
         const formattedDate = date.toISOString().split("T")[0];
 
-        await setDoc(doc(db, 'activity_availability', `aventura_${formattedDate}_morning`), {
-          act_id: 'aventura',
-          date: formattedDate,
-          time_slot: 'morning',
-          spots: 25,
-        });
-        await setDoc(doc(db, 'activity_availability', `aventura_${formattedDate}_afternoon`), {
-          act_id: 'aventura',
-          date: formattedDate,
-          time_slot: 'afternoon',
-          spots: 25,
-        });
+        await setDoc(
+          doc(db, "activity_availability", `aventura_${formattedDate}_morning`),
+          {
+            act_id: "aventura",
+            date: formattedDate,
+            time_slot: "morning",
+            spots: 25,
+          }
+        );
+        await setDoc(
+          doc(
+            db,
+            "activity_availability",
+            `aventura_${formattedDate}_afternoon`
+          ),
+          {
+            act_id: "aventura",
+            date: formattedDate,
+            time_slot: "afternoon",
+            spots: 25,
+          }
+        );
+      }
+    },
+
+    async getAvailability(date) {
+      console.log(date);
+      const availabilityCollection = query(
+        collection(db, "activity_availability"),
+        where("date", "==", date)
+      );
+
+      try {
+        const availabilitySnapshot = await getDocs(availabilityCollection);
+        const docs = availabilitySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log(docs);
+      } catch (error) {
+        console.error(error);
+        return [];
       }
     },
   },
