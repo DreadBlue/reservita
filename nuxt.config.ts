@@ -3,15 +3,12 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
   ssr: false,
-
   nitro: {
     firebase: {
       gen: 2
     }
   },
-
   devtools: { enabled: true },
-
   app: { 
     head: {
       title: 'La reservita',
@@ -25,13 +22,10 @@ export default defineNuxtConfig({
       ] 
     },
   },
-
   build: {
     transpile: ['vuetify'],
   },
-
   css: ['vuetify/lib/styles/main.sass'],
-
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -42,7 +36,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'dayjs-nuxt',
   ],
-
   vite: {
     vue: {
       template: {
@@ -50,6 +43,5 @@ export default defineNuxtConfig({
       },
     },
   },
-
   compatibilityDate: '2024-10-01',
 })
