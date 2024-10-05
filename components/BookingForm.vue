@@ -34,6 +34,8 @@
     </v-row>
   </v-container>
 
+  <BookingDetails/>
+
   <v-container fluid>
     <v-row>
       <v-col cols="12" class="text-center">
