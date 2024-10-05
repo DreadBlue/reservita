@@ -18,31 +18,42 @@
         <div v-for="precio in actividad.precio" :key="precio">{{ precio }}</div>
         <h2 class="mt-5">Seleccionar horario</h2>
         <v-chip-group v-model="horario" selected-class="bg-deep-purple-lighten-2">
-          <v-chip>9:00 - 13:00</v-chip>
-          <v-chip>13:00 - 17:00</v-chip>
+          <v-chip @click="handleSpots(0)">9:00 - 13:00</v-chip>
+          <v-chip @click="handleSpots(1)">13:00 - 17:00</v-chip>
         </v-chip-group>
       </v-col>
       <v-col cols="6">
         <div class="d-flex flex-column align-end pr-15">
-          <h2>Cupos: 5</h2>
-          <v-btn>Reservar</v-btn>
+          <h2>Cupos: {{ spots }}</h2>
+          <v-btn @click="handleReservation()">Reservar</v-btn>
         </div>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script lang="ts" setup>
-import { useBookingStore } from "@/stores/booking";
-
-defineProps({
+<script setup>
+const router = useRouter();
+const props = defineProps({
   actividad: {
     type: Object,
     required: true,
   },
+  availability: {
+    type: Array,
+    required: true,
+  }
 });
+const horario = ref(null);
+const spots = ref('Seleccione horario');
 
-let horario = ref();
+const handleSpots = (index) => {
+  spots.value = props.availability[index].spots;
+}
 
-const bookingStore = useBookingStore();
+const handleReservation = () => {
+  const hora = horario.value === 0 ? 'morning' : 'afternoon';
+  const { date  } = useRoute().query;
+  router.push({ path: "/reservar/formulario", query: { Cdate: date, horario: hora, actividad: props.actividad.titulo } });
+}
 </script>

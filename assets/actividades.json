@@ -1,6 +1,7 @@
 [
     {
       "src": "/images/arborismo.webp",
+      "availability": "arborismo",
       "actividad": "Arborismo",
       "titulo": "ARBORISMO",
       "descripcion": "El arborismo es una actividad de aventura que consiste en recorrer circuitos elevados entre árboles, usando puentes colgantes, cuerdas y tirolinas. Asegurados con arneses, los participantes superan obstáculos en altura, disfrutando de adrenalina y contacto con la naturaleza.",
@@ -23,6 +24,7 @@
   
     {
         "src": "/images/canyoning.webp",
+        "availability": "canyoning",
         "actividad": "Canyoning",
         "titulo": "CANYONING",
         "precio": [
@@ -46,6 +48,7 @@
 
       {
         "src": "/images/aventura.webp",
+        "availability": "aventura",
         "actividad": "Aventura",
         "titulo": "AVENTURA",
         "precio": [

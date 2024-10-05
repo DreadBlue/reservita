@@ -3,21 +3,24 @@
     <v-row>
       <v-col cols="12">
         <GeneralAvailabilitySearcher/>
-        <BookingOptions v-for="actividad in actividades" :key="actividad.titulo" :actividad="actividad" />
+        <BookingOptions v-if="renderOptions" v-for="actividad in actividades" :key="actividad.titulo" :actividad="actividad" :availability="availability" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script lang="ts" setup>
-import actividades from "@/assets/actividades.json";
+<script setup>
+import actividades from "../assets/actividades.json";
 import { useBookingStore } from '@/stores/booking';
 
 const bookingStore = useBookingStore();
 
 const { date } = useRoute().query;
-
+const renderOptions = ref(false);
+const availability = ref([]);
 onMounted(async () => {
-  await bookingStore.getAvailability(date);
+  const database = await bookingStore.getAvailability(date);
+  renderOptions.value = true;
+  availability.value = database;
 });
 </script>

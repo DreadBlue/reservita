@@ -29,7 +29,13 @@ export const useBookingStore = defineStore("booking", {
         cayoning: 0,
         aventura: 0
       },
-      max: '2025-04-30'
+      max: '2025-04-30',
+      arborimosAfternoon: {},
+      arborimosMorning: {},
+      aventuraAfternoon: {},
+      aventuraMorning: {},
+      canyoningAfternoon: {},
+      canyoningMorning: {}
     };
   },
   actions: {
@@ -90,7 +96,10 @@ export const useBookingStore = defineStore("booking", {
           id: doc.id,
           ...doc.data(),
         }));
-        console.log(docs);
+        this.arborismo = [docs[0], docs[1]];
+        this.aventura = [docs[2], docs[3]];
+        this.canyoning = [docs[4], docs[5]];
+        return docs
       } catch (error) {
         console.error(error);
         return [];
