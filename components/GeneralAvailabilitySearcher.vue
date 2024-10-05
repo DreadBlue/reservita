@@ -21,10 +21,10 @@
   </v-container>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { useBookingStore } from "@/stores/booking.js";
+import { useBookingStore } from "/stores/booking.js";
 
 const bookingStore = useBookingStore();
 const maxDate = ref(bookingStore.max);
