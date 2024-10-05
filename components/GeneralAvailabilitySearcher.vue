@@ -6,14 +6,12 @@
           v-model="dateValue"
           label="Día de actividad"
           style="max-width: 250px"
-          :min="dayjs().format('YYYY-MM-DD')"
           :max="maxDate"
         />
         <v-btn
           class="bg-second color-white"
           prepend-icon="mdi-calendar-search"
           :disabled="!dateValue"
-          @click="redirection"
           >Ver disponibilidad</v-btn
         >
       </v-col>
@@ -22,19 +20,13 @@
 </template>
 
 <script lang="ts" setup>
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useBookingStore } from "@/stores/booking";
 
 const bookingStore = useBookingStore();
 const maxDate = ref(bookingStore.max);
 const router = useRouter();
-dayjs.extend(customParseFormat);
 
 const dateValue = ref();
 
-const redirection = () => {
-  const dateFormatted = dayjs(dateValue.value, "DD-MM-YYYY").format("YYYY-MM-DD");
-  router.push({ path: "/reservar", query: { date: dateFormatted } });
-};
+
 </script>
