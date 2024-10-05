@@ -19,7 +19,7 @@
         :elevation="elevation"
         @update:model-value="date"
         :min="min"
-        :max="max"
+        :max="maxDate"
         :month="minMonth"
       ></v-date-picker>
     </v-menu>
@@ -61,9 +61,9 @@ export default defineComponent({
       type: String,
       default: undefined,
     },
-    max: {
+    maxDate: {
       type: String,
-      default: undefined,
+      default: '2025-04-30',
     },
     pickerWidth: {
       type: String,
