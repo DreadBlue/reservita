@@ -7,6 +7,7 @@
           label="Día de actividad"
           style="max-width: 250px"
           :min="dayjs().format('YYYY-MM-DD')"
+          :max="maxDate"
         />
         <v-btn
           class="bg-second color-white"
@@ -26,7 +27,7 @@ import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useBookingStore } from "@/stores/booking";
 
 const bookingStore = useBookingStore();
-const maxDate = bookingStore.max;
+const maxDate = ref(bookingStore.max);
 const router = useRouter();
 dayjs.extend(customParseFormat);
 
