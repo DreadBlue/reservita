@@ -21,13 +21,13 @@
 </template>
 
 <script setup>
+import { useBookingStore } from '@/stores/booking.js';
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { useBookingStore } from '@/stores/booking.js';
 
-// const useBooking = useBookingStore();
-// const maxDate = useBooking.max;
-// const router = useRouter();
+const useBooking = useBookingStore();
+const maxDate = useBooking.max;
+const router = useRouter();
 dayjs.extend(customParseFormat);
 
 const dateValue = ref();

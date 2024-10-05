@@ -12,7 +12,6 @@ export default [
       "no-undef": "off",  
       // "vue/no-unused-vars": "warn",  // Changes unused vars from error to warning
       // Add more rules as needed
-      "vue/multi-word-component-names": "off",
       '@typescript-eslint/no-unused-vars': ['error', {
         varsIgnorePattern: 'PropType'
       }]

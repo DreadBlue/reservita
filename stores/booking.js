@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+// import dayjs from "dayjs";
+// import customParseFormat from "dayjs/plugin/customParseFormat";
+// import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   getDocs,
   collection,
@@ -15,7 +15,7 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 import { db } from "/firebase/firebase.config.js";
-import { getFunctions, httpsCallable } from "firebase/functions";
+// import { getFunctions, httpsCallable } from "firebase/functions";
 
 export const useBookingStore = defineStore("booking", {
   state: () => {
