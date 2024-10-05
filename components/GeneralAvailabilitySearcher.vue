@@ -24,10 +24,10 @@
 <script setup>
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { useBookingStore } from "/stores/booking.js";
+import { useBookingStore } from '/stores/booking.js';
 
 const useBooking = useBookingStore();
-const maxDate = ref(useBooking.max);
+const maxDate = useBooking.max;
 const router = useRouter();
 dayjs.extend(customParseFormat);
 
