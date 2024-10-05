@@ -7,7 +7,6 @@
           label="Día de actividad"
           style="max-width: 250px"
           :min="dayjs().format('YYYY-MM-DD')"
-          :max="maxDate"
         />
         <v-btn
           class="bg-second color-white"
