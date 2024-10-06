@@ -38,9 +38,8 @@
                     <v-text-field
                       :label="'Nombre participante ' + n"
                       variant="solo"
-                      v-model="participantes[n]"
+                      v-model="participantes[n].nombre"
                       prepend-inner-icon="account-multiple"
-                      :type="text"
                     >
                     </v-text-field>
                   </v-col>
@@ -48,9 +47,8 @@
                     <v-text-field
                       :label="'Cédula / pasaporte participante ' + n"
                       variant="solo"
-                      v-model="participantes[n]"
+                      v-model="participantes[n].documento"
                       prepend-inner-icon="mdi-card-account-details-outline"
-                      :type="text"
                     >
                     </v-text-field>
                   </v-col>
@@ -118,18 +116,32 @@ import { useBookingStore } from '/stores/booking.js';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 
 export default {
-  data() {
+  setup() {
     const useBooking = useBookingStore();
-    const info = useRoute().query;
     const price = computed(() => useBooking.price);
     const quantity = computed(() => useBooking.quantity);
+    const info = useRoute().query;
+
+    const participantes = ref({});
+    for (let i = 1; i <= quantity.value; i++) {
+        console.log('soy ronda', i);
+        participantes.value[i] = {
+          nombre: '',
+          documento: '',
+        }
+        console.log('soy participantes', participantes.value);
+      }
+    return {
+      participantes, price, quantity, useBooking, info
+    }
+  },
+  data() {
     return {
       test: true,
       card: false,
       cash: false,
       warning: false,
       invoice: [],
-      participantes: {},
       Inputs: {
         InputUno: [
           '6',
@@ -172,7 +184,6 @@ export default {
           '',
         ],
       },
-      useBooking, info, price, quantity,
     };
   },
   methods: {

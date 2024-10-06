@@ -49,7 +49,6 @@ export const useBookingStore = defineStore("booking", {
         if (statesNames.includes(data)) {
           this.$state[data] = item[data];
         }
-        console.log(this.$state[data])
       }
     },
     async createDatabase() {

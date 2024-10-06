@@ -70,7 +70,6 @@ const transporte = ref(false);
 const price = computed(() => useBooking.bookingPrice + useBooking.addonsPrice - useBooking.discount);
 
 watch(almuerzo, (value) => {
-  console.log(value);
   if (value == true) {
     useBooking.updateDetails({ addonsPrice: useBooking.addonsPrice + 13000 });
   } else {
@@ -79,7 +78,6 @@ watch(almuerzo, (value) => {
 });
 
 watch(transporte, (value) => {
-  console.log(value);
   if (value == true) {
     useBooking.updateDetails({ addonsPrice: useBooking.addonsPrice + 200000 });
   } else {

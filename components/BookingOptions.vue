@@ -65,7 +65,7 @@ const horario = ref(null);
 const handleSpots = (index) => {
   horario.value = index == 0 ? '9:00 - 13:00' : '13:00 - 17:00';
   spots.value = props.availability[index].spots;
-  for (let i = 0; i <= props.availability[index].spots; i++) {
+  for (let i = 1; i <= props.availability[index].spots; i++) {
     amountOptions.value.push(i);
   }
 };
