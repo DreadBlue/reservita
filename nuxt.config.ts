@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     head: {
       title: 'La reservita',
       link: [{
-        rel: "icon", href: "/favicon.ico", type:"image/x-icon"
+        rel: "icon", href: "/logo.ico", type:"image/x-icon"
       }],
       script:[
        {
