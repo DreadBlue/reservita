@@ -20,10 +20,6 @@ import { db } from "/firebase/firebase.config.js";
 export const useBookingStore = defineStore("booking", {
   state: () => {
     return {
-      nombre: '',
-      celular: '',
-      correo: '',
-      cedula: '',
       activity: '',
       date: '',
       quantity: 0,

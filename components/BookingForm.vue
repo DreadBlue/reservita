@@ -167,7 +167,6 @@ export default {
   },
   methods: {
     async initiateCheckout(payment) {
-      // const amount = this.useBooking.precio;
       // const orderId = 'ORDER' + Date.now() * 1e6;
       // const functions = getFunctions();
 
