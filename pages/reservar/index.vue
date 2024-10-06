@@ -15,10 +15,10 @@ import { useBookingStore } from '@/stores/booking';
 
 const bookingStore = useBookingStore();
 
-const { date } = useRoute().query;
 const renderOptions = ref(false);
 const availability = ref([]);
 onMounted(async () => {
+  const { date } = useRoute().query;
   const database = await bookingStore.getAvailability(date);
   renderOptions.value = true;
   availability.value = database;

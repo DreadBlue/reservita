@@ -7,6 +7,7 @@
           label="Día de actividad"
           style="max-width: 250px"
           :min="dayjs().format('YYYY-MM-DD')"
+          :max="maxDate"
         />
         <v-btn
           class="bg-second color-white"
@@ -34,6 +35,7 @@ const dateValue = ref();
 
 const redirection = () => {
   const dateFormatted = dayjs(dateValue.value, "DD-MM-YYYY").format("YYYY-MM-DD");
+  useBooking.updateDetails({date: dateFormatted});
   router.push({ path: "/reservar", query: { date: dateFormatted } });
 };
 </script>

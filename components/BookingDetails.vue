@@ -6,10 +6,28 @@
             <span class="color-main text-h4 text-sm-h3">DETALLES DE RESERVA</span>
         </div>
         <div class="text-body-2 text-sm-body-1">
-          <p>FECHA: {{ date }}</p>
-          <p>HORARIO: {{ horario }}</p>
-          <p>ACTIVIDAD: {{ actividad }}</p>
-          <p>PARTICIPANTES: {{ amount }}</p>
+          <div class="d-flex pl-2 ga-2 align-center">
+            <v-icon icon="mdi-calendar-range"></v-icon>
+            <p>{{ dayjs(date).format('DD/MM/YYYY') }}</p>
+          </div>
+          <div class="d-flex pl-2 ga-2 align-center">
+            <v-icon icon="mdi-clock-outline"></v-icon>
+            <p>{{ horario }}</p>
+          </div>
+          <div class="d-flex pl-2 ga-2 align-center">
+            <v-icon icon="mdi-hiking"></v-icon>
+            <p>{{ activity }}</p>
+          </div>
+          <div class="d-flex pl-2 ga-2 align-center">
+            <v-icon icon="mdi-account-multiple"></v-icon>
+            <p>{{ quantity }}</p>
+          </div>
+          <div class="d-flex pl-2 ga-2 align-center">
+            <v-icon icon="mdi-cash"></v-icon>
+            <p>{{ price.toLocaleString('es-Co') }}</p>
+          </div>
+          <v-checkbox v-model="almuerzo" label="¿Deseas incluir almuerzo casero por 13.000?" hide-details></v-checkbox>
+          <v-checkbox v-model="transporte" label="¿Deseas incluir carro privado por 200.000? (Máximo 4 personas)" hide-details></v-checkbox>
         </div>
         <div class="d-flex align-center pt-3 text-body-2 text-sm-body-1">
             <v-col cols="6" class="text-start">
@@ -33,9 +51,32 @@
 </template>
 
 <script setup>
-const route = useRoute();
-const date = route.query.Cdate;
-const horario = route.query.horario;
-const actividad = route.query.actividad;
-const amount = route.query.amount;
+import { useBookingStore } from '/stores/booking.js'; 
+const useBooking = useBookingStore();
+import dayjs from 'dayjs';
+
+const { quantity, id, horario, activity, date } = useBooking;
+// const routeVerifier = useRoute().query;
+const almuerzo = ref(false);
+const transporte = ref(false);
+const price = computed(() => useBooking.price );
+
+watch(almuerzo, (value) => {
+  console.log(value);
+  if (value == true) {
+    useBooking.updateDetails({price: useBooking.price + 13000});
+  } else {
+    useBooking.updateDetails({price: useBooking.price -  13000});
+  }
+});
+
+watch(transporte, (value) => {
+  console.log(value);
+  if (value == true) {
+    useBooking.updateDetails({price: useBooking.price + 200000});
+  } else {
+    useBooking.updateDetails({price: useBooking.price -  200000});
+  }
+});
+const voucher = ref('');
 </script>

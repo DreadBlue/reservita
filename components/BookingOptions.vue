@@ -18,7 +18,7 @@
         <div v-for="precio in actividad.precio" :key="precio">{{ precio }}</div>
         <h2 class="mt-5">Seleccionar horario</h2>
         <v-chip-group
-          v-model="horario"
+          v-model="selected"
           selected-class="bg-deep-purple-lighten-2"
         >
           <v-chip @click="handleSpots(0)">9:00 - 13:00</v-chip>
@@ -28,7 +28,7 @@
       <v-col cols="6" class="d-flex align-end justify-end">
         <div class="d-flex flex-column align-end pr-15">
           <h2>Cupos: {{ spots }}</h2>
-          <v-select :disabled="horario === null" :items="amountOptions" label="Cantidad" width="140" variant="outlined" class="pt-2" v-model="amount"
+          <v-select :disabled="selected === null" :items="amountOptions" label="Cantidad" width="140" variant="outlined" class="pt-2" v-model="amount"
           ></v-select>
           <v-btn @click="handleReservation()" class="bg-second color-white">Reservar</v-btn>
         </div>
@@ -38,7 +38,11 @@
 </template>
 
 <script setup>
+import { useBookingStore } from '@/stores/booking.js';
+
+const useBooking = useBookingStore();
 const router = useRouter();
+
 const props = defineProps({
   actividad: {
     type: Object,
@@ -49,11 +53,13 @@ const props = defineProps({
     required: true,
   },
 });
-const horario = ref(null);
+const selected = ref(null);
 const spots = ref("Seleccione horario");
 const amountOptions = ref([]);
 const amount = ref(null);
+const horario = ref(null);
 const handleSpots = (index) => {
+  horario.value = index == 0 ? '9:00 - 13:00' : '13:00 - 17:00';
   spots.value = props.availability[index].spots;
   for (let i = 0; i <= props.availability[index].spots; i++) {
     amountOptions.value.push(i);
@@ -61,11 +67,13 @@ const handleSpots = (index) => {
 };
 
 const handleReservation = () => {
-  const hora = horario.value === 0 ? "morning" : "afternoon";
+  const id = props.availability[selected.value].id;
   const { date } = useRoute().query;
+  useBooking.updatePrice(amount.value, props.actividad.availability);
+  useBooking.updateDetails({quantity: amount.value, id: id, horario: horario.value, activity: props.actividad.actividad});
   router.push({
     path: "/reservar/formulario",
-    query: { Cdate: date, horario: hora, actividad: props.actividad.titulo, amount: amount.value },
+    query: { Cdate: date, actividad: id, amount: amount.value },
   });
 };
 </script>

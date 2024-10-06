@@ -5,6 +5,7 @@
         <v-row>
           <v-col cols="12">
             <span class="color-main text-h4 text-sm-h3">DATOS DE RESERVA</span>
+            {{ useBooking.price }}
           </v-col>
         </v-row>
         <v-row>
@@ -91,7 +92,10 @@ import { getFunctions, httpsCallable } from 'firebase/functions';
 export default {
   data() {
     const useBooking = useBookingStore();
+    const info = useRoute().query;
+    const price = computed(() => useBooking.price);
     return {
+      test: true,
       card: false,
       cash: false,
       warning: false,
@@ -158,60 +162,80 @@ export default {
           '',
         ],
       },
-      useBooking,
+      useBooking, info, price,
     };
   },
-  // methods: {
-  //   async initiateCheckout(payment) {
-  //     const amount = this.useBooking.precio;
-  //     const orderId = 'ORDER' + Date.now() * 1e6;
-  //     const functions = getFunctions();
+  methods: {
+    async initiateCheckout(payment) {
+      // const amount = this.useBooking.precio;
+      // const orderId = 'ORDER' + Date.now() * 1e6;
+      // const functions = getFunctions();
 
-  //     const generateHash = httpsCallable(functions, 'generateHash');
+      // const generateHash = httpsCallable(functions, 'generateHash');
 
-  //     try {
-  //       const response = await generateHash({ orderId, amount });
-  //       const { hash } = response.data;
+      try {
+        // const response = await generateHash({ orderId, amount });
+        // const { hash } = response.data;
 
-  //       const checkout = new BoldCheckout({
-  //         orderId: orderId,
-  //         currency: 'COP',
-  //         amount: amount,
-  //         apiKey: 'FeCNwHajYokCj6t2VQrednNaNP5L7c4g4cS2BAAxopw',
-  //         integritySignature: hash,
-  //         description: 'Pago valor dinámico',
-  //         redirectionUrl: 'https://abyayalahostel.com/reservar/confirmacion',
-  //         extraNombre: this.Inputs.InputUno[7],
-  //         extraCelular: this.Inputs.InputDos[7],
-  //       });
+        let handler = window.ePayco.checkout.configure({
+          key: '431e83810ea6a56d54fed22b9a434898',
+          test: true, // Set to false in production
+        });
 
-  //       let item = {
-  //         nombre: this.Inputs.InputUno[7],
-  //         celular: this.Inputs.InputDos[7],
-  //         correo: this.Inputs.InputTres[7],
-  //         cedula: this.Inputs.InputCuatro[7],
-  //         acompanantes: this.Inputs.InputCinco[7],
-  //         infoAcompanantes: this.Inputs.InputSeis[7],
-  //         invoice: this.invoice,
-  //       };
+        let data = {
+          //Parametros compra (obligatorio)
+          name: `Reserva ${this.useBooking.activity}`,
+          description: `Reserva de actividad ${this.useBooking.activity} el ${this.useBooking.date} para ${this.useBooking.quantity} personas`,
+          invoice: `FAC-${this.useBooking.id}-${this.useBooking.quantity}`,
+          currency: "cop",
+          amount: this.price,
+          tax_base: "0",
+          tax: "0",
+          tax_ico: "0",
+          country: "co",
+          lang: "es",
 
-  //       if (Object.values(item).some((value) => value === '')) {
-  //         this.warning = true;
-  //       } else {
-  //         this.warning = false;
-  //         if (payment == 'card') {
-  //           await this.useBooking.reservar(item);
-  //           checkout.open();
-  //         } else if (payment == 'cash' && item.invoice[0] != undefined) {
-  //           await this.useBooking.reservar(item);
-  //           await this.useBooking.fetchGoogle(item, true, true);
-  //           return navigateTo('/reservar/confirmacion');
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.error('Error al generar el hash:', error);
-  //     }
-  //   },
-  // },
+          //Onpage="false" - Standard="true"
+          external: "false",
+
+
+          //Atributos opcionales
+          extra1: "extra1",
+          extra2: "extra2",
+          extra3: "extra3",
+          confirmation: "https://reservita-7e847.web.app/reservar/confirmacion",
+          response: "https://reservita-7e847.web.app/reservar/confirmacion",
+
+          //Atributos cliente
+          name_billing: "",
+          address_billing: "",
+          type_doc_billing: "",
+          mobilephone_billing: "",
+          number_doc_billing: "",
+          email_billing: "",
+
+         //atributo deshabilitación método de pago
+          methodsDisable: ["SP", "CASH"]
+
+          }
+
+        if (this.test == false) {
+          this.warning = true;
+        } else {
+          this.warning = false;
+          if (payment == 'card') {
+            // await this.useBooking.reservar(item);
+            handler.open(data);
+          } else if (payment == 'cash' && item.invoice[0] != undefined) {
+            // await this.useBooking.reservar(item);
+            // await this.useBooking.fetchGoogle(item, true, true);
+            return navigateTo('/reservar/confirmacion');
+          }
+        }
+      } catch (error) {
+        console.error('Error al generar el hash:', error);
+      }
+    },
+  },
 };
 </script>

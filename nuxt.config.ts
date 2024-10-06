@@ -17,7 +17,7 @@ export default defineNuxtConfig({
       }],
       script:[
        {
-        src: "https://checkout.bold.co/library/boldPaymentButton.js"
+        src:"https://checkout.epayco.co/checkout.js"
        } 
       ] 
     },
