@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container :class="actividad.background">
     <v-row>
       <v-col cols="5">
         <div class="w-100">
@@ -52,6 +52,10 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  background: {
+    type: String,
+    default: undefined,
+  },
 });
 const selected = ref(null);
 const spots = ref("Seleccione horario");
@@ -73,7 +77,7 @@ const handleReservation = () => {
   useBooking.updateDetails({quantity: amount.value, id: id, horario: horario.value, activity: props.actividad.actividad});
   router.push({
     path: "/reservar/formulario",
-    query: { Cdate: date, actividad: id, amount: amount.value },
+    query: { date: date, actividad: id, amount: amount.value },
   });
 };
 </script>

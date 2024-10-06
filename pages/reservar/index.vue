@@ -1,9 +1,10 @@
 <template>
-  <v-container>
+  <GeneralLoader v-if="!renderOptions" loadingText="Cargando disponibilidad..."/>
+  <v-container fluid v-else>
     <v-row>
-      <v-col cols="12">
-        <GeneralAvailabilitySearcher/>
-        <BookingOptions v-if="renderOptions" v-for="actividad in actividades" :key="actividad.titulo" :actividad="actividad" :availability="availability" />
+      <v-col cols="12" class="d-flex flex-column ga-5 my-3">
+        <GeneralAvailabilitySearcher :date="date" class="mb-3"/>
+        <BookingOptions v-for="actividad in actividades" :key="actividad.titulo" :actividad="actividad" :availability="availability" />
       </v-col>
     </v-row>
   </v-container>
@@ -13,13 +14,20 @@
 import actividades from "../assets/actividades.json";
 import { useBookingStore } from '@/stores/booking';
 
-const bookingStore = useBookingStore();
+const useBooking = useBookingStore();
 
 const renderOptions = ref(false);
 const availability = ref([]);
+const {date} = useRoute().query;
+
+onBeforeMount(() => {
+    if (useBooking.date == false || !date) {
+        return navigateTo('/');
+    }
+});
+
 onMounted(async () => {
-  const { date } = useRoute().query;
-  const database = await bookingStore.getAvailability(date);
+  const database = await useBooking.getAvailability(date);
   renderOptions.value = true;
   availability.value = database;
 });

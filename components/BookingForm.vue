@@ -4,8 +4,7 @@
       <v-col cols="12" class="text-center">
         <v-row>
           <v-col cols="12">
-            <span class="color-main text-h4 text-sm-h3">DATOS DE RESERVA</span>
-            {{ useBooking.price }}
+            <span class="color-main text-h4 text-sm-h3">TITULAR DE LA RESERVA</span>
           </v-col>
         </v-row>
         <v-row>
@@ -23,6 +22,35 @@
                       :minlength="item[6].minl ? item[6].minl : null"
                       :min="item[6].min ? item[6].min : null"
                       :hide-spin-buttons="item[6].spin ? item[6].spin : null"
+                    >
+                    </v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+              <v-container fluid>
+                <v-row>
+                  <v-col cols="12" class="d-flex text-h5 text-sm-h4">
+                    Participantes
+                  </v-col>
+                </v-row>
+                <v-row v-for="n in quantity">
+                  <v-col :cols="6" :sm="6">
+                    <v-text-field
+                      :label="'Nombre participante ' + n"
+                      variant="solo"
+                      v-model="participantes[n]"
+                      prepend-inner-icon="account-multiple"
+                      :type="text"
+                    >
+                    </v-text-field>
+                  </v-col>
+                  <v-col :cols="6" :sm="6">
+                    <v-text-field
+                      :label="'Cédula / pasaporte participante ' + n"
+                      variant="solo"
+                      v-model="participantes[n]"
+                      prepend-inner-icon="mdi-card-account-details-outline"
+                      :type="text"
                     >
                     </v-text-field>
                   </v-col>
@@ -57,19 +85,19 @@
             @update:model-value="invoice"
           ></v-file-input>
         </div>
-        <div>PSE / Tarjeta de crédito - debito</div>
+        <div>Pago virtual </div>
         <div class="d-flex">
           <v-checkbox v-model="card" :disabled="cash"></v-checkbox>
-          <!-- <div class="w-50">
-            <img class="w-33" src="/otros/logo-bold.png" alt="logo bold" />
-          </div> -->
+          <div class="w-50">
+            <img class="w-33" src="/images/epayco-logo-fondo-oscuro.png" alt="logo Epayco" />
+          </div>
         </div>
         <div class="text-center">
           <v-btn
             v-if="cash"
             class="bg-second color-white"
             @click="initiateCheckout('cash')"
-            :disabled="!invoice[0]"
+            :disabled="!invoice.name"
             >PAGAR</v-btn
           >
           <v-btn
@@ -94,12 +122,14 @@ export default {
     const useBooking = useBookingStore();
     const info = useRoute().query;
     const price = computed(() => useBooking.price);
+    const quantity = computed(() => useBooking.quantity);
     return {
       test: true,
       card: false,
       cash: false,
       warning: false,
       invoice: [],
+      participantes: {},
       Inputs: {
         InputUno: [
           '6',
@@ -141,33 +171,12 @@ export default {
           { type: 'text' },
           '',
         ],
-        InputCinco: [
-          '3',
-          'Acompañantes',
-          'text',
-          'solo',
-          '4',
-          'mdi-account-multiple',
-          { type: 'number', min: '0', spin: false },
-          '',
-        ],
-        InputSeis: [
-          '9',
-          'Nombres y cédulas de los acompañantes',
-          'text',
-          'solo',
-          '12',
-          'mdi-account-multiple',
-          { type: 'text' },
-          '',
-        ],
       },
-      useBooking, info, price,
+      useBooking, info, price, quantity,
     };
   },
   methods: {
     async initiateCheckout(payment) {
-      // const orderId = 'ORDER' + Date.now() * 1e6;
       // const functions = getFunctions();
 
       // const generateHash = httpsCallable(functions, 'generateHash');

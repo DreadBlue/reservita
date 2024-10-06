@@ -25,7 +25,9 @@ export const useBookingStore = defineStore("booking", {
       quantity: 0,
       id: '',
       horario: '',
-      price: 0,
+      bookingPrice: 0,
+      discount: 0,
+      addonsPrice: 0,
       disponibilidad: {
         arborismo: 0,
         cayoning: 0,
@@ -86,37 +88,55 @@ export const useBookingStore = defineStore("booking", {
       }
     },
 
-    async updatePrice(quantity, activity) {
+   updatePrice(quantity, activity) {
       if (activity == 'arborismo') {
         if (quantity == 1) {
-          this.price = 100000 * quantity;
+          this.bookingPrice = 100000 * quantity;
         } else if (quantity <= 5) {
-          this.price = 80000 * quantity;
+          this.bookingPrice = 80000 * quantity;
         } else if (quantity <= 8) {
-          this.price = 70000 * quantity;
+          this.bookingPrice = 70000 * quantity;
         } else if (quantity <= 15) {
-          this.price = 50000 * quantity;
+          this.bookingPrice = 50000 * quantity;
         }
       } else if (activity == 'canyoning') {
         if (quantity == 1) {
-          this.price = 190000 * quantity;
+          this.bookingPrice = 190000 * quantity;
         } else if (quantity <= 5) {
-          this.price = 170000 * quantity;
+          this.bookingPrice = 170000 * quantity;
         } else if (quantity <= 8) {
-          this.price = 150000 * quantity;
+          this.bookingPrice = 150000 * quantity;
         } else if (quantity <= 15) {
-          this.price = 140000 * quantity;
+          this.bookingPrice = 140000 * quantity;
         } else if (quantity <= 20) {
-          this.price = 110000 * quantity;
+          this.bookingPrice = 110000 * quantity;
         }
       } else if (activity == 'aventura') {
         if (quantity == 1) {
-          this.price = 230000 * quantity;
+          this.bookingPrice = 230000 * quantity;
         } else if (quantity <= 12) {
-          this.price = 200000 * quantity;
+          this.bookingPrice = 200000 * quantity;
         } else if (quantity <= 20) {
-          this.price = 180000 * quantity;
+          this.bookingPrice = 180000 * quantity;
         }
+      }
+    },
+
+    applyDiscount(code) {
+      const descuentos = {
+        "123456": 10,
+        "123457": 20,
+
+      };
+
+      if (Object.hasOwn(descuentos, code)) {
+        const totalDiscount = (this.bookingPrice * descuentos[code]) / 100;
+        this.updateDetails({
+          discount: totalDiscount,
+        });
+        return 'Descuento del ' + descuentos[code] + '% aplicado';
+      } else {
+        return 'Código de descuento no válido';
       }
     },
 

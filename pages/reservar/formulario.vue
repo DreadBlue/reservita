@@ -9,5 +9,16 @@
 </template>
 
 <script setup>
-const { date, horario, actividad } = useRoute().query;
+import { useBookingStore } from '@/stores/booking';
+
+const useBooking = useBookingStore();
+
+const { date, actividad, amount } = useRoute().query;
+
+onBeforeMount(() => {
+    if (useBooking.date == false || useBooking.quantity == 0 || useBooking.id == false || useBooking.horario == false || !date || !actividad || !amount) {
+        return navigateTo('/');
+    }
+});
+
 </script>

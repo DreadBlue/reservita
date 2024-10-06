@@ -1,7 +1,7 @@
 <template>
-  <v-container fluid class="bg-mywhite rounded-lg">
+  <v-container fluid class="bg-mywhite rounded-lg" style="max-width: 550px;">
     <v-row>
-      <v-col cols="12" class="d-flex align-center ga-10">
+      <v-col cols="12" class="d-flex align-center ga-10 justify-center">
         <general-date-picker
           v-model="dateValue"
           label="Día de actividad"
@@ -26,12 +26,19 @@ import { useBookingStore } from '@/stores/booking.js';
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
+const props = defineProps({
+  date: {
+    type: String,
+    default: ''
+  }
+});
+
 const useBooking = useBookingStore();
 const maxDate = useBooking.max;
 const router = useRouter();
 dayjs.extend(customParseFormat);
 
-const dateValue = ref();
+const dateValue = ref(props.date);
 
 const redirection = () => {
   const dateFormatted = dayjs(dateValue.value, "DD-MM-YYYY").format("YYYY-MM-DD");
