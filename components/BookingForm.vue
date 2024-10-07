@@ -5,6 +5,7 @@
         <v-row>
           <v-col cols="12">
             <span class="color-main text-h4 text-sm-h3">TITULAR DE LA RESERVA</span>
+            <span>gds</span>
           </v-col>
         </v-row>
         <v-row>
@@ -118,7 +119,7 @@ import { getFunctions, httpsCallable } from 'firebase/functions';
 export default {
   setup() {
     const useBooking = useBookingStore();
-    const price = computed(() => useBooking.price);
+    const price = computed(() => useBooking.bookingPrice + useBooking.addonsPrice - useBooking.discount);
     const quantity = computed(() => useBooking.quantity);
     const info = useRoute().query;
 

@@ -1,12 +1,13 @@
 import { defineStore } from "pinia";
 // import dayjs from "dayjs";
 // import customParseFormat from "dayjs/plugin/customParseFormat";
-// import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   getDocs,
   collection,
   where,
   query,
+  updateDoc,
   orderBy,
   setDoc,
   doc,
@@ -20,26 +21,26 @@ import { db } from "/firebase/firebase.config.js";
 export const useBookingStore = defineStore("booking", {
   state: () => {
     return {
-      activity: '',
-      date: '',
+      activity: "",
+      date: "",
       quantity: 0,
-      id: '',
-      horario: '',
+      id: "",
+      horario: "",
       bookingPrice: 0,
       discount: 0,
       addonsPrice: 0,
       disponibilidad: {
         arborismo: 0,
         cayoning: 0,
-        aventura: 0
+        aventura: 0,
       },
-      max: '2025-04-30',
+      max: "2025-04-30",
       arborimosAfternoon: {},
       arborimosMorning: {},
       aventuraAfternoon: {},
       aventuraMorning: {},
       canyoningAfternoon: {},
-      canyoningMorning: {}
+      canyoningMorning: {},
     };
   },
   actions: {
@@ -51,6 +52,7 @@ export const useBookingStore = defineStore("booking", {
         }
       }
     },
+
     async createDatabase() {
       const start = new Date("2024-10-15");
       const end = new Date("2025-04-30");
@@ -87,58 +89,6 @@ export const useBookingStore = defineStore("booking", {
       }
     },
 
-   updatePrice(quantity, activity) {
-      if (activity == 'arborismo') {
-        if (quantity == 1) {
-          this.bookingPrice = 100000 * quantity;
-        } else if (quantity <= 5) {
-          this.bookingPrice = 80000 * quantity;
-        } else if (quantity <= 8) {
-          this.bookingPrice = 70000 * quantity;
-        } else if (quantity <= 15) {
-          this.bookingPrice = 50000 * quantity;
-        }
-      } else if (activity == 'canyoning') {
-        if (quantity == 1) {
-          this.bookingPrice = 190000 * quantity;
-        } else if (quantity <= 5) {
-          this.bookingPrice = 170000 * quantity;
-        } else if (quantity <= 8) {
-          this.bookingPrice = 150000 * quantity;
-        } else if (quantity <= 15) {
-          this.bookingPrice = 140000 * quantity;
-        } else if (quantity <= 20) {
-          this.bookingPrice = 110000 * quantity;
-        }
-      } else if (activity == 'aventura') {
-        if (quantity == 1) {
-          this.bookingPrice = 230000 * quantity;
-        } else if (quantity <= 12) {
-          this.bookingPrice = 200000 * quantity;
-        } else if (quantity <= 20) {
-          this.bookingPrice = 180000 * quantity;
-        }
-      }
-    },
-
-    applyDiscount(code) {
-      const descuentos = {
-        "123456": 10,
-        "123457": 20,
-
-      };
-
-      if (Object.hasOwn(descuentos, code)) {
-        const totalDiscount = (this.bookingPrice * descuentos[code]) / 100;
-        this.updateDetails({
-          discount: totalDiscount,
-        });
-        return 'Descuento del ' + descuentos[code] + '% aplicado';
-      } else {
-        return 'Código de descuento no válido';
-      }
-    },
-
     async getAvailability(date) {
       const availabilityCollection = query(
         collection(db, "activity_availability"),
@@ -154,11 +104,143 @@ export const useBookingStore = defineStore("booking", {
         this.arborismo = [docs[0], docs[1]];
         this.aventura = [docs[2], docs[3]];
         this.canyoning = [docs[4], docs[5]];
-        return docs
+        return docs;
       } catch (error) {
         console.error(error);
         return [];
       }
+    },
+
+    updatePrice(quantity, activity) {
+      if (activity == "arborismo") {
+        if (quantity == 1) {
+          this.bookingPrice = 100000 * quantity;
+        } else if (quantity <= 5) {
+          this.bookingPrice = 80000 * quantity;
+        } else if (quantity <= 8) {
+          this.bookingPrice = 70000 * quantity;
+        } else if (quantity <= 15) {
+          this.bookingPrice = 50000 * quantity;
+        }
+      } else if (activity == "canyoning") {
+        if (quantity == 1) {
+          this.bookingPrice = 190000 * quantity;
+        } else if (quantity <= 5) {
+          this.bookingPrice = 170000 * quantity;
+        } else if (quantity <= 8) {
+          this.bookingPrice = 150000 * quantity;
+        } else if (quantity <= 15) {
+          this.bookingPrice = 140000 * quantity;
+        } else if (quantity <= 20) {
+          this.bookingPrice = 110000 * quantity;
+        }
+      } else if (activity == "aventura") {
+        if (quantity == 1) {
+          this.bookingPrice = 230000 * quantity;
+        } else if (quantity <= 12) {
+          this.bookingPrice = 200000 * quantity;
+        } else if (quantity <= 20) {
+          this.bookingPrice = 180000 * quantity;
+        }
+      }
+    },
+
+    applyDiscount(code) {
+      const descuentos = {
+        123456: 10,
+        123457: 20,
+      };
+
+      if (Object.hasOwn(descuentos, code)) {
+        const totalDiscount = (this.bookingPrice * descuentos[code]) / 100;
+        this.updateDetails({
+          discount: totalDiscount,
+        });
+        return "Descuento del " + descuentos[code] + "% aplicado";
+      } else {
+        return "Código de descuento no válido";
+      }
+    },
+
+    async verifyAvailability(activity, date, time) {
+      const availabilityCollection = query(
+        collection(db, "activity_availability"),
+        where("date", "==", date),
+        where("time_slot", "==", time),
+        where("act_id", "==", activity)
+      );
+
+      try {
+        const availabilitySnapshot = await getDocs(availabilityCollection);
+        return availabilitySnapshot.docs.length > 0;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    },
+
+    generateBookingCode() {
+      const caracteres = "ABY0123456789";
+      let codigo = "";
+
+      for (let i = 0; i < 8; i++) {
+        const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
+        codigo += caracteres[indiceAleatorio];
+      }
+      return codigo;
+    },
+
+    async takeAvailability() {
+      const availabilityDay = doc(db, "activity_availability", `${this.id}`);
+
+      try {
+        await updateDoc(availabilityDay, {
+          spots: increment(-this.quantity)
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+    async makeReservation(item) {
+      const id = this.generateBookingCode();
+      await this.takeAvailability();
+      let url = "";
+
+      // if (item.invoice) {
+      //   const storage = getStorage();
+      //   const archivoRef = ref(storage, `Comprobantes/${id}`);
+
+      //   const uploadInvoice = await uploadBytes(archivoRef, item.invoice[0]);
+
+      //   url = await getDownloadURL(archivoRef);
+      // }
+
+      // try {
+      //   setDoc(doc(db, "bookings", this.bookingCode), {
+      //     id: id,
+      //     name: item.name,
+      //     email: item.email,
+      //     phone: item.phone,
+      //     documentId: item.docuementId,
+      //     participants: this.participants,
+      //     activity: this.activity,
+      //     date: this.date,
+      //     quantity: this.quantity,
+      //     horario: this.horario,
+      //     bookingPrice: this.bookingPrice,
+      //     discount: this.discount,
+      //     addonsPrice: this.addonsPrice,
+      //     status: "pending",
+      //     createdAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+      //     updatedAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+      //     bill: url,
+      //   });
+
+      //   this.takeAvailability();
+      // } catch (error) {
+      //   console.error(error);
+      // }
     },
   },
 });
