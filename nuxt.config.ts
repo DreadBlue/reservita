@@ -17,9 +17,12 @@ export default defineNuxtConfig({
       }],
       script:[
        {
-        src:"https://checkout.epayco.co/checkout.js"
-       } 
-      ] 
+        src:"https://checkout.epayco.co/checkout.js",
+       },
+       {
+        src:"https://www.google.com/recaptcha/enterprise.js?render=6Le7mVoqAAAAAKoRUSkv7Yc4KnconJJsP2HcmZqJ",
+       }
+      ],
     },
   },
   build: {
