@@ -1,13 +1,19 @@
 <template>
-    <v-container fluid class="h-50 pa-0" :style="{ backgroundImage: `url(${model.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }">
+    <v-container fluid class="pa-0" :style="{ backgroundImage: `url(${model.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }">
         <v-row class="h-100 pa-0 ma-0 d-flex">
-            <v-col cols="6" style="background-color: rgba(0, 0, 0, 0.5)" class="w-100 h-100" :class="model.clases">
-                <span class="text-white">{{ model.title }}</span>
+            <v-col cols="12" sm="6" style="background-color: rgba(0, 0, 0, 0.5)" class="w-100 h-100 d-flex flex-column justify-center ga-3 py-15" :class="model.clases">
+                <p class="color-white text-sm-h3 text-h4 text-center mt-2">{{ model.title }}</p>
+                <p class="text-white text-sm-body-1 text-body-2 px-10 text-center">{{ model.description }}</p>
+                <div class="d-flex justify-center ga-10 mt-5">
+                    <div v-for="item in model.icon" class="d-flex flex-column color-white align-center">
+                        <v-icon size="80" :icon="item.icon"></v-icon>
+                        <p class="text-body-2">{{ item.text }}</p>
+                    </div>
+                </div>
+                <p class="text-white text-body-2 text-center">Los tiempos de duración son estimados y dependen de la destreza de los participantes*.</p>
             </v-col>
-            <v-col cols="6" class="order-1">
+            <v-col cols="6" class="order-1 d-sm-flex d-none">
                 <div>
-                    <p>{{ model.title }}</p>
-                    <p>{{ model.description }}</p>
                 </div>
             </v-col>
         </v-row>

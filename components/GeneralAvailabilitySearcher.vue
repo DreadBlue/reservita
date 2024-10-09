@@ -1,11 +1,11 @@
 <template>
   <v-container fluid class="bg-mywhite rounded-lg" style="max-width: 550px;">
     <v-row>
-      <v-col cols="12" class="d-flex align-center ga-10 justify-center">
+      <v-col cols="12" class="d-flex align-center ga-sm-10 ga-4 justify-center flex-sm-row flex-column">
         <general-date-picker
           v-model="dateValue"
           label="Día de actividad"
-          style="max-width: 250px"
+          style="width: 200px"
           :min="dayjs().format('YYYY-MM-DD')"
           :max="maxDate"
         />

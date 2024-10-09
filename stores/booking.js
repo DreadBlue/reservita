@@ -8,6 +8,7 @@ import {
   where,
   query,
   updateDoc,
+  increment,
   orderBy,
   setDoc,
   doc,
@@ -180,7 +181,7 @@ export const useBookingStore = defineStore("booking", {
     },
 
     generateBookingCode() {
-      const caracteres = "ABY0123456789";
+      const caracteres = "RESRVITA0123456789";
       let codigo = "";
 
       for (let i = 0; i < 8; i++) {
