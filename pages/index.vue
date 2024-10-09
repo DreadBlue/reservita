@@ -14,15 +14,15 @@
 const modelOne = {
   clases: 'order-2',
   title: 'ARBORISMO',
-  description: 'El arborismo consiste en recorrer circuitos entre árboles con plataformas, puentes colgantes y tirolinas. Ideal para quienes buscan adrenalina con naturaleza, promoviendo equilibrio y destreza física.',
+  description: 'Consiste en recorrer un circuito de altura entre 3 árboles, cruzando por una línea de equilibrio, un puente tibetano y escaleras de mano que te llevarán a la malla catamarán más alta del país (25 metros).',
   image: '/images/canyoning.webp',
   icon: {
     uno: {
-      icon: 'mdi-numeric-1-circle',
+      icon: 'mdi-numeric-3-circle',
       text: 'DIFICULTAD 1-5',
     },
     dos: {
-      icon: 'mdi-numeric-3-circle',
+      icon: 'mdi-numeric-1-circle',
       text: 'TIEMPO EN H',
     },
     tres: {
@@ -38,7 +38,7 @@ const modelTwo = {
   image: '/images/arborismo.webp',
   icon: {
     uno: {
-      icon: 'mdi-numeric-3-circle',
+      icon: 'mdi-numeric-2-circle',
       text: 'DIFICULTAD 1-5',
     },
     dos: {
@@ -73,6 +73,6 @@ const modelThree = {
 }
 const modelFour = {
   clases: 'bg-main color-white',
-  description: 'Somos un ecoparque de aventura que ofrece experiencias de barranquismo, torrentismo y arborismo. Nos especializamos en brindar aventuras emocionantes y seguras, inmersas en la naturaleza, para aquellos que buscan desafiar sus límites y disfrutar de paisajes impresionantes.',
+  descripcion: 'Somos un <span class="text-sm-h4 text-h6 text-fun">ecoparque</span> de aventura que ofrece <span class="text-sm-h4 text-h6 text-fun">experiencias</span> de cañonismo, torrentismo y arborismo. Nos <span class="text-sm-h4 text-h6 text-fun">especializamos</span> en brindar <span class="text-sm-h4 text-h6 text-fun">aventuras</span> emocionantes y seguras, inmersas en la <span class="text-sm-h4 text-h6 text-fun">naturaleza</span>, para aquellos que buscan desafiar sus límites y <span class="text-sm-h4 text-h6 text-fun">disfrutar</span> de paisajes impresionantes.',
 }
 </script>

@@ -1,0 +1,38 @@
+[
+    {
+      "nombre": "Juan David Ocampo",
+      "role": "Socio fundador - Colombiano",
+      "profesion": "WFR, instructor WFA, guía profesional de canyoning y montañista",
+      "descripcion": "Con amplia experiencia en actividades al aire libre y rescate en zonas remotas, Juan David lidera la capacitación en seguridad para deportes de aventura. Su enfoque en sostenibilidad y turismo responsable lo ha posicionado como referente en la industria en Colombia.",
+      "foto": "/images/juanda.webp"
+    },
+    {
+      "nombre": "Andrés García Muñoz",
+      "role": "Socio fundador - Colombiano",
+      "profesion": "WFA, Ingeniero forestal, entrenador selección Colombia Hockey subacutico y profesor de natación",
+      "descripcion": "Con su sólida formación en ingeniería forestal, Andrés combina el conocimiento del medio ambiente con su experiencia deportiva, liderando proyectos que integran conservación, aventura y sostenibilidad.",
+      "foto": "/images/andres.jpg"
+    },
+    {
+      "nombre": "Esmeralda Muñoz",
+      "role": "Guía y cofundadora - Colombiana",
+      "profesion": "WFA, guía profesional de Canyoning",
+      "descripcion": "Deportista apasionada por los deportes de aventura. Esmeralda combina su pasión por la naturaleza y el deporte con su compromiso por la seguridad y el bienestar en actividades al aire libre, liderando con experiencia y entusiasmo.",
+      "foto": "/images/esmeralda.jpg"
+    },
+    {
+      "nombre": "Ottavia Cavalli",
+      "role": "Socia capital - Italiana",
+      "profesion": "WFA, bióloga, phd microbiología y líder de expediciones en Antártida y Groenlandia.",
+      "descripcion": "Ottavia aporta su experiencia científica y pasión por la naturaleza a cada proyecto, asegurando un enfoque sostenible y responsable en todas las actividades.",
+      "foto": "/images/ottavia.png"
+    },
+    {
+      "nombre": "María Fernanda Muñoz",
+      "role": "Guía de canyoning - Colombiana",
+      "profesion": "WFA y estudiante de hotelería y turismo",
+      "descripcion": "María Fernanda es una apasionada del turismo de aventura y se dedica a ofrecer experiencias seguras y emocionantes en el canyoning. Su formación en hotelería y turismo complementa su enfoque en brindar un servicio excepcional a los visitantes, siempre priorizando la seguridad y el bienestar de todos.",
+      "foto": "/images/maria.jpg"
+    }
+]
+  
