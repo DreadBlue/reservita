@@ -40,7 +40,7 @@
           >
             <v-icon icon="mdi-instagram"></v-icon>
           </NuxtLink>
-          <NuxtLink to="https://wa.me/+573117834136" style="color: white">
+          <NuxtLink to="https://wa.me/573117834136" style="color: white">
             <v-icon icon="mdi-whatsapp"></v-icon>
           </NuxtLink>
         </div>
@@ -54,7 +54,7 @@
       >
         <NuxtLink>Términos y condiciones</NuxtLink>
         <NuxtLink
-          to="https://maps.app.goo.gl/guAsprxNM6qezkfNA"
+          to="https://maps.app.goo.gl/jBA9pdr4HLQ8eazK"
           style="text-decoration: none;"
           class="color-myblack"
           >Maps</NuxtLink

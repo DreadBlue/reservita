@@ -28,7 +28,7 @@
           </div>
           <v-checkbox
             v-model="almuerzo"
-            label="¿Deseas incluir almuerzo casero por 13.000?"
+            label="¿Deseas incluir almuerzo casero por 18.000?"
             hide-details
           ></v-checkbox>
           <v-checkbox
@@ -71,9 +71,9 @@ const price = computed(() => useBooking.bookingPrice + useBooking.addonsPrice - 
 
 watch(almuerzo, (value) => {
   if (value == true) {
-    useBooking.updateDetails({ addonsPrice: useBooking.addonsPrice + 13000 });
+    useBooking.updateDetails({ addonsPrice: useBooking.addonsPrice + 18000 });
   } else {
-    useBooking.updateDetails({ addonsPrice: useBooking.addonsPrice - 13000 });
+    useBooking.updateDetails({ addonsPrice: useBooking.addonsPrice - 18000 });
   }
 });
 

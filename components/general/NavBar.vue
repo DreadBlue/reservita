@@ -41,6 +41,7 @@
           :active="false"
           variant="plain"
           class="px-0 color-myblack"
+          :ripple="false"
         ></v-list-item>
         
         <NuxtLink to="/" class="d-flex align-center v-col-2">
@@ -55,6 +56,7 @@
           :active="false"
           variant="plain"
           class="px-0"
+          :ripple="false"
         ></v-list-item>
         
         <!-- <div class="d-flex align-center">
