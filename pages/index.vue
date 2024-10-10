@@ -14,7 +14,7 @@ const modelOne = {
   title: "ARBORISMO",
   description:
     "Consiste en recorrer un circuito de altura entre 3 árboles, cruzando por una línea de equilibrio, un puente tibetano y escaleras de mano que te llevarán a la malla catamarán más alta del país (25 metros).",
-  image: "/images/canyoning.webp",
+  image: "/images/arborismo.webp",
   icon: {
     uno: {
       icon: "mdi-numeric-3-circle",
@@ -35,7 +35,7 @@ const modelTwo = {
   title: "CANYONING",
   description:
     "El canyoning o torrentismo, es un deporte extremo que utiliza técnicas de cuerda (rapel) para descender por cascadas de diferentes alturas y niveles de dificultad.",
-  image: "/images/arborismo.webp",
+  image: "/images/canyoning.webp",
   icon: {
     uno: {
       icon: "mdi-numeric-2-circle",
