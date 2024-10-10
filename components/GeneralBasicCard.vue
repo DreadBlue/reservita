@@ -1,12 +1,10 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col>
         <v-card
           :disabled="loading"
           :loading="loading"
-          class="mx-auto my-12"
           max-width="374"
+          min-height="540"
+          class="mx-auto mb-8"
         >
           <template v-slot:loader="{ isActive }">
             <v-progress-linear
@@ -19,17 +17,17 @@
 
           <v-img height="250" :src="item.foto" cover></v-img>
 
-          <v-card-item>
+          <v-card-item class="bg-second color-white">
             <v-card-title>{{ item.nombre }}</v-card-title>
 
             <v-card-subtitle>
               <span class="me-1">{{ item.role }}</span>
 
-              <v-icon
+              <!-- <v-icon
                 color="error"
                 icon="mdi-fire-circle"
                 size="small"
-              ></v-icon>
+              ></v-icon> -->
             </v-card-subtitle>
           </v-card-item>
 
@@ -43,9 +41,6 @@
             </div>
           </v-card-text>
         </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
 </template>
 
 <script setup lang="ts">

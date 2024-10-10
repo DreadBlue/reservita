@@ -9,7 +9,7 @@
     {
       "nombre": "Andrés García Muñoz",
       "role": "Socio fundador - Colombiano",
-      "profesion": "WFA, Ingeniero forestal, entrenador selección Colombia Hockey subacutico y profesor de natación",
+      "profesion": "WFA, Ingeniero forestal, entrenador selección Colombia Hockey subacuático y profesor de natación",
       "descripcion": "Con su sólida formación en ingeniería forestal, Andrés combina el conocimiento del medio ambiente con su experiencia deportiva, liderando proyectos que integran conservación, aventura y sostenibilidad.",
       "foto": "/images/andres.jpg"
     },
@@ -33,6 +33,13 @@
       "profesion": "WFA y estudiante de hotelería y turismo",
       "descripcion": "María Fernanda es una apasionada del turismo de aventura y se dedica a ofrecer experiencias seguras y emocionantes en el canyoning. Su formación en hotelería y turismo complementa su enfoque en brindar un servicio excepcional a los visitantes, siempre priorizando la seguridad y el bienestar de todos.",
       "foto": "/images/maria.jpg"
+    },
+    {
+      "nombre": "Pablo",
+      "role": "Guía de canyoning - Colombiano",
+      "profesion": "WFA y jugador selección Colombia Hockey subacuático",
+      "descripcion": "Amante de la naturaleza y las aventuras al aire libre. Su pasión por los deportes extremos y la exploración de cañones lo ha llevado a compartir experiencias únicas con quienes buscan disfrutar de la naturaleza. Promueve el respeto y cuidado del entorno natural en cada actividad.",
+      "foto": "/images/pablo.webp"
     }
 ]
   
