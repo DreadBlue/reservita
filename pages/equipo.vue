@@ -2,7 +2,7 @@
 <v-container fluid class="pa-0 mb-8">
   <v-row>
     <v-col cols="12">
-      <GeneralBannerText :model="info"/>
+      <GeneralBanner :model="info"/>
     </v-col>
   </v-row>
 

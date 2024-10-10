@@ -1,6 +1,6 @@
 <template>
   <HomeBanner />
-  <GeneralBannerText :model="modelFour" />
+  <GeneralBanner :model="modelFour" />
   <section class="d-flex flex-column ga-sm-0 ga-8">
     <GeneralPresentationCard :model="modelOne" />
     <GeneralPresentationCard :model="modelTwo" />
