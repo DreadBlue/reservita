@@ -4,7 +4,7 @@
       "availability": "arborismo",
       "actividad": "Arborismo",
       "titulo": "ARBORISMO",
-      "descripcion": "El arborismo es una actividad de aventura que consiste en recorrer circuitos elevados entre árboles, usando puentes colgantes, cuerdas y tirolinas. Asegurados con arneses, los participantes superan obstáculos en altura, disfrutando de adrenalina y contacto con la naturaleza.",
+      "descripcion": "Consiste en recorrer un circuito de altura entre 3 árboles, cruzando por una línea de equilibrio, un puente tibetano y escaleras de mano que te llevarán a la malla catamarán más alta del país (25 metros).",
       "precio": [
         "1 persona: $100.000",
         "2 a 5 personas: $80.000",
@@ -17,15 +17,20 @@
         70000,
         50000
       ],
-      "icons": [
-        "🛏️ Cama doble y habitación deluxe",
-        "🛁 Baño privado (externo)",
-        "🍳 Desayuno incluido",
-        "🧖🏻 Toallas",
-        "👩🏿‍🤝‍👨🏻 2 personas.",
-        "🏞️ Vista a la montaña.",
-        "💵 Precio: 420.000"
-      ]
+      "icon": {
+        "uno": {
+          "icon": "mdi-numeric-3-circle",
+          "text": "DIFICULTAD 1-5"
+        },
+        "dos": {
+          "icon": "mdi-numeric-1-circle",
+          "text": "TIEMPO EN H"
+        },
+        "tres": {
+          "icon": "mdi-numeric-8-circle",
+          "text": "EDAD MINIMA"
+        }
+      }
     },
   
     {
@@ -48,15 +53,20 @@
           110000
         ],
         "descripcion": "El canyoning es una actividad de aventura que consiste en descender por cañones y barrancos utilizando técnicas como rápel, saltos, toboganes naturales y nado. Los participantes atraviesan terrenos rocosos y cursos de agua, explorando paisajes impresionantes mientras desafían su destreza y resistencia física.",
-        "icons": [
-          "🛏️ Cama doble y habitación deluxe",
-          "🛁 Baño privado (externo)",
-          "🍳 Desayuno incluido",
-          "🧖🏻 Toallas",
-          "👩🏿‍🤝‍👨🏻 2 personas.",
-          "🏞️ Vista a la montaña.",
-          "💵 Precio: 420.000"
-        ],
+        "icon": {
+          "uno": {
+            "icon": "mdi-numeric-2-circle",
+            "text": "DIFICULTAD 1-5"
+          },
+          "dos": {
+            "icon": "mdi-numeric-3-circle",
+            "text": "TIEMPO EN H"
+          },
+          "tres": {
+            "icon": "mdi-numeric-8-circle",
+            "text": "EDAD MINIMA"
+          }
+        },
         "background": "bg-mywhite"
       },
 
@@ -76,15 +86,20 @@
           200000,
           180000
         ],
-        "icons": [
-          "🛏️ Cama doble y habitación deluxe",
-          "🛁 Baño privado (externo)",
-          "🍳 Desayuno incluido",
-          "🧖🏻 Toallas",
-          "👩🏿‍🤝‍👨🏻 2 personas.",
-          "🏞️ Vista a la montaña.",
-          "💵 Precio: 420.000"
-        ]
+        "icon": {
+          "uno": {
+            "icon": "mdi-numeric-3-circle",
+            "text": "DIFICULTAD 1-5"
+          },
+          "dos": {
+            "icon": "mdi-numeric-3-circle",
+            "text": "TIEMPO EN H"
+          },
+          "tres": {
+            "icon": "mdi-numeric-8-circle",
+            "text": "EDAD MINIMA"
+          }
+        }
       }
   ]
   
