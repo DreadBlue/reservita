@@ -1,9 +1,14 @@
 <template>
-  <div>
-    <h1>Eventos Empresariales</h1>
-  </div>
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12">
+        <GeneralExperience v-for="activity in eventos" :item="activity"/>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
-<script lang="ts" setup>
+<script setup>
+import eventos from "@/assets/corporativo.json"
 
 </script>

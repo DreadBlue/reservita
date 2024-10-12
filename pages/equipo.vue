@@ -10,7 +10,7 @@
     <v-col cols="12" class="pa-0 pt-7 d-flex justify-center">
       <p class="color-main text-sm-h2 text-h4">EQUIPO RESERVITA</p>
     </v-col>
-    <v-divider class="mx-15 px-15 my-8 color-main" :thickness="5"></v-divider>
+    <v-divider class="px-15 my-8 color-main" :thickness="4" style="margin-left: 200px; margin-right: 200px; opacity: 1;"></v-divider>
   </v-row>
   
   <v-row class="mx-15">
