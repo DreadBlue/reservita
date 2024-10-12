@@ -95,12 +95,12 @@
                 "subtitle": "EXPERIENCIAS QUE IMPACTAN",
                 "backgroundColor": "bg-main",
                 "title": "SIEMBRA DE ÁRBOLES",
-                "src": "/images/equipo.webp",
+                "src": "/images/siembra.webp",
                 "description": "Una experiencia transformadora que permite a los equipos reconectarse con la naturaleza mientras trabajan juntos hacia un objetivo común: dejar una huella positiva en el medio ambiente."
         },
             "two": {
                 "title": "CHARLA SOBRE SOSTENIBILIDAD",
-                "src": "/images/equipo.webp",
+                "src": "/images/charla.webp",
                 "description": "Se ofrecerán charlas interactivas breves sobre la importancia de la sostenibilidad y cómo cada uno puede contribuir al cuidado del medio ambiente en su día a día en el espacio laboral y personal."
         }
       },
