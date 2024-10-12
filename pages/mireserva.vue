@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="pa-0">
+  <v-container fluid class="pa-sm-0 py-10">
     <v-row class="mx-0">
       <v-col cols="12" sm="6" class="d-none d-sm-flex px-0" style="height: 90vh;">
         <GeneralBanner :model="model" />

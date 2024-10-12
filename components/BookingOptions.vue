@@ -1,12 +1,12 @@
 <template>
   <v-container :class="actividad.background">
     <v-row>
-      <v-col cols="5">
+      <v-col cols="12" sm="5">
         <div class="w-100">
           <img :src="actividad.src" alt="foto-actividad" class="w-100" />
         </div>
       </v-col>
-      <v-col cols="7">
+      <v-col cols="12" sm="7">
         <div class="d-flex flex-column ga-3">
           <h1>{{ actividad.titulo }}</h1>
           <p>{{ actividad.descripcion }}</p>
@@ -14,7 +14,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="6" class="d-flex flex-column pl-5">
+      <v-col cols="12" sm="6" class="d-flex flex-column pl-5">
         <div v-for="precio in actividad.precio" :key="precio">{{ precio }}</div>
         <h2 class="mt-5">Seleccionar horario</h2>
         <v-chip-group
@@ -25,8 +25,8 @@
           <v-chip @click="handleSpots(1)">13:00 - 17:00</v-chip>
         </v-chip-group>
       </v-col>
-      <v-col cols="6" class="d-flex align-end justify-end">
-        <div class="d-flex flex-column align-end pr-15">
+      <v-col cols="12" sm="6" class="d-flex align-end justify-end">
+        <div class="d-flex flex-column align-sm-end align-start pr-15">
           <h2>Cupos: {{ spots }}</h2>
           <v-select :disabled="selected === null" :items="amountOptions" label="Cantidad" width="140" variant="outlined" class="pt-2" v-model="amount"
           ></v-select>

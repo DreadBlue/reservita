@@ -2,14 +2,14 @@
     <v-container fluid :class="items.one.backgroundColor">
         <v-row>
             <v-col cols="12" class="d-flex flex-column align-center color-white">
-                <p class="text-sm-h3 mt-4">ACTIVIDADES</p>
+                <p class="text-h3 mt-4">ACTIVIDADES</p>
                 <p style="font-style: italic;">"{{ items.one.subtitle }}"</p>
             </v-col>
         </v-row>
-        <v-row class="d-flex ma-15 justify-space-evenly">
-            <v-col v-for="activity in items" :key="activity.id" cols="3" :style="{ backgroundImage: `url(${activity.src})`, height: '400px', backgroundSize: 'cover' }" class="color-white">
-                <div class="pa-10">
-                    <p class="text-sm-subtitle-1 my-5">{{ activity.title }}</p>
+        <v-row class="d-flex ma-sm-15 ma-4 justify-space-evenly">
+            <v-col v-for="activity in items" :key="activity.id" cols="10" sm="3" :style="{ backgroundImage: `url(${activity.src})`, height: 'auto', backgroundSize: 'cover' }" class="color-white rounded-lg my-5">
+                <div class="pa-sm-10 pa-3">
+                    <p class="text-subtitle-1 my-5">{{ activity.title }}</p>
                     <p class="text-sm-body-2">{{ activity.description }}</p>
                 </div>
             </v-col>

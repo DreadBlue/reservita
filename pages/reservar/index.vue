@@ -1,6 +1,6 @@
 <template>
   <GeneralLoader v-if="!renderOptions" loadingText="Cargando disponibilidad..."/>
-  <v-container fluid v-else>
+  <v-container fluid v-else class="py-sm-3 py-15">
     <v-row>
       <v-col cols="12" class="d-flex flex-column ga-5 my-3">
         <GeneralAvailabilitySearcher :date="date" class="mb-3"/>

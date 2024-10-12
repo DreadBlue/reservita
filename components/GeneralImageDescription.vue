@@ -1,25 +1,25 @@
 <template>
   <v-container fluid class="py-7">
-    <v-row style="height: 580px" class="d-flex">
-      <v-col cols="6" :class="item.order">
+    <v-row style="height: auto" class="d-flex">
+      <v-col cols="12" sm="6" :class="item.order">
         <div class="w-100 h-100">
           <img :src="item.src" alt="rappel" class="h-100 w-100 rounded-xl" />
         </div>
       </v-col>
-      <v-col cols="6" class="d-flex align-center">
+      <v-col cols="12" sm="6" class="d-flex align-center">
         <v-row>
           <v-col cols="12">
-            <p class="text-sm-h3 color-main">{{ item.actividad }}</p>
+            <p class="text-sm-h3 text-h4 color-main">{{ item.actividad }}</p>
             <v-divider
               :thickness="5"
-              class="mb-3 color-main"
+              class="mb-3 color-main d-sm-flex d-none"
               style="margin-right: 480px; opacity: 1; margin-left: 50px"
             ></v-divider>
-            <p class="text-sm-body-1 ml-8 mt-4">
+            <p class="text-sm-body-1 text-body-2 ml-sm-8 mt-sm-4 ml-3 mt-0">
               {{ item.descripcion }}
             </p>
           </v-col>
-            <v-col cols="12" class="d-flex justify-center ga-10 mt-5">
+            <v-col cols="12" class="d-flex justify-center ga-10 mt-sm-5 mt-0">
               <div
                 v-for="item in item.icon"
                 class="d-flex flex-column color-second align-center"
@@ -28,12 +28,12 @@
                 <p class="text-body-2">{{ item.text }}</p>
               </div>
             </v-col>
-            <v-col cols="5" class="d-flex flex-column ml-12 mt-5">
-              <div v-for="precio in item.precio" :key="precio">
+            <v-col cols="12" sm="5" class="d-flex flex-column ml-sm-12 mt-sm-5 ml-3 mt-0">
+              <div class="text-sm-body-1 text-body-2" v-for="precio in item.precio" :key="precio">
                 {{ precio }}
               </div>
             </v-col>
-            <v-col cols="5" class="d-flex align-center justify-end">
+            <v-col cols="12" sm="5" class="d-flex align-center justify-sm-end justify-center">
               <v-btn class="bg-second color-white">RESERVAR</v-btn>
             </v-col>
         </v-row>

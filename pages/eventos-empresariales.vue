@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="pa-0">
     <v-row>
       <v-col cols="12">
         <GeneralExperience v-for="activity in eventos" :item="activity"/>

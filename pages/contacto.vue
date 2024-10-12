@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="px-3 px-sm-15 mb-10">
+  <v-container fluid class="px-3 px-sm-15 mt-sm-0 my-10">
     <v-row>
       <v-col cols="12" class="d-flex flex-column align-center ga-5">
         <span class="text-sm-h3 text-h4 color-main">CONTACTO</span>
@@ -18,9 +18,9 @@
       <v-col cols="12" class="text-center">
         <span class="text-sm-h3 text-h4 color-third">¿CÓMO LLEGAR?</span>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <iframe src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d63475.7432196715!2d-75.69981283385229!3d6.099161385051505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e0!4m3!3m2!1d6.1501912!2d-75.632667!4m5!1s0x8e46874ff9ed1e73%3A0x158d2df331e75c4f!2sEco%20Parque%20la%20reservita%20Antigua%20V%C3%ADa%20Ferrocarril%20Amaga%2C%20Amag%C3%A1%2C%20Antioquia!3m2!1d6.062481099999999!2d-75.68840829999999!5e0!3m2!1ses-419!2sco!4v1728581927042!5m2!1ses-419!2sco" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>      </v-col>
-      <v-col cols="6" class="d-flex flex-column ga-1 pl-10">
+      <v-col cols="12" sm="6" class="d-flex flex-column ga-1 pl-10">
         <span class="text-subtitle-2 text-sm-subtitle color-main mb-5"
           >TRANSPORTE PÚBLICO</span
         >

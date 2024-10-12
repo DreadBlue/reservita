@@ -1,6 +1,12 @@
 <template>
-  <GeneralBanner :model="presentation"/>
-  <GeneralImageDescription v-for="activity in actividades" :item="activity"/>
+  <v-container fluid class="pa-sm-0 px-0 pt-10">
+    <v-row>
+      <v-col>
+        <GeneralBanner :model="presentation"/>
+        <GeneralImageDescription v-for="activity in actividades" :item="activity"/>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts" setup>
