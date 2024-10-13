@@ -3,9 +3,9 @@
     <v-row>
       <v-col cols="12">
         <div class="d-flex justify-center">
-          <span class="color-main text-h4 text-sm-h3">DETALLES DE RESERVA</span>
+          <span class="color-main text-h5 text-sm-h3">DETALLES DE RESERVA</span>
         </div>
-        <div class="text-body-2 text-sm-body-1">
+        <div class="text-body-1 pt-5 d-flex flex-column ga-1">
           <div class="d-flex pl-2 ga-2 align-center">
             <v-icon icon="mdi-calendar-range"></v-icon>
             <p>{{ dayjs(date).format("DD/MM/YYYY") }}</p>

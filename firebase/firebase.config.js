@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-check';
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
 // import { getFunctions } from 'firebase/functions';
 // import { getAuth } from 'firebase/auth';
 
@@ -34,6 +34,6 @@ export const db = getFirestore();
 // export const auth = getAuth(app);
 
 const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaEnterpriseProvider('6Le7mVoqAAAAAKoRUSkv7Yc4KnconJJsP2HcmZqJ'),
-  isTokenAutoRefreshEnabled: true, // Refresh the token automatically
+  provider: new ReCaptchaEnterpriseProvider('6LdzW2AqAAAAAMwcyo_8OkHMDRSxXnSdaZgOQVcd'),
+  isTokenAutoRefreshEnabled: true,
 });

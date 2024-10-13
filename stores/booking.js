@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-// import dayjs from "dayjs";
+import dayjs from "dayjs";
 // import customParseFormat from "dayjs/plugin/customParseFormat";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
@@ -184,7 +184,7 @@ export const useBookingStore = defineStore("booking", {
       const caracteres = "RESRVITA0123456789";
       let codigo = "";
 
-      for (let i = 0; i < 8; i++) {
+      for (let i = 0; i < 6; i++) {
         const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
         codigo += caracteres[indiceAleatorio];
       }
@@ -208,40 +208,38 @@ export const useBookingStore = defineStore("booking", {
       await this.takeAvailability();
       let url = "";
 
-      // if (item.invoice) {
-      //   const storage = getStorage();
-      //   const archivoRef = ref(storage, `Comprobantes/${id}`);
+      if (item.invoice instanceof File) {
+        const storage = getStorage();
+        const archivoRef = ref(storage, `comprobantes/${id}`);
+        const uploadInvoice = await uploadBytes(archivoRef, item.invoice);
+        
+        url = await getDownloadURL(archivoRef);
+        console.log("Archivo subido con éxito", uploadInvoice);
+      }
 
-      //   const uploadInvoice = await uploadBytes(archivoRef, item.invoice[0]);
-
-      //   url = await getDownloadURL(archivoRef);
-      // }
-
-      // try {
-      //   setDoc(doc(db, "bookings", this.bookingCode), {
-      //     id: id,
-      //     name: item.name,
-      //     email: item.email,
-      //     phone: item.phone,
-      //     documentId: item.docuementId,
-      //     participants: this.participants,
-      //     activity: this.activity,
-      //     date: this.date,
-      //     quantity: this.quantity,
-      //     horario: this.horario,
-      //     bookingPrice: this.bookingPrice,
-      //     discount: this.discount,
-      //     addonsPrice: this.addonsPrice,
-      //     status: "pending",
-      //     createdAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
-      //     updatedAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
-      //     bill: url,
-      //   });
-
-      //   this.takeAvailability();
-      // } catch (error) {
-      //   console.error(error);
-      // }
+      try {
+        setDoc(doc(db, "bookings", id), {
+          id: id,
+          name: item.name,
+          email: item.email,
+          phone: item.phone,
+          documentId: item.documentId,
+          participants: item.participants,
+          activity: this.activity,
+          date: this.date,
+          quantity: this.quantity,
+          horario: this.horario,
+          bookingPrice: this.bookingPrice,
+          discount: this.discount,
+          addonsPrice: this.addonsPrice,
+          status: "pending",
+          createdAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+          updatedAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+          bill: url,
+        });
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 });

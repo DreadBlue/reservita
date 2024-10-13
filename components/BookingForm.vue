@@ -1,11 +1,13 @@
 <template>
-  <v-container fluid>
+  <v-container fluid class="pt-3 pt-15">
     <v-row>
       <v-col cols="12" class="text-center">
         <v-row>
           <v-col cols="12">
-            <span class="color-main text-h4 text-sm-h3">TITULAR DE LA RESERVA</span>
-            <span>gds</span>
+            <span class="color-main text-h4 text-sm-h3"
+              >TITULAR DE LA RESERVA</span
+            >
+            {{ invoice}}
           </v-col>
         </v-row>
         <v-row>
@@ -40,7 +42,7 @@
                       :label="'Nombre participante ' + n"
                       variant="solo"
                       v-model="participantes[n].nombre"
-                      prepend-inner-icon="account-multiple"
+                      prepend-inner-icon="mdi-account-multiple"
                     >
                     </v-text-field>
                   </v-col>
@@ -62,9 +64,9 @@
     </v-row>
   </v-container>
 
-  <BookingDetails/>
+  <BookingDetails />
 
-  <v-container fluid>
+  <v-container fluid class="pt-10 pt-sm-5">
     <v-row>
       <v-col cols="12" class="text-center">
         <span class="text-h4 text-sm-h3 color-main">METODOS DE PAGO</span>
@@ -84,11 +86,15 @@
             @update:model-value="invoice"
           ></v-file-input>
         </div>
-        <div>Pago virtual </div>
+        <div>Pago virtual</div>
         <div class="d-flex">
           <v-checkbox v-model="card" :disabled="cash"></v-checkbox>
           <div class="w-50">
-            <img class="w-33" src="/images/epayco-logo-fondo-oscuro.png" alt="logo Epayco" />
+            <img
+              class="w-sm-33 w-75 pt-3 pt-sm-1"
+              src="/images/epayco-logo-fondo-oscuro.png"
+              alt="logo Epayco"
+            />
           </div>
         </div>
         <div class="text-center">
@@ -96,7 +102,6 @@
             v-if="cash"
             class="bg-second color-white"
             @click="initiateCheckout('cash')"
-            :disabled="!invoice.name"
             >PAGAR</v-btn
           >
           <v-btn
@@ -113,28 +118,33 @@
 </template>
 
 <script>
-import { useBookingStore } from '/stores/booking.js';
-import { getFunctions, httpsCallable } from 'firebase/functions';
+import { useBookingStore } from "/stores/booking.js";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 export default {
   setup() {
     const useBooking = useBookingStore();
-    const price = computed(() => useBooking.bookingPrice + useBooking.addonsPrice - useBooking.discount);
+    const price = computed(
+      () =>
+        useBooking.bookingPrice + useBooking.addonsPrice - useBooking.discount
+    );
     const quantity = computed(() => useBooking.quantity);
     const info = useRoute().query;
 
     const participantes = ref({});
     for (let i = 1; i <= quantity.value; i++) {
-        console.log('soy ronda', i);
-        participantes.value[i] = {
-          nombre: '',
-          documento: '',
-        }
-        console.log('soy participantes', participantes.value);
-      }
-    return {
-      participantes, price, quantity, useBooking, info
+      participantes.value[i] = {
+        nombre: "",
+        documento: "",
+      };
     }
+    return {
+      participantes,
+      price,
+      quantity,
+      useBooking,
+      info,
+    };
   },
   data() {
     return {
@@ -144,63 +154,65 @@ export default {
       warning: false,
       invoice: [],
       Inputs: {
-        InputUno: [
-          '6',
-          'Nombre completo',
-          'text',
-          'solo',
-          '12',
-          'mdi-account-edit',
-          { type: 'text' },
-          '',
+        name: [
+          "6",
+          "Nombre completo",
+          "text",
+          "solo",
+          "12",
+          "mdi-account-edit",
+          { type: "text" },
+          "",
         ],
-        InputDos: [
-          '6',
-          'Número de celular',
-          'number',
-          'solo',
-          '12',
-          'mdi-cellphone',
-          { type: 'number', minl: '10', spin: true },
-          '',
+        phone: [
+          "6",
+          "Número de celular",
+          "number",
+          "solo",
+          "12",
+          "mdi-cellphone",
+          { type: "number", minl: "10", spin: true },
+          "",
         ],
-        InputTres: [
-          '6',
-          'Correo Electronico',
-          'text',
-          'solo',
-          '12',
-          'mdi-email',
-          { type: 'mail' },
-          '',
+        email: [
+          "6",
+          "Correo Electronico",
+          "text",
+          "solo",
+          "12",
+          "mdi-email",
+          { type: "mail" },
+          "",
         ],
-        InputCuatro: [
-          '6',
-          'Número de cédula / pasaporte',
-          'text',
-          'solo',
-          '8',
-          'mdi-card-account-details-outline',
-          { type: 'text' },
-          '',
+        document: [
+          "6",
+          "Número de cédula / pasaporte",
+          "text",
+          "solo",
+          "8",
+          "mdi-card-account-details-outline",
+          { type: "text" },
+          "",
         ],
       },
     };
   },
   methods: {
     async initiateCheckout(payment) {
-      // const functions = getFunctions();
-
-      // const generateHash = httpsCallable(functions, 'generateHash');
-
       try {
-        // const response = await generateHash({ orderId, amount });
-        // const { hash } = response.data;
-
         let handler = window.ePayco.checkout.configure({
-          key: '431e83810ea6a56d54fed22b9a434898',
+          key: "431e83810ea6a56d54fed22b9a434898",
           test: true, // Set to false in production
         });
+
+        let item = {
+          name: this.Inputs.name[7],
+          email: this.Inputs.email[7],
+          phone: this.Inputs.phone[7],
+          documentId: this.Inputs.document[7],
+          participants: this.participantes,
+          invoice: this.invoice,
+        };
 
         let data = {
           //Parametros compra (obligatorio)
@@ -218,7 +230,6 @@ export default {
           //Onpage="false" - Standard="true"
           external: "false",
 
-
           //Atributos opcionales
           extra1: "extra1",
           extra2: "extra2",
@@ -234,26 +245,25 @@ export default {
           number_doc_billing: "",
           email_billing: "",
 
-         //atributo deshabilitación método de pago
-          methodsDisable: ["SP", "CASH"]
-
-          }
+          //atributo deshabilitación método de pago
+          methodsDisable: ["SP", "CASH"],
+        };
 
         if (this.test == false) {
           this.warning = true;
         } else {
           this.warning = false;
-          if (payment == 'card') {
+          if (payment == "card") {
             // await this.useBooking.reservar(item);
             handler.open(data);
-          } else if (payment == 'cash' && item.invoice[0] != undefined) {
-            // await this.useBooking.reservar(item);
+          } else if (payment == "cash") {
+            await this.useBooking.makeReservation(item);
             // await this.useBooking.fetchGoogle(item, true, true);
-            return navigateTo('/reservar/confirmacion');
+            // return navigateTo("/reservar/confirmacion");
           }
         }
       } catch (error) {
-        console.error('Error al generar el hash:', error);
+        console.error("Error al enviar reserva:", error);
       }
     },
   },
