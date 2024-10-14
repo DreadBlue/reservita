@@ -35,5 +35,5 @@ export const db = getFirestore();
 
 const appCheck = initializeAppCheck(app, {
   provider: new ReCaptchaEnterpriseProvider('6Le7mVoqAAAAAKoRUSkv7Yc4KnconJJsP2HcmZqJ'),
-  isTokenAutoRefreshEnabled: true,
+  isTokenAutoRefreshEnabled: false,
 });
