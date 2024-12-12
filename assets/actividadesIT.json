@@ -1,0 +1,104 @@
+[
+  {
+      "src": "/images/arborismo.webp",
+      "availability": "arborismo",
+      "actividad": "Arborismo",
+      "titulo": "ARBORISMO",
+      "descripcion": "Consiste nel percorrere un circuito in altezza tra 3 alberi, attraversando una linea di equilibrio, un ponte tibetano e scale a pioli che ti porteranno alla rete catamarano più alta del paese (25 metri).",
+      "precio": [
+          "1 persona: $100.000",
+          "2 a 5 persone: $80.000",
+          "6 a 8 persone: $70.000",
+          "9 a 15 persone: $50.000"
+      ],
+      "price": [
+          100000,
+          80000,
+          70000,
+          50000
+      ],
+      "icon": {
+          "uno": {
+              "icon": "mdi-numeric-3-circle",
+              "text": "DIFFICOLTÀ 1-5"
+          },
+          "dos": {
+              "icon": "mdi-numeric-1-circle",
+              "text": "TEMPO IN ORE"
+          },
+          "tres": {
+              "icon": "mdi-numeric-8-circle",
+              "text": "ETÀ MINIMA"
+          }
+      }
+  },
+
+  {
+      "src": "/images/canyoning.webp",
+      "availability": "canyoning",
+      "actividad": "Canyoning",
+      "titulo": "CANYONING",
+      "precio": [
+          "1 persona: $190.000",
+          "2 a 5 persone: $170.000",
+          "6 a 8 persone: $150.000",
+          "9 a 15 persone: $140.000",
+          "16 a 20 persone: $110.000"
+      ],
+      "price": [
+          190000,
+          170000,
+          150000,
+          140000,
+          110000
+      ],
+      "descripcion": "Il canyoning è un'attività d'avventura che consiste nel discendere gole e burroni utilizzando tecniche come calate in corda doppia, salti, scivoli naturali e nuoto. I partecipanti attraversano terreni rocciosi e corsi d'acqua, esplorando paesaggi impressionanti mentre sfidano la loro destrezza e resistenza fisica.",
+      "icon": {
+          "uno": {
+              "icon": "mdi-numeric-2-circle",
+              "text": "DIFFICOLTÀ 1-5"
+          },
+          "dos": {
+              "icon": "mdi-numeric-3-circle",
+              "text": "TEMPO IN ORE"
+          },
+          "tres": {
+              "icon": "mdi-numeric-8-circle",
+              "text": "ETÀ MINIMA"
+          }
+      },
+      "background": "bg-mywhite"
+  },
+
+  {
+      "src": "/images/aventura.webp",
+      "availability": "aventura",
+      "actividad": "Avventura",
+      "titulo": "AVVENTURA",
+      "precio": [
+          "1 persona: $230.000",
+          "2 a 12 persone: $200.000",
+          "13 a 20 persone: $180.000"
+      ],
+      "price": [
+          230000,
+          200000,
+          180000
+      ],
+      "descripcion": "Questa promozione unica combina il meglio dei due mondi: l'emozione di superare sfide tra gli alberi e una profonda connessione con la natura tra gole e cascate. Non perdere questa opportunità di vivere un'esperienza indimenticabile e superare i tuoi stessi limiti!",
+      "icon": {
+          "uno": {
+              "icon": "mdi-numeric-3-circle",
+              "text": "DIFFICOLTÀ 1-5"
+          },
+          "dos": {
+              "icon": "mdi-numeric-3-circle",
+              "text": "TEMPO IN ORE"
+          },
+          "tres": {
+              "icon": "mdi-numeric-8-circle",
+              "text": "ETÀ MINIMA"
+          }
+      }
+  }
+]

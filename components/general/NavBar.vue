@@ -4,7 +4,7 @@
       <!-- Mobile -->
       <v-col class="d-flex flex-column d-sm-none align-end h-100 bg-mywhite">
         <v-app-bar class="d-flex justify-space-between bg-white px-4" prominent>
-          <NuxtLink to="/">
+          <NuxtLink :to="localePath('/')">
             <img src="/logo-completo-negro.png" alt="logo" style="width: 60%" class="pt-3" />
           </NuxtLink>
           <v-app-bar-nav-icon
@@ -40,11 +40,11 @@
           :title="route.name"
           :active="false"
           variant="plain"
-          class="px-0 color-myblack"
+          class="px-0 color-myblack text-center"
           :ripple="false"
         ></v-list-item>
         
-        <NuxtLink to="/" class="d-flex align-center v-col-2">
+        <NuxtLink :to="localePath('/')" class="d-flex align-center v-col-2">
           <img src="/logo-completo-negro.png" alt="logo" style="width: 100%"/>
         </NuxtLink>
         
@@ -55,7 +55,7 @@
           :title="route.name"
           :active="false"
           variant="plain"
-          class="px-0"
+          class="px-0 text-center"
           :ripple="false"
         ></v-list-item>
         
@@ -72,42 +72,28 @@
 // import { useGeneralStore } from '/stores/general.js';
 
 export default {
-  // setup() {
-  //   const useGeneral = useGeneralStore();
-  //   const signOutBtn = computed(() => useGeneral.signOutButton);
-  //   return { signOutBtn, useGeneral };
-  // },
+  setup() {
+    // const useGeneral = useGeneralStore();
+    // const signOutBtn = computed(() => useGeneral.signOutButton);
+    // return { signOutBtn, useGeneral };
+    const localePath = useLocalePath()
+    return {localePath}
+  },
   data: () => ({
     drawer: false,
     group: null,
-    routes: [
-      {
-        name: "INICIO",
-        route: "/",
-      },
-      {
-        name: "ACTIVIDADES",
-        route: "/actividades",
-      },
-      {
-        name: "EVENTOS EMPRESARIALES",
-        route: "/eventos-empresariales",
-      },
-      {
-        name: "EQUIPO",
-        route: "equipo",
-      },
-      {
-        name: "CONTACTO",
-        route: "/contacto",
-      },
-      {
-        name: "MI RESERVA",
-        route: "/mireserva",
-      },
-    ],
   }),
   computed: {
+    routes() {
+      return [
+        { name: this.$t('inicio'), route: this.localePath('/') },
+        { name: this.$t('actividades'), route: this.localePath('actividades') },
+        { name: this.$t('eventos'), route: this.localePath('/eventos-empresariales') },
+        { name: this.$t('equipo'), route: this.localePath("/equipo") },
+        { name: this.$t('contacto'), route: this.localePath("/contacto") },
+        { name: this.$t('miReserva'), route: this.localePath("/mireserva") },
+      ];
+    },
     firstHalfRoutes() {
       const middleIndex = Math.ceil(this.routes.length / 2);
       return this.routes.slice(0, middleIndex);

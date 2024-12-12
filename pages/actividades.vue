@@ -3,19 +3,39 @@
     <v-row>
       <v-col>
         <GeneralBanner :model="presentation"/>
-        <GeneralImageDescription v-for="activity in actividades" :item="activity"/>
+        <GeneralImageDescription v-for="activity in actividades" :item="activity" :key="activity.actividad"/>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script lang="ts" setup>
-import actividades from "@/assets/actividades.json"
-const presentation = {
-  image: "/logo-cuadro.png",
-  clases: "bg-main color-white",
-  classTitle: "text-sm-h4 mb-10",
-  title: "LA RESERVITA",
-  descripcion: "En nuestro eco parque, cada actividad te invita a reconectar con lo esencial. El arborismo te desafía a explorar la altura de los árboles, mientras que el canyoning te sumerge en paisajes naturales. Ambas experiencias no solo son emocionantes, sino que también refuerzan el respeto por la sostenibilidad y el cuidado del entorno. Vive la aventura y contribuye al equilibrio de la naturaleza en un entorno diseñado para generar conciencia y conexión con lo que realmente importa."
-}
+import { useI18n } from 'vue-i18n';
+import actividadesES from '@/assets/actividadesES.json'
+import actividadesEN from '@/assets/actividadesEN.json'
+import actividadesIT from '@/assets/actividadesIT.json'
+
+const { t } = useI18n();
+const { locale } = useI18n();
+
+const presentation = computed (()=> {
+  return {
+    image: "/logo-cuadro.png",
+    clases: "bg-main color-white",
+    classTitle: "text-sm-h4 mb-10",
+    title: "LA RESERVITA",
+    descripcion: t('actDescription')
+  }
+})
+
+const actividades = computed(()=> {
+  if (locale.value === 'es') {
+    return actividadesES;
+  } else if (locale.value === 'en') {
+    return actividadesEN;
+  } else if (locale.value === 'it') {
+    return actividadesIT;
+  }
+})
+
 </script>

@@ -5,12 +5,12 @@
                 <p class="color-white text-sm-h3 text-h4 text-center mt-2">{{ model.title }}</p>
                 <p class="text-white text-sm-body-1 text-body-2 px-10 text-center">{{ model.description }}</p>
                 <div class="d-flex justify-center ga-10 mt-5">
-                    <div v-for="item in model.icon" class="d-flex flex-column color-white align-center">
+                    <div v-for="item in model.icon" class="d-flex flex-column color-white align-center" :key="item.icon">
                         <v-icon size="80" :icon="item.icon"></v-icon>
                         <p class="text-body-2">{{ item.text }}</p>
                     </div>
                 </div>
-                <p class="text-white text-body-2 text-center">Los tiempos de duración son estimados y dependen de la destreza de los participantes*.</p>
+                <p class="text-white text-body-2 text-center">{{$t('timerDisclaimer')}}</p>
             </v-col>
             <v-col cols="6" class="order-1 d-sm-flex d-none">
                 <div>

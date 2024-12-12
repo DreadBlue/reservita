@@ -9,12 +9,13 @@ export default [
   ...pluginVue.configs["flat/essential"],
   {
     rules: {
-      "no-undef": "off",  
-      // "vue/no-unused-vars": "warn",  // Changes unused vars from error to warning
+      "no-undef": "off",
+      "vue/multi-word-component-names": "off",
+      "vue/no-unused-vars": "off",  // Changes unused vars from error to warning
       // Add more rules as needed
-      '@typescript-eslint/no-unused-vars': ['error', {
-        varsIgnorePattern: 'PropType'
-      }]
+      // '@typescript-eslint/no-unused-vars': ['error', {
+      //   varsIgnorePattern: 'PropType'
+      // }]
     }
   }
 ];

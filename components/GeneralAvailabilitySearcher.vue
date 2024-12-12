@@ -4,7 +4,7 @@
       <v-col cols="12" class="d-flex align-center ga-sm-10 ga-4 justify-center flex-sm-row flex-column">
         <general-date-picker
           v-model="dateValue"
-          label="Día de actividad"
+          :label="$t('homePicker')"
           style="width: 200px"
           :min="dayjs().format('YYYY-MM-DD')"
           :max="maxDate"
@@ -14,7 +14,7 @@
           prepend-icon="mdi-calendar-search"
           :disabled="!dateValue"
           @click="redirection"
-          >Ver disponibilidad</v-btn
+          >{{ $t('verDisponibilidad') }}</v-btn
         >
       </v-col>
     </v-row>
@@ -33,6 +33,7 @@ const props = defineProps({
   }
 });
 
+const localePath = useLocalePath()
 const useBooking = useBookingStore();
 const maxDate = useBooking.max;
 const router = useRouter();
@@ -43,6 +44,6 @@ const dateValue = ref(props.date);
 const redirection = () => {
   const dateFormatted = dayjs(dateValue.value, "DD-MM-YYYY").format("YYYY-MM-DD");
   useBooking.updateDetails({date: dateFormatted});
-  router.push({ path: "/reservar", query: { date: dateFormatted } });
+  router.push({ path: localePath("/reservar"), query: { date: dateFormatted } });
 };
 </script>

@@ -81,7 +81,7 @@ export default defineComponent({
   emits: ['update:model-value', 'update:show-picker'],
   methods: {
     date(value: any) {
-      this.$emit('update:model-value', dayjs(value).format('DD-MM-YYYY'));
+      this.$emit('update:model-value', dayjs(value).format('YYYY-MM-DD'));
       this.showMenu = false; // Close the menu after selecting a date
       this.$emit('update:show-picker', false); // Emit the closed state to the parent
     },

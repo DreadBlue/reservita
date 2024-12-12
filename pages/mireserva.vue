@@ -18,10 +18,13 @@
 
 
 <script setup lang="ts">
-import { useBookingStore } from "@/stores/booking.js";
+// import { useBookingStore } from "@/stores/booking.js";
+import { useI18n } from 'vue-i18n';
 
-const useBooking = useBookingStore();
-const route = useRoute();
+const { t } = useI18n();
+
+// const useBooking = useBookingStore();
+// const route = useRoute();
 const idReserva = ref('');
 const correo = ref('');
 const model = {
@@ -30,16 +33,16 @@ const model = {
 
 const info = computed(() => {
   return {
-        InputUno: ['Codigo de reserva', 'Codigo de reserva', 'mdi-ticket'],
+        InputUno: [t('codigo'), t('codigo'), 'mdi-ticket'],
         InputDos: [
-          'Correo titular',
-          'Ingresa tu correo electronico',
+          t('correoTit'),
+          t('correoAct'),
           'mdi-email-outline',
         ],
         Descripcion:
-          '¡Hola! Bienvenido a casa, desde aquí podrás enviar solicitudes para modificar tus fechas de reserva, el titular o realizar la reserva anticipada de tu menú de comidas durante tu estancia',
+          t('miReservaDesc'),
         Login: false,
-        btn: ['Gestionar reserva', `/reserva-${idReserva.value}/${correo.value}`],
+        btn: [t('gestionarRes'), `/reserva-${idReserva.value}/${correo.value}`],
       };
 })
 

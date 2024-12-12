@@ -120,7 +120,6 @@ export default {
   },
   data() {
     const useBooking = useBookingStore();
-    const route = useRoute();
     return {
       visible: false,
       useBooking,
@@ -132,10 +131,11 @@ export default {
   emits: ['update:fieldOne', 'update:fieldTwo'],
   methods: {
     signInIf() {
+      const localePath = useLocalePath()
       if (this.action && this.fieldOne !== '' && this.fieldTwo !== '') {
         this.action();
       } else if (!this.action && this.fieldOne !== '' && this.fieldTwo !== '') {
-        return navigateTo(this.formato.btn[1]);
+        return navigateTo(localePath(this.formato.btn[1]));
       }
     },
     // credentials(value) {

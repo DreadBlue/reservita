@@ -1,0 +1,104 @@
+[
+  {
+    "src": "/images/arborismo.webp",
+    "availability": "arborismo",
+    "actividad": "Arborism",
+    "titulo": "ARBORISM",
+    "descripcion": "It consists of traversing a high circuit among 3 trees, crossing a balance line, a Tibetan bridge, and ladders that will take you to the highest catamaran net in the country (25 meters).",
+    "precio": [
+      "1 person: $100,000",
+      "2 to 5 people: $80,000",
+      "6 to 8 people: $70,000",
+      "9 to 15 people: $50,000"
+    ],
+    "price": [
+      100000,
+      80000,
+      70000,
+      50000
+    ],
+    "icon": {
+      "uno": {
+        "icon": "mdi-numeric-3-circle",
+        "text": "DIFFICULTY 1-5"
+      },
+      "dos": {
+        "icon": "mdi-numeric-1-circle",
+        "text": "TIME IN H"
+      },
+      "tres": {
+        "icon": "mdi-numeric-8-circle",
+        "text": "MINIMUM AGE"
+      }
+    }
+  },
+
+  {
+      "src": "/images/canyoning.webp",
+      "availability": "canyoning",
+      "actividad": "Canyoning",
+      "titulo": "CANYONING",
+      "precio": [
+          "1 person: $190,000",
+          "2 to 5 people: $170,000",
+          "6 to 8 people: $150,000",
+          "9 to 15 people: $140,000",
+          "16 to 20 people: $110,000"
+        ],
+      "price": [
+        190000,
+        170000,
+        150000,
+        140000,
+        110000
+      ],
+      "descripcion": "Canyoning is an adventure activity that involves descending through canyons and ravines using techniques such as rappelling, jumps, natural slides, and swimming. Participants traverse rocky terrain and water courses, exploring stunning landscapes while challenging their skills and physical endurance.",
+      "icon": {
+        "uno": {
+          "icon": "mdi-numeric-2-circle",
+          "text": "DIFFICULTY 1-5"
+        },
+        "dos": {
+          "icon": "mdi-numeric-3-circle",
+          "text": "TIME IN H"
+        },
+        "tres": {
+          "icon": "mdi-numeric-8-circle",
+          "text": "MINIMUM AGE"
+        }
+      },
+      "background": "bg-mywhite"
+    },
+
+    {
+      "src": "/images/aventura.webp",
+      "availability": "aventura",
+      "actividad": "Adventure",
+      "titulo": "ADVENTURE",
+      "precio": [
+          "1 person: $230,000",
+          "2 to 12 people: $200,000",
+          "13 to 20 people: $180,000"
+        ],
+      "descripcion": "This unique promotion combines the best of both worlds: the thrill of overcoming challenges among the trees and a deep connection with nature among canyons and waterfalls. Don’t miss this opportunity to experience an unforgettable adventure and push your limits!",
+      "price": [
+        230000,
+        200000,
+        180000
+      ],
+      "icon": {
+        "uno": {
+          "icon": "mdi-numeric-3-circle",
+          "text": "DIFFICULTY 1-5"
+        },
+        "dos": {
+          "icon": "mdi-numeric-3-circle",
+          "text": "TIME IN H"
+        },
+        "tres": {
+          "icon": "mdi-numeric-8-circle",
+          "text": "MINIMUM AGE"
+        }
+      }
+    }
+]

@@ -8,3 +8,11 @@
   </v-container>
 </template>
 
+<style scoped>
+.top-right {
+  position: absolute;
+  top: 4%;
+  right: 0;
+  margin: 16px; /* Ajusta el margen según tus necesidades */
+}
+</style>

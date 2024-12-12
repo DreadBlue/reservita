@@ -9,15 +9,15 @@ import {
   query,
   updateDoc,
   increment,
-  orderBy,
+  // orderBy,
   setDoc,
   doc,
-  limit,
-  startAfter,
-  deleteDoc,
+  // limit,
+  // startAfter,
+  // deleteDoc,
 } from "firebase/firestore";
 import { db } from "/firebase/firebase.config.js";
-// import { getFunctions, httpsCallable } from "firebase/functions";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 export const useBookingStore = defineStore("booking", {
   state: () => {
@@ -26,10 +26,14 @@ export const useBookingStore = defineStore("booking", {
       date: "",
       quantity: 0,
       id: "",
+      bookingId: "",
       horario: "",
       bookingPrice: 0,
       discount: 0,
       addonsPrice: 0,
+      food: false,
+      almuerzo: 0,
+      transporte: false,
       disponibilidad: {
         arborismo: 0,
         cayoning: 0,
@@ -54,9 +58,10 @@ export const useBookingStore = defineStore("booking", {
       }
     },
 
-    async createDatabase() {
+    async createAvailability() {
       const start = new Date("2024-10-15");
       const end = new Date("2025-04-30");
+      const activities = ["arborismo", "aventura", "canyoning"];
 
       for (
         let date = new Date(start);
@@ -65,29 +70,39 @@ export const useBookingStore = defineStore("booking", {
       ) {
         const formattedDate = date.toISOString().split("T")[0];
 
-        await setDoc(
-          doc(db, "activity_availability", `aventura_${formattedDate}_morning`),
-          {
-            act_id: "aventura",
-            date: formattedDate,
-            time_slot: "morning",
-            spots: 25,
-          }
-        );
-        await setDoc(
-          doc(
-            db,
-            "activity_availability",
-            `aventura_${formattedDate}_afternoon`
-          ),
-          {
-            act_id: "aventura",
-            date: formattedDate,
-            time_slot: "afternoon",
-            spots: 25,
-          }
-        );
+        for (const activity of activities) {
+          await setDoc(
+            doc(
+              db,
+              "activity_availability",
+              `${activity}_${formattedDate}_morning`
+            ),
+            {
+              act_id: activity,
+              date: formattedDate,
+              time_slot: "morning",
+              spots: 20,
+            }
+          );
+          await setDoc(
+            doc(
+              db,
+              "activity_availability",
+              `${activity}_${formattedDate}_afternoon`
+            ),
+            {
+              act_id: activity,
+              date: formattedDate,
+              time_slot: "afternoon",
+              spots: 20,
+            }
+          );
+        }
       }
+    },
+
+    async createProducts() {
+      
     },
 
     async getAvailability(date) {
@@ -148,8 +163,10 @@ export const useBookingStore = defineStore("booking", {
 
     applyDiscount(code) {
       const descuentos = {
-        123456: 10,
-        123457: 20,
+        MAGIARESERVITA: 15,
+        INICIACIONRESERVITA: 10,
+        AVENTURAMEDELLIN: 20,
+        test: 99,
       };
 
       if (Object.hasOwn(descuentos, code)) {
@@ -196,30 +213,58 @@ export const useBookingStore = defineStore("booking", {
 
       try {
         await updateDoc(availabilityDay, {
-          spots: increment(-this.quantity)
+          spots: increment(-this.quantity),
         });
       } catch (error) {
         console.error(error);
       }
     },
 
+    async fetchEmail() {
+      const item = JSON.parse(localStorage.getItem("item"));
+
+      try {
+        const infoEmail = {
+          name: item.name,
+          email: item.email,
+          activity: item.activity,
+          horario: item.horario,
+          quantity: item.quantity,
+          date: item.date,
+          subject: "Confirmación de reserva",
+          bookingCode: item.bookingId,
+          almuerzo: item.almuerzo,
+          transporte: item.transporte,
+        };
+
+        const functions = getFunctions();
+        const sendEmail = httpsCallable(functions, "sendEmail");
+        await sendEmail({ infoEmail, secret: "SendThisEmail" });
+      } catch (error) {
+        console.log("error fetching email: ", error);
+        throw error;
+      }
+    },
+
     async makeReservation(item) {
-      const id = this.generateBookingCode();
+      const bookingId = this.generateBookingCode();
       await this.takeAvailability();
       let url = "";
 
       if (item.invoice instanceof File) {
         const storage = getStorage();
-        const archivoRef = ref(storage, `comprobantes/${id}`);
+        const archivoRef = ref(storage, `comprobantes/${bookingId}`);
         const uploadInvoice = await uploadBytes(archivoRef, item.invoice);
-        
+
         url = await getDownloadURL(archivoRef);
         console.log("Archivo subido con éxito", uploadInvoice);
       }
 
       try {
-        setDoc(doc(db, "bookings", id), {
-          id: id,
+        const transporte = this.transporte ? "inlcuido" : "noIncluido";
+        const comida = this.food ? "inlcuido" : "noIncluido";
+        setDoc(doc(db, "bookings", bookingId), {
+          bookingId: bookingId,
           name: item.name,
           email: item.email,
           phone: item.phone,
@@ -231,12 +276,30 @@ export const useBookingStore = defineStore("booking", {
           horario: this.horario,
           bookingPrice: this.bookingPrice,
           discount: this.discount,
+          food: comida,
           addonsPrice: this.addonsPrice,
+          transporte: transporte,
+          almuerzo: this.almuerzo,
           status: "pending",
           createdAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
           updatedAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
           bill: url,
         });
+
+        const emailItem = {
+          name: item.name,
+          email: item.email,
+          activity: this.activity,
+          horario: this.horario,
+          quantity: this.quantity,
+          date: this.date,
+          precio: item.bookingPrice,
+          bookingId: bookingId,
+          almuerzo: this.almuerzo,
+          transporte: this.transporte,
+        };
+        localStorage.setItem("item", JSON.stringify(emailItem));
+        this.bookingId = bookingId;
       } catch (error) {
         console.error(error);
       }

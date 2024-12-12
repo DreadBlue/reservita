@@ -1,0 +1,44 @@
+[
+  {
+    "nombre": "Juan David Ocampo",
+    "role": "Socio fondatore - Colombiano",
+    "profesion": "WFR, istruttore WFA, guida professionale di canyoning e alpinista",
+    "descripcion": "Con una vasta esperienza in attività all'aperto e nel soccorso in zone remote, Juan David guida la formazione in sicurezza per gli sport d'avventura. Il suo impegno nella sostenibilità e nel turismo responsabile lo ha reso un punto di riferimento nel settore in Colombia.",
+    "foto": "/images/juanda.webp"
+  },
+  {
+    "nombre": "Andrés García Muñoz",
+    "role": "Socio fondatore - Colombiano",
+    "profesion": "WFA, Ingegnere forestale, allenatore della nazionale colombiana di Hockey subacqueo e istruttore di nuoto",
+    "descripcion": "Con una solida formazione in ingegneria forestale, Andrés unisce la conoscenza dell'ambiente con la sua esperienza sportiva, guidando progetti che integrano conservazione, avventura e sostenibilità.",
+    "foto": "/images/andres.jpg"
+  },
+  {
+    "nombre": "Esmeralda Muñoz",
+    "role": "Guida e co-fondatrice - Colombiana",
+    "profesion": "WFA, guida professionale di Canyoning",
+    "descripcion": "Sportiva appassionata di sport d'avventura. Esmeralda unisce la sua passione per la natura e lo sport al suo impegno per la sicurezza e il benessere nelle attività all'aperto, guidando con esperienza ed entusiasmo.",
+    "foto": "/images/esmeralda.jpg"
+  },
+  {
+    "nombre": "Ottavia Cavalli",
+    "role": "Socia capitalista - Italiana",
+    "profesion": "WFA, biologa, dottorato in microbiologia e capo spedizioni in Antartide e Groenlandia.",
+    "descripcion": "Ottavia porta la sua esperienza scientifica e la passione per la natura in ogni progetto, assicurando un approccio sostenibile e responsabile in tutte le attività.",
+    "foto": "/images/ottavia.png"
+  },
+  {
+    "nombre": "María Fernanda Muñoz",
+    "role": "Guida di canyoning - Colombiana",
+    "profesion": "WFA e studentessa di ospitalità e turismo",
+    "descripcion": "María Fernanda è appassionata di turismo d'avventura e si dedica a offrire esperienze sicure ed emozionanti nel canyoning. La sua formazione in ospitalità e turismo integra il suo impegno a fornire un servizio eccezionale ai visitatori, sempre dando priorità alla sicurezza e al benessere di tutti.",
+    "foto": "/images/maria.jpg"
+  },
+  {
+    "nombre": "Pablo",
+    "role": "Guida di canyoning - Colombiano",
+    "profesion": "WFA e giocatore della nazionale colombiana di Hockey subacqueo",
+    "descripcion": "Amante della natura e delle avventure all'aperto. La sua passione per gli sport estremi e l'esplorazione dei canyon lo ha portato a condividere esperienze uniche con chi desidera godere della natura. Promuove il rispetto e la cura dell'ambiente naturale in ogni attività.",
+    "foto": "/images/pablo.webp"
+  }
+]

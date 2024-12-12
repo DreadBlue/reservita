@@ -1,0 +1,157 @@
+[
+    {
+        "style": {
+            "backgroundLeft": "0%"
+        },
+        "main": {
+            "srcBack": "/images/backgroundNat.webp",
+            "srcOverlay": "/images/overlayNat.webp",
+            "subtitle": "COSTRUENDO SQUADRE AD ALTE PRESTAZIONI",
+            "title": "TEAM BUILDING: NELLA NATURA",
+            "descripcion": "Il piano 'Team Building nella Natura' è progettato per aziende e gruppi che desiderano rafforzare i loro legami attraverso un'esperienza unica e avvincente all'aperto. Questa attività offre non solo l'opportunità di staccarsi dalla routine quotidiana, ma anche di promuovere un senso di comunità e collaborazione tra i partecipanti.",
+            "order": "order-0"
+        },
+
+        "activities": {
+            "one": {
+                "subtitle": "ESPERIENZE MEMORABILI",
+                "backgroundColor": "bg-second",
+                "title": "CANYONING",
+                "src": "/images/cayoningdos.webp",
+                "description": "Il gruppo affronterà vari ostacoli naturali come cascate, rapide e rocce. Durante questa attività, i partecipanti impareranno a fidarsi e a sostenersi a vicenda, sviluppando capacità di comunicazione e problem-solving."
+            },
+            "two": {
+                "title": "ARBORISMO",
+                "src": "/images/arborismodos.webp",
+                "description": "Questa attività offre una serie di sfide che richiedono lavoro di squadra, permettendo ai partecipanti di aiutarsi l'un l'altro per superare ogni tratto. L'esperienza sugli alberi incoraggerà la fiducia e lo spirito di squadra, poiché ogni membro contribuirà al successo del gruppo."
+            }
+        },
+
+        "third": {
+            "first": {
+                "icon": "mdi-account-group",
+                "text": "Rafforzamento del lavoro di squadra",
+                "parrafo": "Le attività di canyoning e arborismo sono progettate per far lavorare insieme i partecipanti, aiutando a costruire relazioni più solide ed efficaci."
+            },
+            "second": {
+                "icon": "mdi-account-child",
+                "text": "Sviluppo delle capacità di leadership",
+                "parrafo": "Man mano che i partecipanti affrontano sfide, avranno l'opportunità di assumere ruoli di leadership e prendere decisioni di gruppo."
+            },
+            "third": {
+                "icon": "mdi-party-popper",
+                "text": "Divertimento e emozioni",
+                "parrafo": "La combinazione di adrenalina e divertimento garantisce che i partecipanti portino con sé ricordi indimenticabili e un'esperienza arricchente.",
+                "incluye": {
+                    "actividades": {
+                        "icon": "mdi-ticket",
+                        "text": "Attività con tutti gli elementi e gli strumenti necessari."
+                    },
+                    "food": {
+                        "icon": "mdi-food",
+                        "text": "Pranzo salutare e snack per mantenere l'energia durante la giornata."
+                    },
+                    "transporte": {
+                        "icon": "mdi-bus",
+                        "text": "Trasporto di andata e ritorno da Medellín, eliminando ogni preoccupazione logistica."
+                    },
+                    "seguro": {
+                        "icon": "mdi-shield-account",
+                        "text": "Assicurazione per garantire la sicurezza di tutti i partecipanti durante l'attività."
+                    }
+                },
+                "requisitos": {
+                    "grupominimo": {
+                        "icon": "mdi-account-multiple-minus",
+                        "text": "Gruppo minimo: 10 persone."
+                    },
+                    "grupomaximo": {
+                        "icon": "mdi-account-multiple-plus",
+                        "text": "Gruppo massimo: 30 persone."
+                    },
+                    "precio": {
+                        "icon": "mdi-cash-multiple",
+                        "text": "$180.000 / persona"
+                    }
+                }
+            }
+        }
+    },
+
+    {
+        "style": {
+            "backgroundLeft": "55%"
+        },
+        "main": {
+            "srcBack": "/images/login.webp",
+            "srcOverlay": "/images/canyoning.webp",
+            "subtitle": "PROMUOVERE SQUADRE DI CAMBIAMENTO",
+            "title": "TEAM BUILDING: PIANTAGIONE E CONSERVAZIONE",
+            "descripcion": "Il piano 'Team Building piantagione e conservazione' è progettato per aziende e gruppi che desiderano unirsi attorno all'importanza della sostenibilità e della conservazione ambientale. Attraverso questa attività, i partecipanti avranno l'opportunità di contribuire alla riforestazione e alla cura dell'ambiente naturale, promuovendo l'unione e il lavoro di squadra in un ambiente pacifico e arricchente.",
+            "order": "order-1"
+        },
+        "activities": {
+            "one": {
+                "subtitle": "ESPERIENZE CHE LASCIANO IL SEGNO",
+                "backgroundColor": "bg-main",
+                "title": "PIANTAGIONE DI ALBERI",
+                "src": "/images/siembra.webp",
+                "description": "Un'esperienza trasformativa che permette ai team di riconnettersi con la natura mentre lavorano insieme per un obiettivo comune: lasciare un'impronta positiva sull'ambiente."
+            },
+            "two": {
+                "title": "CONFERENZA SULLA SOSTENIBILITÀ",
+                "src": "/images/charla.webp",
+                "description": "Saranno offerte brevi conferenze interattive sull'importanza della sostenibilità e su come ciascuno possa contribuire alla cura dell'ambiente nella vita quotidiana e sul posto di lavoro."
+            }
+        },
+        "third": {
+            "first": {
+                "icon": "mdi-earth-plus",
+                "text": "Impatto duraturo",
+                "parrafo": "Il team avrà la soddisfazione di sapere che il loro sforzo contribuisce a migliorare l'ambiente, offrendo un lascito tangibile che durerà per generazioni."
+            },
+            "second": {
+                "icon": "mdi-account-switch",
+                "text": "Rafforzamento della collaborazione",
+                "parrafo": "Attraverso il lavoro di squadra, i partecipanti svilupperanno capacità di comunicazione, fiducia e cooperazione, essenziali in qualsiasi contesto lavorativo."
+            },
+            "third": {
+                "icon": "mdi-image-filter-hdr",
+                "text": "Disconnessione e rinnovamento",
+                "parrafo": "Allontanandosi dalla routine quotidiana e connettendosi con la natura, i partecipanti sperimenteranno una sensazione di rinnovamento, permettendo loro di tornare ai loro ruoli con una mentalità fresca e rinnovata.",
+                "incluye": {
+                    "actividades": {
+                        "icon": "mdi-ticket",
+                        "text": "Attività con tutti gli elementi e gli strumenti necessari."
+                    },
+                    "food": {
+                        "icon": "mdi-food",
+                        "text": "Pranzo salutare e snack per mantenere l'energia durante la giornata."
+                    },
+                    "transporte": {
+                        "icon": "mdi-bus",
+                        "text": "Trasporto di andata e ritorno da Medellín, eliminando ogni preoccupazione logistica."
+                    },
+                    "seguro": {
+                        "icon": "mdi-shield-account",
+                        "text": "Assicurazione per garantire la sicurezza di tutti i partecipanti durante l'attività."
+                    }
+                },
+                "requisitos": {
+                    "grupominimo": {
+                        "icon": "mdi-account-multiple-minus",
+                        "text": "Gruppo minimo: 12 persone."
+                    },
+                    "grupomaximo": {
+                        "icon": "mdi-account-multiple-plus",
+                        "text": "Gruppo massimo: 30 persone."
+                    },
+                    "precio": {
+                        "icon": "mdi-cash-multiple",
+                        "text": "$150.000 / persona"
+                    }
+                }
+            }
+        }
+    }
+]

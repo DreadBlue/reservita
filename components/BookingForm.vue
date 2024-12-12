@@ -1,13 +1,13 @@
 <template>
-  <v-container fluid class="pt-3 pt-15">
+  <GeneralLoader v-if="loading" :loading-text="$t('loading')" />
+  <v-container v-if="!loading" fluid class="pt-3 pt-15">
     <v-row>
       <v-col cols="12" class="text-center">
         <v-row>
           <v-col cols="12">
-            <span class="color-main text-h4 text-sm-h3"
-              >TITULAR DE LA RESERVA</span
-            >
-            {{ invoice}}
+            <span class="color-main text-h4 text-sm-h3">{{
+              $t("titularReserva")
+            }}</span>
           </v-col>
         </v-row>
         <v-row>
@@ -15,31 +15,36 @@
             <v-form>
               <v-container fluid>
                 <v-row>
-                  <v-col v-for="item in Inputs" :cols="item[4]" :sm="item[0]">
+                  <v-col
+                    v-for="(item, key) in Inputs"
+                    :cols="item.cols"
+                    :sm="item.colsSM"
+                    :key="item[0]"
+                  >
                     <v-text-field
-                      :label="item[1]"
-                      :variant="item[3]"
-                      v-model="item[7]"
-                      :prepend-inner-icon="item[5]"
-                      :type="item[6].type ? item[6].type : null"
-                      :minlength="item[6].minl ? item[6].minl : null"
-                      :min="item[6].min ? item[6].min : null"
-                      :hide-spin-buttons="item[6].spin ? item[6].spin : null"
+                      :label="item.label"
+                      :variant="item.variant"
+                      v-model="dataItem[item.key]"
+                      :prepend-inner-icon="item.prependIcon"
+                      :type="item.type ? item.type : null"
+                      :minlength="item.minl ? item.minl : null"
+                      :min="item.min ? item.min : null"
+                      :hide-spin-buttons="item.spin ? item.spin : null"
                     >
                     </v-text-field>
                   </v-col>
                 </v-row>
               </v-container>
-              <v-container fluid>
+              <v-container fluid v-if="quantity > 1">
                 <v-row>
                   <v-col cols="12" class="d-flex text-h5 text-sm-h4">
-                    Participantes
+                    {{ $t("participantes") }}
                   </v-col>
                 </v-row>
-                <v-row v-for="n in quantity">
+                <v-row v-for="n in quantity - 1" :key="n">
                   <v-col :cols="6" :sm="6">
                     <v-text-field
-                      :label="'Nombre participante ' + n"
+                      :label="$t('nombreParticipante') + (n + 1)"
                       variant="solo"
                       v-model="participantes[n].nombre"
                       prepend-inner-icon="mdi-account-multiple"
@@ -48,7 +53,7 @@
                   </v-col>
                   <v-col :cols="6" :sm="6">
                     <v-text-field
-                      :label="'Cédula / pasaporte participante ' + n"
+                      :label="$t('cedulaParticipante') + (n + 1)"
                       variant="solo"
                       v-model="participantes[n].documento"
                       prepend-inner-icon="mdi-card-account-details-outline"
@@ -64,21 +69,26 @@
     </v-row>
   </v-container>
 
-  <BookingDetails />
+  <BookingDetails v-if="!loading" />
 
-  <v-container fluid class="pt-10 pt-sm-5">
+  <v-container v-if="!loading" fluid class="pt-10 pt-sm-5">
     <v-row>
       <v-col cols="12" class="text-center">
-        <span class="text-h4 text-sm-h3 color-main">METODOS DE PAGO</span>
+        <span class="text-h4 text-sm-h3 color-main">{{ $t("metodos") }}</span>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12" class="d-flex flex-column ga-2">
-        <div>Transferencia bancaria</div>
+        <div>{{ $t("transferencia") }}</div>
+        <div class="d-flex flex-column text-body-2 ml-10 mb-3">
+          <p>{{ $t("cuenta") }}</p>
+          <p>{{ $t("cedulaBank") }}</p>
+          <p>{{ $t("titular") }}</p>
+        </div>
         <div class="d-flex">
           <v-checkbox v-model="cash" :disabled="card"></v-checkbox>
           <v-file-input
-            label="Comprobante de pago"
+            :label="$t('comprobante')"
             variant="outlined"
             prepend-inner-icon="mdi-paperclip"
             :prepend-icon="null"
@@ -86,7 +96,7 @@
             @update:model-value="invoice"
           ></v-file-input>
         </div>
-        <div>Pago virtual</div>
+        <div>{{ $t("Pago virtual") }}</div>
         <div class="d-flex">
           <v-checkbox v-model="card" :disabled="cash"></v-checkbox>
           <div class="w-50">
@@ -102,16 +112,18 @@
             v-if="cash"
             class="bg-second color-white"
             @click="initiateCheckout('cash')"
-            >PAGAR</v-btn
+            >{{ $t("pagar") }}</v-btn
           >
           <v-btn
             v-if="card"
             class="bg-second color-white"
             @click="initiateCheckout('card')"
-            >PAGAR</v-btn
+            >{{ $t("pagar") }}</v-btn
           >
         </div>
-        <span class="d-flex justify-center" v-if="warning">Faltan datos</span>
+        <span class="d-flex justify-center" v-if="warning">{{
+          $t("datosWarning")
+        }}</span>
       </v-col>
     </v-row>
   </v-container>
@@ -119,10 +131,13 @@
 
 <script>
 import { useBookingStore } from "/stores/booking.js";
-import { getFunctions, httpsCallable } from "firebase/functions";
+import { useI18n } from 'vue-i18n';
+
 
 export default {
   setup() {
+    const { t } = useI18n();
+    const localePath = useLocalePath()
     const useBooking = useBookingStore();
     const price = computed(
       () =>
@@ -132,18 +147,71 @@ export default {
     const info = useRoute().query;
 
     const participantes = ref({});
-    for (let i = 1; i <= quantity.value; i++) {
+    for (let i = 1; i < quantity.value; i++) {
       participantes.value[i] = {
         nombre: "",
         documento: "",
       };
     }
+    const addons = ref([false, false]);
+
+    const dataItem = ref({
+      "name": ref(''),
+      "phone": ref(''),
+      "email": ref(''),
+      "documentId": ref(''),
+    });
+
+    const Inputs = computed(() => [
+      {
+        cols: "12",
+        colsSM: "6",
+        label: t('nombre'),
+        variant: "solo",
+        prependIcon: "mdi-account-edit",
+        type: "text",
+        key: "name",  
+      },
+      {
+        cols: "12",
+        colsSM: "6",
+        label: t('celular'),
+        variant: "solo",
+        prependIcon: "mdi-cellphone",
+        type: "number",
+        minLength: "10",
+        spin: true,
+        key: 'phone',
+      },
+      {
+        cols: "12",
+        colsSM: "6",        
+        label: t('correo'),
+        variant: "solo",
+        prependIcon: "mdi-email",
+        type: "email",
+        key: 'email',
+      },
+      {
+        cols: "12",
+        colsSM: "6",        
+        label: t('cedula'),
+        variant: "solo",
+        prependIcon: "mdi-card-account-details-outline",
+        type: "text",
+        key: 'documentId',
+      },
+    ]);
     return {
       participantes,
       price,
       quantity,
       useBooking,
       info,
+      addons,
+      Inputs,
+      localePath,
+      dataItem
     };
   },
   data() {
@@ -152,64 +220,21 @@ export default {
       card: false,
       cash: false,
       warning: false,
+      loading: false,
       invoice: [],
-      Inputs: {
-        name: [
-          "6",
-          "Nombre completo",
-          "text",
-          "solo",
-          "12",
-          "mdi-account-edit",
-          { type: "text" },
-          "",
-        ],
-        phone: [
-          "6",
-          "Número de celular",
-          "number",
-          "solo",
-          "12",
-          "mdi-cellphone",
-          { type: "number", minl: "10", spin: true },
-          "",
-        ],
-        email: [
-          "6",
-          "Correo Electronico",
-          "text",
-          "solo",
-          "12",
-          "mdi-email",
-          { type: "mail" },
-          "",
-        ],
-        document: [
-          "6",
-          "Número de cédula / pasaporte",
-          "text",
-          "solo",
-          "8",
-          "mdi-card-account-details-outline",
-          { type: "text" },
-          "",
-        ],
-      },
     };
   },
   methods: {
     async initiateCheckout(payment) {
+      this.loading = true;
       try {
         let handler = window.ePayco.checkout.configure({
           key: "431e83810ea6a56d54fed22b9a434898",
-          test: true, // Set to false in production
+          test: false, // Set to false in production
         });
 
         let item = {
-          name: this.Inputs.name[7],
-          email: this.Inputs.email[7],
-          phone: this.Inputs.phone[7],
-          documentId: this.Inputs.document[7],
+          ...this.dataItem,
           participants: this.participantes,
           invoice: this.invoice,
         };
@@ -234,8 +259,8 @@ export default {
           extra1: "extra1",
           extra2: "extra2",
           extra3: "extra3",
-          confirmation: "https://reservita-7e847.web.app/reservar/confirmacion",
-          response: "https://reservita-7e847.web.app/reservar/confirmacion",
+          confirmation: "https://www.lareservita.com/reservar/confirmacion",
+          response: "https://www.lareservita.com/reservar/confirmacion",
 
           //Atributos cliente
           name_billing: "",
@@ -249,18 +274,18 @@ export default {
           methodsDisable: ["SP", "CASH"],
         };
 
-        if (this.test == false) {
-          this.warning = true;
-        } else {
+        if (Object.values(item).every((value) => value !== "")) {
           this.warning = false;
           if (payment == "card") {
-            // await this.useBooking.reservar(item);
+            await this.useBooking.makeReservation(item);
             handler.open(data);
           } else if (payment == "cash") {
             await this.useBooking.makeReservation(item);
-            // await this.useBooking.fetchGoogle(item, true, true);
-            // return navigateTo("/reservar/confirmacion");
+            return navigateTo(this.localePath("/reservar/confirmacion"));
           }
+        } else {
+          this.warning = true;
+          this.loading = false;
         }
       } catch (error) {
         console.error("Error al enviar reserva:", error);

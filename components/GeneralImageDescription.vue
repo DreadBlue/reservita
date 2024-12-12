@@ -23,6 +23,7 @@
               <div
                 v-for="item in item.icon"
                 class="d-flex flex-column color-second align-center"
+                :key="item.icon"
               >
                 <v-icon size="80" :icon="item.icon"></v-icon>
                 <p class="text-body-2">{{ item.text }}</p>
@@ -34,7 +35,7 @@
               </div>
             </v-col>
             <v-col cols="12" sm="5" class="d-flex align-center justify-sm-end justify-center">
-              <v-btn class="bg-second color-white">RESERVAR</v-btn>
+              <v-btn to="/" class="bg-second color-white">{{$t('reservarCap')}}</v-btn>
             </v-col>
         </v-row>
       </v-col>
@@ -43,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   item: {
     type: Object,
     required: true,

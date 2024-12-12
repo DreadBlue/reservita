@@ -9,72 +9,99 @@
 </template>
 
 <script lang="ts" setup>
-const modelOne = {
-  clases: "order-2",
-  title: "ARBORISMO",
-  description:
-    "Consiste en recorrer un circuito de altura entre 3 árboles, cruzando por una línea de equilibrio, un puente tibetano y escaleras de mano que te llevarán a la malla catamarán más alta del país (25 metros).",
-  image: "/images/arborismo.webp",
-  icon: {
-    uno: {
-      icon: "mdi-numeric-3-circle",
-      text: "DIFICULTAD 1-5",
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+const { locale } = useI18n();
+
+const modelOne = computed(() => {
+  return {
+    clases: "order-2",
+    title: t("arborismoTitle"),
+    description: t("arborismoDescription"),
+    image: "/images/arborismo.webp",
+    icon: {
+      uno: {
+        icon: "mdi-numeric-3-circle",
+        text: t("dificultad"),
+      },
+      dos: {
+        icon: "mdi-numeric-1-circle",
+        text: t("time"),
+      },
+      tres: {
+        icon: "mdi-numeric-8-circle",
+        text: t("edad"),
+      },
     },
-    dos: {
-      icon: "mdi-numeric-1-circle",
-      text: "TIEMPO EN H",
+  };
+});
+const modelTwo = computed(() => {
+  return {
+    clases: "order-1",
+    title: t("canyoningTitle"),
+    description: t("canyoningDescription"),
+    image: "/images/canyoning.webp",
+    icon: {
+      uno: {
+        icon: "mdi-numeric-2-circle",
+        text: t("dificultad"),
+      },
+      dos: {
+        icon: "mdi-numeric-3-circle",
+        text: t("time"),
+      },
+      tres: {
+        icon: "mdi-numeric-8-circle",
+        text: t("edad"),
+      },
     },
-    tres: {
-      icon: "mdi-numeric-8-circle",
-      text: "EDAD MINIMA",
+  };
+});
+const modelThree = computed(() => {
+  return {
+    clases: "order-2",
+    title: t("aventuraTitle"),
+    description: t("aventuraDescription"),
+    image: "/images/aventura.webp",
+    icon: {
+      uno: {
+        icon: "mdi-numeric-3-circle",
+        text: t("dificultad"),
+      },
+      dos: {
+        icon: "mdi-numeric-3-circle",
+        text: t("time"),
+      },
+      tres: {
+        icon: "mdi-numeric-8-circle",
+        text: t("edad"),
+      },
     },
-  },
-};
-const modelTwo = {
-  clases: "order-1",
-  title: "CANYONING",
-  description:
-    "El canyoning o torrentismo, es un deporte extremo que utiliza técnicas de cuerda (rapel) para descender por cascadas de diferentes alturas y niveles de dificultad.",
-  image: "/images/canyoning.webp",
-  icon: {
-    uno: {
-      icon: "mdi-numeric-2-circle",
-      text: "DIFICULTAD 1-5",
-    },
-    dos: {
-      icon: "mdi-numeric-3-circle",
-      text: "TIEMPO EN H",
-    },
-    tres: {
-      icon: "mdi-numeric-8-circle",
-      text: "EDAD MINIMA",
-    },
-  },
-};
-const modelThree = {
-  clases: "order-2",
-  title: "COMBO AVENTURA",
-  description:
-    "Vive esta promoción llena de emoción que incluye canyoning, arborismo, rapel, senderismo y más.",
-  image: "/images/aventura.webp",
-  icon: {
-    uno: {
-      icon: "mdi-numeric-3-circle",
-      text: "DIFICULTAD 1-5",
-    },
-    dos: {
-      icon: "mdi-numeric-3-circle",
-      text: "TIEMPO EN H",
-    },
-    tres: {
-      icon: "mdi-numeric-8-circle",
-      text: "EDAD MINIMA",
-    },
-  },
-};
-const modelFour = {
-  clases: "bg-main color-white",
-  descripcion:
-    `Somos un <span class="text-sm-h4 text-h6 text-fun">ecoparque</span> de aventura que ofrece <span class="text-sm-h4 text-h6 text-fun">experiencias</span> de cañonismo, torrentismo y arborismo. Nos <span class="text-sm-h4 text-h6 text-fun">especializamos</span> en brindar <span class="text-sm-h4 text-h6 text-fun">aventuras</span> emocionantes y seguras, inmersas en la <span class="text-sm-h4 text-h6 text-fun">naturaleza</span>, para aquellos que buscan desafiar sus límites y <span class="text-sm-h4 text-h6 text-fun">disfrutar</span> de paisajes impresionantes.`,
-};
+  };
+});
+const modelFour = computed(() => {
+  if (locale.value === "es") {
+    return {
+      clases: "bg-main color-white",
+      descripcion: `Somos un <span class="text-sm-h4 text-h6 text-fun">ecoparque</span> de aventura que ofrece <span class="text-sm-h4 text-h6 text-fun">experiencias</span> de cañonismo, torrentismo y arborismo. Nos <span class="text-sm-h4 text-h6 text-fun">especializamos</span> en brindar <span class="text-sm-h4 text-h6 text-fun">aventuras</span> emocionantes y seguras, inmersas en la <span class="text-sm-h4 text-h6 text-fun">naturaleza</span>, para aquellos que buscan desafiar sus límites y <span class="text-sm-h4 text-h6 text-fun">disfrutar</span> de paisajes impresionantes.`,
+    };
+  } else if (locale.value === "en") {
+    return {
+      clases: "bg-main color-white",
+      descripcion: `We are an <span class="text-sm-h4 text-h6 text-fun">adventure ecopark</span> offering <span class="text-sm-h4 text-h6 text-fun">canyoning</span>, torrenting, and tree climbing <span class="text-sm-h4 text-h6 text-fun">experiences</span>. We <span class="text-sm-h4 text-h6 text-fun">specialize</span> in providing exciting and safe <span class="text-sm-h4 text-h6 text-fun">adventures</span> immersed in <span class="text-sm-h4 text-h6 text-fun">nature</span>, for those looking to challenge their limits and <span class="text-sm-h4 text-h6 text-fun">enjoy</span> breathtaking landscapes.
+`,
+    };
+  } else if (locale.value === "it") {
+    return {
+      clases: "bg-main color-white",
+      descripcion: `Siamo un <span class="text-sm-h4 text-h6 text-fun">ecoparco</span> di avventura che offre <span class="text-sm-h4 text-h6 text-fun">esperienze</span> di canyoning, torrentismo e arrampicata sugli alberi. Ci <span class="text-sm-h4 text-h6 text-fun">specializziamo</span> nell'offrire <span class="text-sm-h4 text-h6 text-fun">avventure</span> emozionanti e sicure, immerse nella <span class="text-sm-h4 text-h6 text-fun">natura</span>, per coloro che cercano di sfidare i propri limiti e <span class="text-sm-h4 text-h6 text-fun">godere</span> di paesaggi mozzafiato.
+`,
+    };
+  }
+  return {
+    clases: "bg-main color-white",
+    descripcion: "Default description in case of unsupported locale.",
+  };
+});
 </script>

@@ -38,7 +38,20 @@ export default defineNuxtConfig({
     },
     '@pinia/nuxt',
     'dayjs-nuxt',
+    '@nuxtjs/i18n',
   ],
+  i18n: {
+    locales: [
+      { code: 'es', language: 'es-ES', file: 'es/es.json', files: ['es/es.json', 'es/actividades.json'] },
+      { code: 'en', language: 'en-US', file: 'en/en.json', files: ['en/en.json', 'en/actividades.json'] },
+      { code: 'it', language: 'it-IT', file: 'it/it.json', files: ['it/it.json', 'it/actividades.json'] }
+    ],
+    defaultLocale: 'es',
+    strategy: 'prefix_and_default',
+    lazy: true,
+    langDir: 'languages/',
+    vueI18n: './i18n.config.ts',
+  },
   vite: {
     vue: {
       template: {

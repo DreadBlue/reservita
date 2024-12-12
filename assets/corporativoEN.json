@@ -1,0 +1,157 @@
+[
+    {
+        "style": {
+            "backgroundLeft": "0%"
+        },
+        "main": {
+            "srcBack": "/images/backgroundNat.webp",
+            "srcOverlay": "/images/overlayNat.webp",
+            "subtitle": "BUILDING HIGH-PERFORMANCE TEAMS",
+            "title": "TEAM BUILDING: IN NATURE",
+            "descripcion": "The 'Team Building in Nature' plan is designed for companies and groups looking to strengthen their bonds through a unique and exciting outdoor experience. This activity not only offers the chance to disconnect from the daily routine but also fosters a sense of community and collaboration among participants.",
+            "order": "order-0"
+        },
+
+        "activities": {
+            "one": {
+                "subtitle": "MEMORABLE EXPERIENCES",
+                "backgroundColor": "bg-second",
+                "title": "CANYONING",
+                "src": "/images/cayoningdos.webp",
+                "description": "The group will face various natural obstacles such as waterfalls, rapids, and rocks. During this activity, participants will learn to trust and support each other, developing communication and problem-solving skills."
+        },
+            "two": {
+                "title": "ARBORISM",
+                "src": "/images/arborismodos.webp",
+                "description": "This activity offers a series of challenges that require teamwork, allowing participants to assist each other in overcoming each section. The treetop experience will foster trust and camaraderie, as each team member contributes to the group's success."
+        }
+      },
+
+        "third": {
+            "first": {
+                "icon": "mdi-account-group",
+                "text": "Strengthening teamwork",
+                "parrafo": "The canyoning and arborism activities are designed for participants to work together, helping build stronger and more effective relationships."
+            },
+            "second": {
+                "icon": "mdi-account-child",
+                "text": "Leadership skill development",
+                "parrafo": "As participants face challenges, they will have the opportunity to take on leadership roles and make group decisions."
+            },
+            "third": {
+                "icon": "mdi-party-popper",
+                "text": "Fun and excitement",
+                "parrafo": "The combination of adrenaline and fun ensures participants take away unforgettable memories and a rewarding experience.",
+                "incluye": {
+                    "actividades": {
+                        "icon": "mdi-ticket",
+                        "text": "Activities with all the necessary elements and equipment."
+                    },
+                    "food": {
+                        "icon": "mdi-food",
+                        "text": "Healthy lunch and snacks to maintain energy throughout the day."
+                    },
+                    "transporte": {
+                        "icon": "mdi-bus",
+                        "text": "Round-trip transportation from Medellín, eliminating any logistical concerns."
+                    },
+                    "seguro": {
+                        "icon": "mdi-shield-account",
+                        "text": "Insurance to ensure the safety of all participants during the activity."
+                    }
+                },
+                "requisitos": {
+                    "grupominimo": {
+                        "icon": "mdi-account-multiple-minus",
+                        "text": "Minimum group: 10 people."
+                    },
+                    "grupomaximo": {
+                        "icon": "mdi-account-multiple-plus",
+                        "text": "Maximum group: 30 people."
+                    },
+                    "precio": {
+                        "icon": "mdi-cash-multiple",
+                        "text": "$180,000 / person"
+                    }
+                }
+            }
+        }
+    },    
+
+    {
+        "style": {
+            "backgroundLeft": "55%"
+        },
+        "main": {
+            "srcBack": "/images/login.webp",
+            "srcOverlay": "/images/canyoning.webp",
+            "subtitle": "PROMOTING CHANGE-MAKING TEAMS",
+            "title": "TEAM BUILDING: PLANTING AND CONSERVATION",
+            "descripcion": "The 'Team Building planting and conservation' plan is designed for companies and groups who wish to come together around the importance of sustainability and environmental conservation. Through this activity, participants will have the opportunity to contribute to reforestation and care for the natural environment, fostering unity and teamwork in a peaceful and enriching setting.",
+            "order": "order-1"
+        },
+        "activities": {
+            "one": {
+                "subtitle": "IMPACTFUL EXPERIENCES",
+                "backgroundColor": "bg-main",
+                "title": "TREE PLANTING",
+                "src": "/images/siembra.webp",
+                "description": "A transformative experience that allows teams to reconnect with nature while working together toward a common goal: leaving a positive impact on the environment."
+        },
+            "two": {
+                "title": "SUSTAINABILITY TALK",
+                "src": "/images/charla.webp",
+                "description": "Brief interactive talks will be offered on the importance of sustainability and how each person can contribute to caring for the environment in their daily work and personal lives."
+        }
+      },
+      "third": {
+        "first": {
+            "icon": "mdi-earth-plus",
+            "text": "Long-lasting impact",
+            "parrafo": "The team will have the satisfaction of knowing their effort helps improve the environment, providing a tangible legacy that will endure for generations."
+        },
+        "second": {
+            "icon": "mdi-account-switch",
+            "text": "Strengthening collaboration",
+            "parrafo": "Through teamwork, participants will develop essential communication, trust, and cooperation skills for any work environment."
+        },
+        "third": {
+            "icon": "mdi-image-filter-hdr",
+            "text": "Disconnection and renewal",
+            "parrafo": "Stepping away from the daily routine and connecting with nature, participants will experience a sense of renewal, allowing them to return to their roles with a fresh and revitalized mindset.",
+            "incluye": {
+                    "actividades": {
+                        "icon": "mdi-ticket",
+                        "text": "Activities with all the necessary elements and equipment."
+                    },
+                    "food": {
+                        "icon": "mdi-food",
+                        "text": "Healthy lunch and snacks to maintain energy throughout the day."
+                    },
+                    "transporte": {
+                        "icon": "mdi-bus",
+                        "text": "Round-trip transportation from Medellín, eliminating any logistical concerns."
+                    },
+                    "seguro": {
+                        "icon": "mdi-shield-account",
+                        "text": "Insurance to ensure the safety of all participants during the activity."
+                    }
+                },
+                "requisitos": {
+                    "grupominimo": {
+                        "icon": "mdi-account-multiple-minus",
+                        "text": "Minimum group: 12 people."
+                    },
+                    "grupomaximo": {
+                        "icon": "mdi-account-multiple-plus",
+                        "text": "Maximum group: 30 people."
+                    },
+                    "precio": {
+                        "icon": "mdi-cash-multiple",
+                        "text": "$150,000 / person"
+                    }
+                }
+        }
+      }
+    }
+]

@@ -11,7 +11,7 @@
         class="d-flex flex-column pa-0 py-5 text-center"
         style="font-style: italic"
       >
-        <NuxtLink to="/">
+        <NuxtLink :to="localePath('/')">
           <img
             src="/logo-cuadro.png"
             alt="Logo"
@@ -32,7 +32,7 @@
         sm="3"
         class="d-flex flex-column justify-center pl-3 pl-sm-15 align-center"
       >
-        <div class="w-25 pb-2">SIGUENOS</div>
+        <div class="pb-2">{{$t('siguenos')}}</div>
         <div class="d-flex w-25 ga-4 justify-center">
           <NuxtLink
             to="https://www.instagram.com/lareservita/"
@@ -52,21 +52,21 @@
         sm="5"
         class="d-flex ga-5 pl-6 pl-sm-15 align-center pt-0"
       >
-        <NuxtLink>Términos y condiciones</NuxtLink>
+        <NuxtLink>{{$t('terminos')}}</NuxtLink>
         <NuxtLink
           to="https://maps.app.goo.gl/jBA9pdr4HLQ8eazK"
           style="text-decoration: none;"
           class="color-myblack"
           >Maps</NuxtLink
         >
-        <NuxtLink to="admin" style="text-decoration: none;"
+        <NuxtLink :to="localePath('/admin')" style="text-decoration: none;"
         class="color-myblack"
           >Admin</NuxtLink
         >
       </v-col>
       <v-col cols="12" sm="7" class="justify-end pt-0">
         <div class="text-end pr-10">
-          All rights reserved - Desarrollado por
+          {{$t('desarrollado')}}
           <NuxtLink
             to="https://dreadblue.com"
             style="text-decoration: none"
@@ -78,3 +78,7 @@
     </v-row>
   </v-container>
 </template>
+
+<script setup lang="js">
+  const localePath = useLocalePath();
+</script>
