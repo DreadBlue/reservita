@@ -104,10 +104,4 @@ const modelFour = computed(() => {
     descripcion: 'Default description in case of unsupported locale.',
   };
 });
-
-import { useBookingStore } from '@/stores/booking';
-const useBooking = useBookingStore();
-onMounted(async () => {
-  await useBooking.firestoreTesting();
-});
 </script>

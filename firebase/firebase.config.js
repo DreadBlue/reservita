@@ -1,10 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
 import { initializeFirestore } from 'firebase/firestore';
-import {
-  getFunctions,
-  connectFunctionsEmulator
-} from 'firebase/functions';
+import { getFunctions } from 'firebase/functions';
 import { getAuth } from "firebase/auth";
 
 const apyKey = import.meta.env.VITE_APY_KEY;
@@ -27,10 +24,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const functions = getFunctions(app);
-connectFunctionsEmulator(functions, "localhost", 5001);
-export const db = initializeFirestore(app, {
-  ignoreUndefinedProperties: true,
-}); export const auth = getAuth(app);
+export const db = initializeFirestore(app);
+export const auth = getAuth(app);
 
 initializeAppCheck(app, {
   provider: new ReCaptchaEnterpriseProvider('6Le7mVoqAAAAAKoRUSkv7Yc4KnconJJsP2HcmZqJ'),
