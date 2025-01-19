@@ -9,7 +9,7 @@ const { sendEmail,
 >>>>>>> f2ae2d0 (Booking process finished)
 const { manualBill, monthlyBill, firestoreTesting } = require('./dreadblue.js');
 // const { deleteBooking, createDatabase, adminBookings, createRequest, fetchRequests, manageChangeRequest } = require('./admin.js');
-const { createDatabase, adminBookings } = require('./admin.js');
+const { createDatabase, adminBookings, deleteBooking } = require('./admin.js');
 
 module.exports = {
   getAvailability,

@@ -85,8 +85,8 @@ const retakeAvailability = async (item) => {
     const availabilityCollection = db.collection('availability');
     const availabilityQuery = availabilityCollection
         .where('date', '==', item.date)
-        .where('act_id', '==', item.actividad.toLowerCase())
-        .where('schedule', '==', item.slot.toLowerCase());
+        .where('act_id', '==', item.actividad)
+        .where('schedule', '==', item.schedule);
 
     try {
         const availabilitySnapshot = await availabilityQuery.get();

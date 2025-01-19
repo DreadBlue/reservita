@@ -146,19 +146,42 @@ const makeReservation = onCall(async (request) => {
         log('Reserva creada con éxito');
         await takeAvailability(item);
         log('Disponibilidad actualizada');
-        // const secretEmail = process.env.SECRET_EMAIL;
-        // const infoEmail = {
-        //     name: item.name,
-        //     email: item.email,
-        //     products: item.products,
-        //     date: item.date,
-        //     bookingId: bookingId,
-        //     addons: item.addons,
-        //     subject: 'Confirmación de reserva',
-        //     bookingPrice: item.bookingPrice,
-        //     secret: secretEmail,
-        // };
-        // sendBookEmail(infoEmail);
+        const secretEmail = process.env.SECRET_EMAIL;
+        let horarioEmail = '';
+        let quantityEmail = 0;
+        let menuEmail = 0;
+        let transportEmail = 0;
+        for (const addon in item.addons) {
+            if (addon == 'Almuerzo saludable') {
+                menuEmail = menuEmail + item.addons[addon].amount;
+            } else if (addon == 'Almuerzo local') {
+                menuEmail = menuEmail + item.addons[addon].amount;
+            } else if (addon == 'Transporte') {
+                transportEmail = item.addons[addon].amount;
+            }
+        }
+        for (const activity in item.products) {
+            quantityEmail = quantityEmail + item.products[activity].quantity;
+            if (horarioEmail === '') {
+                horarioEmail = item.products[activity].act_id + ' a las ' + item.products[activity].schedule;
+            } else {
+                horarioEmail = horarioEmail + ' y ' + item.products[activity].act_id + ' a las ' + item.products[activity].schedule;
+            }
+        }
+        const infoEmail = {
+            bookingId: bookingId,
+            name: item.name,
+            activities: activitiesEmail,
+            date: item.date,
+            // horario: horarioEmail,
+            quantity: quantityEmail,
+            menu: menuEmail,
+            transport: transportEmail,
+            subject: 'Confirmación de reserva',
+            secret: secretEmail,
+            email: item.email,
+        };
+        sendBookEmail(infoEmail);
         // const secretCalendar = process.env.SECRET_CALENDAR;
         // const description = `https://www.lareservita.com/admin/reservas/${item.bookingId}-${item.mail}`;
         // const infoEvent = {
