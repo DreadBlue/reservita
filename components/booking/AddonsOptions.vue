@@ -85,8 +85,6 @@ const addons = reactive({
 watch(
   addons,
   (newValue) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
     const addons = ref({});
     for (const addon in newValue) {
       const name = newValue[addon].name;
@@ -95,24 +93,6 @@ watch(
       }
     }
     useBooking.updateDetails({ addons: addons.value });
-=======
-    const products = ref([]);
-=======
-    const addons = ref({});
->>>>>>> f2ae2d0 (Booking process finished)
-    for (const addon in newValue) {
-      const name = newValue[addon].name;
-      if (newValue[addon].amount || newValue[addon].amount > 0) {
-        addons.value = { ...addons.value, [name]: newValue[addon] };
-      }
-    }
-<<<<<<< HEAD
-    useBooking.updateDetails({ addons: products.value });
->>>>>>> 91d6fa8 (booking process almost finished)
-=======
-    console.log('addons', addons.value);
-    useBooking.updateDetails({ addons: addons.value });
->>>>>>> f2ae2d0 (Booking process finished)
   },
   { deep: true },
 );
