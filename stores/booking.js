@@ -53,19 +53,6 @@ export const useBookingStore = defineStore("booking", {
       }
     },
 
-    async firestoreTesting() {
-      try {
-        const firestoreTesting = httpsCallable(
-          functions,
-          'firestoreTesting',
-        );
-        await firestoreTesting();
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
-    },
-
     async getAvailability(date) {
       try {
         const availabilityFunction = httpsCallable(
