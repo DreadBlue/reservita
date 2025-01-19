@@ -24,11 +24,16 @@
 </template>
 
 <script setup>
+<<<<<<< HEAD
 import { DateTime } from 'luxon';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { useBookingStore } from '/stores/booking.js';
 import { useDisplay } from 'vuetify';
+=======
+// import { useBookingStore } from '@/stores/booking.js';
+// import dayjs from 'dayjs';
+>>>>>>> 91d6fa8 (booking process almost finished)
 
 const props = defineProps({
   oldDate: {
@@ -37,6 +42,19 @@ const props = defineProps({
   },
 });
 
+<<<<<<< HEAD
+=======
+// const localePath = useLocalePath();
+// const useBooking = useBookingStore();
+// const router = useRouter();
+
+import { DateTime } from 'luxon';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { useBookingStore } from '/stores/booking.js';
+import { useDisplay } from 'vuetify';
+
+>>>>>>> 91d6fa8 (booking process almost finished)
 const router = useRouter();
 const route = useRoute();
 dayjs.extend(customParseFormat);
@@ -44,10 +62,15 @@ const { smAndUp } = useDisplay();
 const reactiveHeight = ref('max-width: 85%');
 const useBooking = useBookingStore();
 const min = DateTime.local().toString().slice(0, 10);
+<<<<<<< HEAD
+=======
+// let minMonth = 0;
+>>>>>>> 91d6fa8 (booking process almost finished)
 const date = ref(props.oldDate);
 
 function redirection() {
   useBooking.updateDetails({ date: date.value });
+<<<<<<< HEAD
   if (
     route.path == '/eventos-empresariales' ||
     route.path == '/eventos-empresariales/reservar'
@@ -62,6 +85,12 @@ function redirection() {
       query: { date: date.value },
     });
   }
+=======
+  router.push({
+    path: '/reservar',
+    query: { date: date.value },
+  });
+>>>>>>> 91d6fa8 (booking process almost finished)
 }
 
 watch(

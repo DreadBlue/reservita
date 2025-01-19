@@ -30,6 +30,7 @@ export const useAdminStore = defineStore('admin', {
       }
     },
 
+<<<<<<< HEAD
     async adminBookings() {
       // if (activities.length > 0 && horarios.length > 0 && comida.length > 0 && transporte.length > 0) {
       try {
@@ -42,6 +43,19 @@ export const useAdminStore = defineStore('admin', {
       } catch (error) {
         console.log("error fetching booking: ", error);
         throw error;
+=======
+    async adminBookings(filters) {
+      if (activities.length > 0 && horarios.length > 0 && comida.length > 0 && transporte.length > 0) {
+        try {
+          const functions = filters;
+          return functions;
+        } catch (error) {
+          console.log("error fetching booking: ", error);
+          throw error;
+        }
+      } else {
+        return ['Faltan filtros']
+>>>>>>> 91d6fa8 (booking process almost finished)
       }
       // } 
       // else {
