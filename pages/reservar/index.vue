@@ -65,7 +65,6 @@ watch(
           newValue[activity][schedule].quantity ||
           newValue[activity][schedule].quantity > 0
         ) {
-          console.log('nom', newValue[activity][schedule].act_id);
           products.value = {
             ...products.value,
             [newValue[activity][schedule]['act_id'] + '_' + schedule]:

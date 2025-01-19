@@ -92,7 +92,6 @@ watch(
         addons.value = { ...addons.value, [name]: newValue[addon] };
       }
     }
-    console.log('addons', addons.value);
     useBooking.updateDetails({ addons: addons.value });
   },
   { deep: true },

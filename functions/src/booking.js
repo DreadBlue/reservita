@@ -178,8 +178,8 @@ const makeReservation = onCall(async (request) => {
 });
 
 const lookBooking = onCall(async (request) => {
-    const { id, email } = request.data.bookingInfo;
-    const bookingQuery = db.collection('bookings').where('bookingId', '==', id).where('email', '==', email);
+    const { id, mail } = request.data.bookingInfo;
+    const bookingQuery = db.collection('bookings').where('bookingId', '==', id).where('mail', '==', mail);
 
     try {
         const availabilitySnapshot = await bookingQuery.get();
