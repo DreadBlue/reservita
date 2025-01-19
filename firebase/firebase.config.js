@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
 import { initializeFirestore } from 'firebase/firestore';
-import { getFunctions } from 'firebase/functions';
+import { getFunctions, connectFunctionsEmulator } from 'firebase/functions';
 import { getAuth } from "firebase/auth";
 
 const apyKey = import.meta.env.VITE_APY_KEY;
@@ -24,6 +24,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const functions = getFunctions(app);
+connectFunctionsEmulator(functions, "localhost", 5001);
 export const db = initializeFirestore(app);
 export const auth = getAuth(app);
 
