@@ -1,7 +1,4 @@
 import { defineStore } from "pinia";
-import dayjs from "dayjs";
-// import customParseFormat from "dayjs/plugin/customParseFormat";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   getDocs,
   collection,
@@ -9,43 +6,23 @@ import {
   query,
   updateDoc,
   increment,
-  // orderBy,
-  setDoc,
   doc,
-  // limit,
-  // startAfter,
-  // deleteDoc,
 } from "firebase/firestore";
 import { db } from "/firebase/firebase.config.js";
-import { getFunctions, httpsCallable } from "firebase/functions";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "/firebase/firebase.config.js";
 
 export const useBookingStore = defineStore("booking", {
   state: () => {
     return {
-      activity: "",
       date: "",
-      quantity: 0,
       id: "",
-      bookingId: "",
-      horario: "",
-      bookingPrice: 0,
+      products: {},
       discount: 0,
+      productsPrice: 0,
+      addons: {},
       addonsPrice: 0,
-      food: false,
-      almuerzo: 0,
-      transporte: false,
-      disponibilidad: {
-        arborismo: 0,
-        cayoning: 0,
-        aventura: 0,
-      },
-      max: "2025-04-30",
-      arborimosAfternoon: {},
-      arborimosMorning: {},
-      aventuraAfternoon: {},
-      aventuraMorning: {},
-      canyoningAfternoon: {},
-      canyoningMorning: {},
+      bookingPrice: 0,
     };
   },
   actions: {
@@ -58,106 +35,42 @@ export const useBookingStore = defineStore("booking", {
       }
     },
 
-    async createAvailability() {
-      const start = new Date("2024-10-15");
-      const end = new Date("2025-04-30");
-      const activities = ["arborismo", "aventura", "canyoning"];
-
-      for (
-        let date = new Date(start);
-        date <= end;
-        date.setDate(date.getDate() + 1)
-      ) {
-        const formattedDate = date.toISOString().split("T")[0];
-
-        for (const activity of activities) {
-          await setDoc(
-            doc(
-              db,
-              "activity_availability",
-              `${activity}_${formattedDate}_morning`
-            ),
-            {
-              act_id: activity,
-              date: formattedDate,
-              time_slot: "morning",
-              spots: 20,
-            }
-          );
-          await setDoc(
-            doc(
-              db,
-              "activity_availability",
-              `${activity}_${formattedDate}_afternoon`
-            ),
-            {
-              act_id: activity,
-              date: formattedDate,
-              time_slot: "afternoon",
-              spots: 20,
-            }
-          );
-        }
-      }
-    },
-
-    async createProducts() {
-      
-    },
-
-    async getAvailability(date) {
-      const availabilityCollection = query(
-        collection(db, "activity_availability"),
-        where("date", "==", date)
-      );
-
+    async createDatabase() {
       try {
-        const availabilitySnapshot = await getDocs(availabilityCollection);
-        const docs = availabilitySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        this.arborismo = [docs[0], docs[1]];
-        this.aventura = [docs[2], docs[3]];
-        this.canyoning = [docs[4], docs[5]];
-        return docs;
+        const createDatabaseFunction = httpsCallable(
+          functions,
+          'createDatabase',
+        );
+        await createDatabaseFunction();
       } catch (error) {
         console.error(error);
         return [];
       }
     },
 
-    updatePrice(quantity, activity) {
-      if (activity == "arborismo") {
-        if (quantity == 1) {
-          this.bookingPrice = 100000 * quantity;
-        } else if (quantity <= 5) {
-          this.bookingPrice = 80000 * quantity;
-        } else if (quantity <= 8) {
-          this.bookingPrice = 70000 * quantity;
-        } else if (quantity <= 15) {
-          this.bookingPrice = 50000 * quantity;
-        }
-      } else if (activity == "canyoning") {
-        if (quantity == 1) {
-          this.bookingPrice = 190000 * quantity;
-        } else if (quantity <= 5) {
-          this.bookingPrice = 170000 * quantity;
-        } else if (quantity <= 8) {
-          this.bookingPrice = 150000 * quantity;
-        } else if (quantity <= 15) {
-          this.bookingPrice = 140000 * quantity;
-        } else if (quantity <= 20) {
-          this.bookingPrice = 110000 * quantity;
-        }
-      } else if (activity == "aventura") {
-        if (quantity == 1) {
-          this.bookingPrice = 230000 * quantity;
-        } else if (quantity <= 12) {
-          this.bookingPrice = 200000 * quantity;
-        } else if (quantity <= 20) {
-          this.bookingPrice = 180000 * quantity;
-        }
+    async firestoreTesting() {
+      try {
+        const firestoreTesting = httpsCallable(
+          functions,
+          'firestoreTesting',
+        );
+        await firestoreTesting();
+      } catch (error) {
+        console.error(error);
+        return [];
+      }
+    },
+
+    async getAvailability(date) {
+      try {
+        const availabilityFunction = httpsCallable(
+          functions,
+          'getAvailability',
+        );
+        const availability = await availabilityFunction({ date });
+        return availability;
+      } catch (e) {
+        return console.log('error obteniendo disponibilidad', e);
       }
     },
 
@@ -184,7 +97,7 @@ export const useBookingStore = defineStore("booking", {
       const availabilityCollection = query(
         collection(db, "activity_availability"),
         where("date", "==", date),
-        where("time_slot", "==", time),
+        where("schedule", "==", time),
         where("act_id", "==", activity)
       );
 
@@ -195,17 +108,6 @@ export const useBookingStore = defineStore("booking", {
         console.error(error);
         return false;
       }
-    },
-
-    generateBookingCode() {
-      const caracteres = "RESRVITA0123456789";
-      let codigo = "";
-
-      for (let i = 0; i < 6; i++) {
-        const indiceAleatorio = Math.floor(Math.random() * caracteres.length);
-        codigo += caracteres[indiceAleatorio];
-      }
-      return codigo;
     },
 
     async takeAvailability() {
@@ -247,59 +149,60 @@ export const useBookingStore = defineStore("booking", {
     },
 
     async makeReservation(item) {
-      const bookingId = this.generateBookingCode();
-      await this.takeAvailability();
-      let url = "";
+      const fileToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      };
 
-      if (item.invoice instanceof File) {
-        const storage = getStorage();
-        const archivoRef = ref(storage, `comprobantes/${bookingId}`);
-        const uploadInvoice = await uploadBytes(archivoRef, item.invoice);
-
-        url = await getDownloadURL(archivoRef);
-        console.log("Archivo subido con éxito", uploadInvoice);
+      let bookingInfo = {};
+      const bookingPrice = this.productsPrice + this.addonsPrice;
+      if (item.invoice.name) {
+        const base64File = await fileToBase64(item.invoice);
+        bookingInfo = {
+          ...item,
+          fileName: item.invoice.name,
+          fileType: item.invoice.type,
+          fileData: base64File,
+          products: this.products,
+          discount: this.discount,
+          productsPrice: this.productsPrice,
+          addons: this.addons,
+          addonsPrice: this.addonsPrice,
+          precioFinal: bookingPrice,
+        };
+      } else {
+        bookingInfo = {
+          ...item,
+          products: this.products,
+          discount: this.discount,
+          productsPrice: this.productsPrice,
+          addons: this.addons,
+          addonsPrice: this.addonsPrice,
+          bookingPrice: bookingPrice,
+        }
       }
 
       try {
-        const transporte = this.transporte ? "inlcuido" : "noIncluido";
-        const comida = this.food ? "inlcuido" : "noIncluido";
-        setDoc(doc(db, "bookings", bookingId), {
-          bookingId: bookingId,
-          name: item.name,
-          email: item.email,
-          phone: item.phone,
-          documentId: item.documentId,
-          participants: item.participants,
-          activity: this.activity,
-          date: this.date,
-          quantity: this.quantity,
-          horario: this.horario,
-          bookingPrice: this.bookingPrice,
-          discount: this.discount,
-          food: comida,
-          addonsPrice: this.addonsPrice,
-          transporte: transporte,
-          almuerzo: this.almuerzo,
-          status: "pending",
-          createdAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
-          updatedAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
-          bill: url,
-        });
-
-        const emailItem = {
-          name: item.name,
-          email: item.email,
-          activity: this.activity,
-          horario: this.horario,
-          quantity: this.quantity,
-          date: this.date,
-          precio: item.bookingPrice,
-          bookingId: bookingId,
-          almuerzo: this.almuerzo,
-          transporte: this.transporte,
-        };
-        localStorage.setItem("item", JSON.stringify(emailItem));
-        this.bookingId = bookingId;
+        const makeReservation = httpsCallable(functions, "makeReservation");
+        const reservation = await makeReservation({ bookingInfo });
+        // const emailItem = {
+        //   name: item.name,
+        //   email: item.email,
+        //   activity: this.activity,
+        //   horario: this.horario,
+        //   quantity: this.quantity,
+        //   date: this.date,
+        //   precio: item.bookingPrice,
+        //   bookingId: bookingId,
+        //   almuerzo: this.almuerzo,
+        //   transporte: this.transporte,
+        // };
+        this.bookingId = reservation.data;
+        return reservation.data;
       } catch (error) {
         console.error(error);
       }

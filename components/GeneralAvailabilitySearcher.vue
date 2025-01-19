@@ -1,18 +1,20 @@
 <template>
-  <v-container fluid class="bg-mywhite rounded-lg" style="max-width: 550px;">
+  <v-container fluid class="bg-mywhite rounded-lg" style="max-width: 550px">
     <v-row>
-      <v-col cols="12" class="d-flex align-center ga-sm-10 ga-4 justify-center flex-sm-row flex-column">
+      <v-col
+        cols="12"
+        class="d-flex align-center ga-sm-10 ga-4 justify-center flex-sm-row flex-column"
+      >
         <general-date-picker
-          v-model="dateValue"
+          v-model="date"
           :label="$t('homePicker')"
           style="width: 200px"
-          :min="dayjs().format('YYYY-MM-DD')"
-          :max="maxDate"
+          :min="min"
         />
         <v-btn
           class="bg-second color-white"
           prepend-icon="mdi-calendar-search"
-          :disabled="!dateValue"
+          :disabled="!date"
           @click="redirection"
           >{{ $t('verDisponibilidad') }}</v-btn
         >
@@ -22,28 +24,48 @@
 </template>
 
 <script setup>
-import { useBookingStore } from '@/stores/booking.js';
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
+// import { useBookingStore } from '@/stores/booking.js';
+// import dayjs from 'dayjs';
 
 const props = defineProps({
-  date: {
+  oldDate: {
     type: String,
-    default: ''
-  }
+    default: '',
+  },
 });
 
-const localePath = useLocalePath()
-const useBooking = useBookingStore();
-const maxDate = useBooking.max;
+// const localePath = useLocalePath();
+// const useBooking = useBookingStore();
+// const router = useRouter();
+
+import { DateTime } from 'luxon';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { useBookingStore } from '/stores/booking.js';
+import { useDisplay } from 'vuetify';
+
 const router = useRouter();
 dayjs.extend(customParseFormat);
+const { smAndUp } = useDisplay();
+const reactiveHeight = ref('max-width: 85%');
+const useBooking = useBookingStore();
+const min = DateTime.local().toString().slice(0, 10);
+// let minMonth = 0;
+const date = ref(props.oldDate);
 
-const dateValue = ref(props.date);
+function redirection() {
+  useBooking.updateDetails({ date: date.value });
+  router.push({
+    path: '/reservar',
+    query: { date: date.value },
+  });
+}
 
-const redirection = () => {
-  const dateFormatted = dayjs(dateValue.value, "DD-MM-YYYY").format("YYYY-MM-DD");
-  useBooking.updateDetails({date: dateFormatted});
-  router.push({ path: localePath("/reservar"), query: { date: dateFormatted } });
-};
+watch(
+  smAndUp,
+  (val) => {
+    reactiveHeight.value = val ? 'max-width: 95%' : 'max-width: 85%';
+  },
+  { immediate: true },
+);
 </script>

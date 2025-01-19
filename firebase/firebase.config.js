@@ -1,11 +1,11 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
 import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
-import { getFunctions } from 'firebase/functions';
-import { getAuth } from 'firebase/auth';
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeFirestore } from 'firebase/firestore';
+import {
+  getFunctions,
+  connectFunctionsEmulator
+} from 'firebase/functions';
+import { getAuth } from "firebase/auth";
 
 const apyKey = import.meta.env.VITE_APY_KEY;
 const authDomain = import.meta.env.VITE_AUTH_DOMAIN;
@@ -25,15 +25,14 @@ const firebaseConfig = {
   measurementId: measurementId,
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-// export const analytics = getAnalytics(app);
-
 export const functions = getFunctions(app);
-export const db = getFirestore();
-export const auth = getAuth(app);
+connectFunctionsEmulator(functions, "localhost", 5001);
+export const db = initializeFirestore(app, {
+  ignoreUndefinedProperties: true,
+}); export const auth = getAuth(app);
 
-const appCheck = initializeAppCheck(app, {
+initializeAppCheck(app, {
   provider: new ReCaptchaEnterpriseProvider('6Le7mVoqAAAAAKoRUSkv7Yc4KnconJJsP2HcmZqJ'),
   isTokenAutoRefreshEnabled: true,
 });

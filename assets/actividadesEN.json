@@ -3,7 +3,7 @@
     "src": "/images/arborismo.webp",
     "availability": "arborismo",
     "actividad": "Arborism",
-    "titulo": "ARBORISM",
+    "background": "bg-mywhite",
     "descripcion": "It consists of traversing a high circuit among 3 trees, crossing a balance line, a Tibetan bridge, and ladders that will take you to the highest catamaran net in the country (25 meters).",
     "precio": [
       "1 person: $100,000",
@@ -38,6 +38,7 @@
       "availability": "canyoning",
       "actividad": "Canyoning",
       "titulo": "CANYONING",
+      "background": "bg-mywhite",
       "precio": [
           "1 person: $190,000",
           "2 to 5 people: $170,000",
@@ -66,8 +67,7 @@
           "icon": "mdi-numeric-8-circle",
           "text": "MINIMUM AGE"
         }
-      },
-      "background": "bg-mywhite"
+      }
     },
 
     {
@@ -75,6 +75,7 @@
       "availability": "aventura",
       "actividad": "Adventure",
       "titulo": "ADVENTURE",
+      "background": "bg-mywhite",
       "precio": [
           "1 person: $230,000",
           "2 to 12 people: $200,000",

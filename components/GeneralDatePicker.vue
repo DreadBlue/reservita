@@ -63,7 +63,7 @@ export default defineComponent({
     },
     maxDate: {
       type: String,
-      default: '2025-04-30',
+      default: '2025-07-31',
     },
     pickerWidth: {
       type: String,
@@ -92,7 +92,7 @@ export default defineComponent({
     },
     showMenu(newValue) {
       this.$emit('update:show-picker', newValue);
-    }
+    },
   },
   data() {
     return {

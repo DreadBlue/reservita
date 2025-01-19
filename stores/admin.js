@@ -29,29 +29,10 @@ export const useAdminStore = defineStore('admin', {
     },
 
     async adminBookings(filters) {
-      const activities = Object.entries(filters.activities).filter(([key, value]) => value === true).map(([key]) => key);
-      const horarios = Object.entries(filters.horario).filter(([key, value]) => value === true).map(([key]) => key);
-      const comida = Object.entries(filters.comida).filter(([key, value]) => value === true).map(([key]) => key);
-      const transporte = Object.entries(filters.transporte).filter(([key, value]) => value === true).map(([key]) => key);
-      
-      if (activities.length > 0 && horarios.length > 0  && comida.length > 0  && transporte.length > 0 ) {
+      if (activities.length > 0 && horarios.length > 0 && comida.length > 0 && transporte.length > 0) {
         try {
-          const reservaDB = query(
-            collection(db, "bookings"),
-            where("date", "<=", filters.time.startDate),
-            where("date", ">=", filters.time.endDate),
-            where("activity", "in", activities),
-            where("horario", "in", horarios),
-            where("transporte", "in", transporte),
-            where("food", "in", comida),
-            orderBy("date", "desc")
-          );
-          let snapshot = await getDocs(reservaDB);
-          const docs = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          return docs;
+          const functions = filters;
+          return functions;
         } catch (error) {
           console.log("error fetching booking: ", error);
           throw error;
@@ -60,12 +41,12 @@ export const useAdminStore = defineStore('admin', {
         return ['Faltan filtros']
       }
     },
-    
+
     async lookBooking(booking) {
       try {
         const reservaDB = query(
           collection(db, "reservas"),
-          where("idReserva", "==", booking[0]),
+          where("bookingId", "==", booking[0]),
           where("Correo", "==", booking[1])
         );
         let snapshot = await getDocs(reservaDB);
