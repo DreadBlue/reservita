@@ -203,7 +203,6 @@ const lookBooking = onCall(async (request) => {
     const { id, email } = request.data.bookingInfo;
     const bookingQuery = db.collection('bookings').where('bookingId', '==', id).where('email', '==', email);
 
-
     try {
         const availabilitySnapshot = await bookingQuery.get();
         const docs = availabilitySnapshot.docs.map((doc) => ({
