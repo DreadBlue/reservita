@@ -64,7 +64,7 @@ const sendBookEmail = (data) => {
     if (data.secret !== secretEmail) return log('Wrong secret');
     let correoHtml = htmlTemplate;
 
-    correoHtml = correoHtml.replace('{{bookingCode}}', data.bookingCode);
+    correoHtml = correoHtml.replace('{{bookingId}}', data.bookingId);
     correoHtml = correoHtml.replace('{{name}}', data.name);
     correoHtml = correoHtml.replace('{{activity}}', data.activity);
     correoHtml = correoHtml.replace('{{schedule}}', data.horario);
@@ -75,7 +75,7 @@ const sendBookEmail = (data) => {
 
     // Datos del correo
     const mailOptions = {
-        to: data.Correo,
+        to: data.email,
         bcc: 'info@lareservita.com',
         subject: data.subject,
         html: correoHtml,

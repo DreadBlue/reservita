@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <general-nav-bar />
-    <language-selector class="top-right"/>
+    <layout-nav-bar />
+    <language-selector class="top-right" />
     <slot />
-    <general-footer />
+    <layout-footer />
   </v-app>
 </template>
 

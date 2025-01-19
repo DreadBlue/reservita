@@ -1,7 +1,7 @@
 [
   {
       "src": "/images/arborismo.webp",
-      "availability": "arborismo",
+      "availability": "Arborismo",
       "actividad": "Arborismo",
       "titulo": "ARBORISMO",
       "background": "bg-mywhite",
@@ -36,7 +36,7 @@
 
   {
       "src": "/images/canyoning.webp",
-      "availability": "canyoning",
+      "availability": "Canyoning",
       "actividad": "Canyoning",
       "background": "bg-mywhite",
       "precio": [
@@ -72,7 +72,7 @@
 
   {
       "src": "/images/aventura.webp",
-      "availability": "aventura",
+      "availability": "Aventura",
       "actividad": "Avventura",
       "titulo": "AVVENTURA",
       "background": "bg-mywhite",

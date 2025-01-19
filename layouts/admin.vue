@@ -1,12 +1,12 @@
 <template>
-    <v-app>
-      <admin-nav-bar />
-      <slot />
-      <general-footer />
-    </v-app>
-  </template>
-  
-  <script setup lang="js">
+  <v-app>
+    <admin-nav-bar />
+    <slot />
+    <layout-footer />
+  </v-app>
+</template>
+
+<script setup lang="js">
 import { useI18n } from 'vue-i18n';
 
 const { setLocale } = useI18n();

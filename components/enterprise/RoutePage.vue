@@ -36,17 +36,19 @@
               {{ experience.descripcion }}
             </p>
           </v-col>
+          <v-col cols="12" class="d-flex align-center mt-7">
+            <span class="text-subtitle-2 text-center"
+              >Selecciona la fecha para tu evento</span
+            >
+            <general-availability-searcher />
+          </v-col>
         </v-row>
       </v-col>
     </v-row>
     <v-row class="d-sm-none d-flex ma-6">
       <v-col cols="12">
         <div class="h-100 w-100">
-          <img
-            :src="experience.srcOverlay"
-            alt="Canyo"
-            class="h-100 w-100"
-          />
+          <img :src="experience.srcOverlay" alt="Canyo" class="h-100 w-100" />
         </div>
       </v-col>
       <v-col cols="12" sm="6">
@@ -66,6 +68,11 @@
             <p class="text-sm-body-1 ml-8 mt-4">
               {{ experience.descripcion }}
             </p>
+          </v-col>
+          <v-col cols="12">
+            <span>Selecciona la fecha para tu evento</span>
+            <general-availability-searcher />
+            <v-btn />
           </v-col>
         </v-row>
       </v-col>

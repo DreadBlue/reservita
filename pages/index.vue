@@ -1,5 +1,5 @@
 <template>
-  <HomeBanner />
+  <home-banner />
   <GeneralBanner :model="modelFour" />
   <section class="d-flex flex-column ga-sm-0 ga-8">
     <GeneralPresentationCard :model="modelOne" />
@@ -105,9 +105,9 @@ const modelFour = computed(() => {
   };
 });
 
-// import { useBookingStore } from '@/stores/booking';
-// const useBooking = useBookingStore();
-// onMounted(async () => {
-//   await useBooking.firestoreTesting();
-// });
+import { useBookingStore } from '@/stores/booking';
+const useBooking = useBookingStore();
+onMounted(async () => {
+  await useBooking.firestoreTesting();
+});
 </script>

@@ -23,6 +23,11 @@ export const useBookingStore = defineStore("booking", {
       addons: {},
       addonsPrice: 0,
       bookingPrice: 0,
+      morning: false,
+      afternoon: false,
+      transporte: false,
+      almueroLocal: false,
+      almuerzoSaludable: false,
     };
   },
   actions: {
@@ -68,7 +73,7 @@ export const useBookingStore = defineStore("booking", {
           'getAvailability',
         );
         const availability = await availabilityFunction({ date });
-        return availability;
+        return availability.data;
       } catch (e) {
         return console.log('error obteniendo disponibilidad', e);
       }
@@ -167,16 +172,18 @@ export const useBookingStore = defineStore("booking", {
           fileName: item.invoice.name,
           fileType: item.invoice.type,
           fileData: base64File,
+          date: this.date,
           products: this.products,
           discount: this.discount,
           productsPrice: this.productsPrice,
           addons: this.addons,
           addonsPrice: this.addonsPrice,
-          precioFinal: bookingPrice,
+          finalPrice: bookingPrice,
         };
       } else {
         bookingInfo = {
           ...item,
+          date: this.date,
           products: this.products,
           discount: this.discount,
           productsPrice: this.productsPrice,

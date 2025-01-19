@@ -9,6 +9,8 @@ import {
   limit,
 } from "firebase/firestore";
 import { db } from "/firebase/firebase.config.js";
+import { httpsCallable } from "firebase/functions";
+import { functions } from "/firebase/firebase.config.js";
 // import { validatePassword } from 'firebase/auth';
 
 export const useAdminStore = defineStore('admin', {
@@ -28,18 +30,23 @@ export const useAdminStore = defineStore('admin', {
       }
     },
 
-    async adminBookings(filters) {
-      if (activities.length > 0 && horarios.length > 0 && comida.length > 0 && transporte.length > 0) {
-        try {
-          const functions = filters;
-          return functions;
-        } catch (error) {
-          console.log("error fetching booking: ", error);
-          throw error;
-        }
-      } else {
-        return ['Faltan filtros']
+    async adminBookings() {
+      // if (activities.length > 0 && horarios.length > 0 && comida.length > 0 && transporte.length > 0) {
+      try {
+        const adminBookings = httpsCallable(
+          functions,
+          'adminBookings',
+        );
+        const bookings = await adminBookings();
+        return bookings.data
+      } catch (error) {
+        console.log("error fetching booking: ", error);
+        throw error;
       }
+      // } 
+      // else {
+      //   return ['Faltan filtros']
+      // }
     },
 
     async lookBooking(booking) {

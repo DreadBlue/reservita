@@ -1,7 +1,7 @@
 [
   {
     "src": "/images/arborismo.webp",
-    "availability": "arborismo",
+    "availability": "Arborismo",
     "actividad": "Arborism",
     "background": "bg-mywhite",
     "descripcion": "It consists of traversing a high circuit among 3 trees, crossing a balance line, a Tibetan bridge, and ladders that will take you to the highest catamaran net in the country (25 meters).",
@@ -35,7 +35,7 @@
 
   {
       "src": "/images/canyoning.webp",
-      "availability": "canyoning",
+      "availability": "Canyoning",
       "actividad": "Canyoning",
       "titulo": "CANYONING",
       "background": "bg-mywhite",
@@ -72,7 +72,7 @@
 
     {
       "src": "/images/aventura.webp",
-      "availability": "aventura",
+      "availability": "Aventura",
       "actividad": "Adventure",
       "titulo": "ADVENTURE",
       "background": "bg-mywhite",
