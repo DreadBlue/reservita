@@ -95,7 +95,11 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col v-for="(item, index) in CardUno" :cols="item[0]" :key="index">
+            <v-col
+              v-for="(item, index) in CardUno"
+              :cols="item[0]"
+              :key="index"
+            >
               <v-text-field
                 :label="item[1]"
                 :variant="item[3]"
@@ -112,7 +116,11 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col v-for="(item, index) in CardDos" :cols="item[0]" :key="index">
+            <v-col
+              v-for="(item, index) in CardDos"
+              :cols="item[0]"
+              :key="index"
+            >
               <v-text-field
                 :label="item[1]"
                 :variant="item[3]"
@@ -151,47 +159,43 @@
         </v-card>
       </v-col>
       <v-col cols="12" class="d-flex d-sm-none flex-column">
-            <v-card elevation="3" class="mb-8 pa-5">
-              <v-row>
-                <v-col cols="12">
-                  <span class="text-h5 text-sm-4 text-md-h3 color-third"
-                    >DETALLES DE COMIDA</span
-                  >
-                </v-col>
-                <v-col cols="12">
-                  <v-text-field
-                    disabled
-                    label="reserva de comida"
-                    variant="solo"
-                  >
-                  </v-text-field>
-                  <v-btn class="bg-third color-white">Reservar comida</v-btn>
-                </v-col>
-              </v-row>
-            </v-card>
-            <v-card elevation="3" class="mb-8 pa-5">
-              <v-row>
-                <v-col cols="12" class="text-center">
-                  <span class="text-h5 text-sm-4 text-md-h3 color-second"
-                    >COMPROBANTE DE PAGO</span
-                  >
-                </v-col>
-                <v-col cols="12" class="d-flex flex-column align-center ga-8">
-                  <img
-                    :src="booking[0].urlInvoice"
-                    alt="Comprobante"
-                    height="200"
-                    width="100"
-                    style="object-fit: cover"
-                    @click="showModified(true)"
-                  />
-                  <!-- <v-btn class="bg-second color-white" @click="download"
+        <v-card elevation="3" class="mb-8 pa-5">
+          <v-row>
+            <v-col cols="12">
+              <span class="text-h5 text-sm-4 text-md-h3 color-third"
+                >DETALLES DE COMIDA</span
+              >
+            </v-col>
+            <v-col cols="12">
+              <v-text-field disabled label="reserva de comida" variant="solo">
+              </v-text-field>
+              <v-btn class="bg-third color-white">Reservar comida</v-btn>
+            </v-col>
+          </v-row>
+        </v-card>
+        <v-card elevation="3" class="mb-8 pa-5">
+          <v-row>
+            <v-col cols="12" class="text-center">
+              <span class="text-h5 text-sm-4 text-md-h3 color-second"
+                >COMPROBANTE DE PAGO</span
+              >
+            </v-col>
+            <v-col cols="12" class="d-flex flex-column align-center ga-8">
+              <img
+                :src="booking[0].urlInvoice"
+                alt="Comprobante"
+                height="200"
+                width="100"
+                style="object-fit: cover"
+                @click="showModified(true)"
+              />
+              <!-- <v-btn class="bg-second color-white" @click="download"
                     >Descargar comprobante</v-btn
                   > -->
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-col>
+            </v-col>
+          </v-row>
+        </v-card>
+      </v-col>
     </v-row>
   </v-container>
   <GeneralImgPreview v-if="showPreview" :img="booking[0].urlInvoice" />
@@ -228,21 +232,21 @@ export default {
 
     const sendEmail = async () => {
       const item = {
-        nombre: props.booking[0].Nombre,
-        correo: props.booking[0].Correo,
+        name: props.booking[0].name,
+        mail: props.booking[0].mail,
         amountRooms: props.booking[0]['Cantidad de cabañas'],
         acompanantes: props.booking[0]['Cantidad de huespedes'],
         checkIn: props.booking[0]['Check in'],
         checkOut: props.booking[0]['Check out'],
         precio: props.booking[0].Valor,
         cabana: props.booking[0]['Tipo de cabaña'],
-        idReserva: props.booking[0].idReserva,
-      }
+        bookingId: props.booking[0].bookingId,
+      };
       localStorage.setItem('item', JSON.stringify(item));
 
       try {
         await useBooking.fetchGoogle(true, false);
-        localStorage.removeItem('item')
+        localStorage.removeItem('item');
         correoReenviado.value = true;
       } catch (error) {
         console.error('Email error:', error);

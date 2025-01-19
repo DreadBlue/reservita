@@ -4,6 +4,7 @@
       "availability": "arborismo",
       "actividad": "Arborismo",
       "titulo": "ARBORISMO",
+      "background": "bg-white",
       "descripcion": "Consiste en recorrer un circuito de altura entre 3 árboles, cruzando por una línea de equilibrio, un puente tibetano y escaleras de mano que te llevarán a la malla catamarán más alta del país (25 metros).",
       "precio": [
         "1 persona: $100.000",
@@ -38,6 +39,7 @@
         "availability": "canyoning",
         "actividad": "Canyoning",
         "titulo": "CANYONING",
+        "background": "bg-mywhite",
         "precio": [
             "1 persona: $190.000",
             "2 a 5 personas: $170.000",
@@ -66,8 +68,7 @@
             "icon": "mdi-numeric-8-circle",
             "text": "EDAD MINIMA"
           }
-        },
-        "background": "bg-mywhite"
+        }
       },
 
       {
@@ -75,6 +76,7 @@
         "availability": "aventura",
         "actividad": "Aventura",
         "titulo": "AVENTURA",
+        "background": "bg-white",
         "precio": [
             "1 persona: $230.000",
             "2 a 12 personas: $200.000",

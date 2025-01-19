@@ -4,6 +4,7 @@
       "availability": "arborismo",
       "actividad": "Arborismo",
       "titulo": "ARBORISMO",
+      "background": "bg-mywhite",
       "descripcion": "Consiste nel percorrere un circuito in altezza tra 3 alberi, attraversando una linea di equilibrio, un ponte tibetano e scale a pioli che ti porteranno alla rete catamarano più alta del paese (25 metri).",
       "precio": [
           "1 persona: $100.000",
@@ -37,7 +38,7 @@
       "src": "/images/canyoning.webp",
       "availability": "canyoning",
       "actividad": "Canyoning",
-      "titulo": "CANYONING",
+      "background": "bg-mywhite",
       "precio": [
           "1 persona: $190.000",
           "2 a 5 persone: $170.000",
@@ -66,8 +67,7 @@
               "icon": "mdi-numeric-8-circle",
               "text": "ETÀ MINIMA"
           }
-      },
-      "background": "bg-mywhite"
+      }
   },
 
   {
@@ -75,6 +75,7 @@
       "availability": "aventura",
       "actividad": "Avventura",
       "titulo": "AVVENTURA",
+      "background": "bg-mywhite",
       "precio": [
           "1 persona: $230.000",
           "2 a 12 persone: $200.000",
