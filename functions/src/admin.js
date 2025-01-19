@@ -50,10 +50,6 @@ const createDatabase = onCall(async () => {
     // });
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> f2ae2d0 (Booking process finished)
 const adminBookings = onCall(async () => {
     const currentDay = dayjs().subtract(1, 'day').format('YYYY-MM-DD');
     const bookingsCollection = db.collection('bookings');
