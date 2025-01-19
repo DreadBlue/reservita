@@ -53,19 +53,6 @@ export const useBookingStore = defineStore("booking", {
       }
     },
 
-    async firestoreTesting() {
-      try {
-        const firestoreTesting = httpsCallable(
-          functions,
-          'firestoreTesting',
-        );
-        await firestoreTesting();
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
-    },
-
     async getAvailability(date) {
       try {
         const availabilityFunction = httpsCallable(
@@ -196,18 +183,6 @@ export const useBookingStore = defineStore("booking", {
       try {
         const makeReservation = httpsCallable(functions, "makeReservation");
         const reservation = await makeReservation({ bookingInfo });
-        // const emailItem = {
-        //   name: item.name,
-        //   email: item.email,
-        //   activity: this.activity,
-        //   horario: this.horario,
-        //   quantity: this.quantity,
-        //   date: this.date,
-        //   precio: item.bookingPrice,
-        //   bookingId: bookingId,
-        //   almuerzo: this.almuerzo,
-        //   transporte: this.transporte,
-        // };
         this.bookingId = reservation.data;
         return reservation.data;
       } catch (error) {
