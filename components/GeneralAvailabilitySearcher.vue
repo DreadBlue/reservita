@@ -24,8 +24,11 @@
 </template>
 
 <script setup>
-// import { useBookingStore } from '@/stores/booking.js';
-// import dayjs from 'dayjs';
+import { DateTime } from 'luxon';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { useBookingStore } from '/stores/booking.js';
+import { useDisplay } from 'vuetify';
 
 const props = defineProps({
   oldDate: {
@@ -34,31 +37,31 @@ const props = defineProps({
   },
 });
 
-// const localePath = useLocalePath();
-// const useBooking = useBookingStore();
-// const router = useRouter();
-
-import { DateTime } from 'luxon';
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
-import { useBookingStore } from '/stores/booking.js';
-import { useDisplay } from 'vuetify';
-
 const router = useRouter();
+const route = useRoute();
 dayjs.extend(customParseFormat);
 const { smAndUp } = useDisplay();
 const reactiveHeight = ref('max-width: 85%');
 const useBooking = useBookingStore();
 const min = DateTime.local().toString().slice(0, 10);
-// let minMonth = 0;
 const date = ref(props.oldDate);
 
 function redirection() {
   useBooking.updateDetails({ date: date.value });
-  router.push({
-    path: '/reservar',
-    query: { date: date.value },
-  });
+  if (
+    route.path == '/eventos-empresariales' ||
+    route.path == '/eventos-empresariales/reservar'
+  ) {
+    router.push({
+      path: '/eventos-empresariales/reservar',
+      query: { date: date.value },
+    });
+  } else {
+    router.push({
+      path: '/reservar',
+      query: { date: date.value },
+    });
+  }
 }
 
 watch(

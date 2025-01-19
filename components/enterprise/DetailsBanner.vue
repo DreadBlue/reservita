@@ -10,7 +10,7 @@
         <div class="text-body-1 pt-5 d-flex flex-column ga-1">
           <div class="d-flex pl-2 ga-2 align-center">
             <v-icon icon="mdi-calendar-range"></v-icon>
-            <p>{{ dayjs(date).format('DD-MM-YYYY') }}</p>
+            <p>{{ dayjs(date).format('DD/MM/YYYY') }}</p>
           </div>
           <div>
             <v-card
@@ -81,7 +81,6 @@ const props = defineProps({
 const useBooking = useBookingStore();
 const route = useRoute();
 const router = useRouter();
-const date = route.query.date;
 
 const products = computed(() => useBooking.products);
 const addons = computed(() => useBooking.addons);

@@ -9,14 +9,14 @@
         <GeneralAvailabilitySearcher :oldDate="date" />
       </v-col>
       <v-col cols="3">
-        <booking-details-banner :btn="true" class="elevation-1" />
+        <enterprise-details-banner :btn="true" class="elevation-1" />
       </v-col>
       <v-col cols="9" class="d-flex flex-column ga-5 mb-3">
-        <booking-activities-options
+        <enterprise-activities-options
           v-for="actividad in actividades"
           :key="actividad.titulo"
           :activity="actividad"
-          :availability="availability"
+          :availability="availability.data"
           class="elevation-4 rounded-lg"
         />
       </v-col>
@@ -59,17 +59,16 @@ watch(
   availability,
   (newValue) => {
     const products = ref({});
-    for (const activity in newValue) {
-      for (const schedule in newValue[activity]) {
+    for (const activity in newValue.data) {
+      for (const schedule in newValue.data[activity]) {
         if (
-          newValue[activity][schedule].quantity ||
-          newValue[activity][schedule].quantity > 0
+          newValue.data[activity][schedule].quantity ||
+          newValue.data[activity][schedule].quantity > 0
         ) {
-          console.log('nom', newValue[activity][schedule].act_id);
           products.value = {
             ...products.value,
-            [newValue[activity][schedule]['act_id'] + '_' + schedule]:
-              newValue[activity][schedule],
+            [newValue.data[activity][act_id]]:
+              newValue.data[activity][schedule],
           };
         }
       }

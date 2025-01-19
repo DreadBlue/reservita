@@ -21,7 +21,7 @@
         <div class="d-flex flex-column align-sm-center align-start pr-15">
           <span class="text-subtitle-2 color-main">Horario 9 am - 1 pm </span>
           <span class="text-body-1"
-            >{{ availability[activityRendering].morning.spots }} cupos</span
+            >{{ availability[activityRendering][0].spots }} cupos</span
           >
           <v-select
             :items="selectOptions[0]"
@@ -29,13 +29,13 @@
             width="140"
             variant="outlined"
             class="pt-2"
-            v-model="quantity[activityRendering].morning.quantity"
+            v-model="quantity[activityRendering][0].quantity"
           ></v-select>
         </div>
         <div class="d-flex flex-column align-sm-center align-start pr-15">
           <span class="text-subtitle-2 color-main">Horario 1 pm - 5 pm</span>
           <span class="text-body-1">
-            {{ availability[activityRendering].afternoon.spots }} cupos</span
+            {{ availability[activityRendering][1].spots }} cupos</span
           >
           <v-select
             :items="selectOptions[1]"
@@ -43,7 +43,7 @@
             width="140"
             variant="outlined"
             class="pt-2"
-            v-model="quantity[activityRendering].afternoon.quantity"
+            v-model="quantity[activityRendering][1].quantity"
           ></v-select>
         </div>
       </v-col>
@@ -69,14 +69,10 @@ const selectOptions = ref([]);
 const quantity = reactive(props.availability);
 
 onMounted(() => {
-  for (const schedule in props.availability[activityRendering]) {
+  for (const schedule of props.availability[activityRendering]) {
     const options = ref([]);
 
-    for (
-      let i = 0;
-      i <= props.availability[activityRendering][schedule].spots;
-      i++
-    ) {
+    for (let i = 0; i <= schedule.spots; i++) {
       options.value.push(i);
     }
     selectOptions.value.push(options.value);

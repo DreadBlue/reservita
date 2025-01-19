@@ -7,13 +7,9 @@ const { sendEmail,
   // sendCalendar
 } = require('./google.js');
 // const { generateHash, paymentReceiver } = require('./payments.js');
-const {
-  // facturaFinal, 
-  // facturaManual,
-  firestoreTesting
-} = require('./dreadblue.js');
+const { manualBill, monthlyBill, firestoreTesting } = require('./dreadblue.js');
 // const { deleteBooking, createDatabase, adminBookings, createRequest, fetchRequests, manageChangeRequest } = require('./admin.js');
-const { createDatabase } = require('./admin.js');
+const { createDatabase, adminBookings } = require('./admin.js');
 
 module.exports = {
   getAvailability,
@@ -22,11 +18,11 @@ module.exports = {
   // sendCalendar,
   // paymentReceiver,
   makeReservation,
-  // facturaFinal,
-  // facturaManual,
+  monthlyBill,
+  manualBill,
   // deleteBooking,
   createDatabase,
-  // adminBookings,
+  adminBookings,
   // createRequest,
   // lookBooking,
   // fetchRequests,

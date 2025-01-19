@@ -12,7 +12,7 @@ const formatDate = (date) => {
     return `${year}-${month}-${day}`;
 };
 
-const facturaFinal = onSchedule("59 23 28-31 * *", async () => {
+const monthlyBill = onSchedule("59 23 28-31 * *", async () => {
     const currentDate = new Date();
 
     const firstDayOfMonth = new Date(currentDate);
@@ -26,22 +26,22 @@ const facturaFinal = onSchedule("59 23 28-31 * *", async () => {
 
     const formattedFirstDay = formatDate(firstDayOfMonth);
     const formattedLastDay = formatDate(lastDayOfMonth);
-    const reservasCollection = db.collection("reservas");
+    const bookingCollection = db.collection("bookings");
 
-    const reservasSnapshot = await reservasCollection.where("Check in", ">=", formattedFirstDay).where('Check in', '<=', formattedLastDay).get();
-    const docs = reservasSnapshot.docs.map((doc) => ({
+    const bookingSnapshot = await bookingCollection.where("date", ">=", formattedFirstDay).where('date', '<=', formattedLastDay).get();
+    const docs = bookingSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
     }));
 
-    let totalVentas = 0;
+    let totalSales = 0;
 
-    for (const reserva of docs) {
-        totalVentas += reserva.Valor;
+    for (const booking of docs) {
+        totalSales += booking.finalPrice;
     }
-    const factura = totalVentas * 0.03;
-    const totalVentasFormatted = totalVentas.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
-    const facturaFormatted = factura.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+    const bill = totalSales * 0.03;
+    const totalSalesFormatted = totalSales.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+    const billFormatted = bill.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
     const months = [
         "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO",
         "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE",
@@ -52,11 +52,11 @@ const facturaFinal = onSchedule("59 23 28-31 * *", async () => {
 
 
     const infoEmail = {
-        billValue: facturaFormatted,
-        comision: '3%',
-        ventasTotales: totalVentasFormatted,
+        billValue: billFormatted,
+        comision: '10%',
+        ventasTotales: totalSalesFormatted,
         numeroDeReservas: docs.length,
-        aliado: 'Abya Yala Hostel',
+        aliado: 'La reservita',
         mes: monthName,
         secret: secretEmail,
     };
@@ -64,7 +64,7 @@ const facturaFinal = onSchedule("59 23 28-31 * *", async () => {
     return sendBillEmail(infoEmail);
 });
 
-const facturaManual = onCall(async () => {
+const manualBill = onCall(async () => {
     const currentDate = new Date(2024, 11, 1); // 11 = diciembre (meses en JavaScript son 0-indexados)
 
     const firstDayOfMonth = new Date(currentDate);
@@ -78,22 +78,22 @@ const facturaManual = onCall(async () => {
 
     const formattedFirstDay = formatDate(firstDayOfMonth);
     const formattedLastDay = formatDate(lastDayOfMonth);
-    const reservasCollection = db.collection("reservas");
+    const bookingCollection = db.collection("bookings");
 
-    const reservasSnapshot = await reservasCollection.where("Check in", ">=", formattedFirstDay).where('Check in', '<=', formattedLastDay).get();
-    const docs = reservasSnapshot.docs.map((doc) => ({
+    const bookingSnapshot = await bookingCollection.where("date", ">=", formattedFirstDay).where('date', '<=', formattedLastDay).get();
+    const docs = bookingSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
     }));
 
-    let totalVentas = 0;
+    let totalSales = 0;
 
-    for (const reserva of docs) {
-        totalVentas += reserva.Valor;
+    for (const booking of docs) {
+        totalSales += booking.finalPrice;
     }
-    const factura = totalVentas * 0.03;
-    const totalVentasFormatted = totalVentas.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
-    const facturaFormatted = factura.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+    const bill = totalSales * 0.03;
+    const totalSalesFormatted = totalSales.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+    const billFormatted = bill.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
     const months = [
         "ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO",
         "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE",
@@ -102,17 +102,19 @@ const facturaManual = onCall(async () => {
     const monthName = months[currentDate.getMonth()];
     const secretEmail = process.env.SECRET_EMAIL;
 
+
     const infoEmail = {
-        billValue: facturaFormatted,
-        comision: '3%',
-        ventasTotales: totalVentasFormatted,
+        billValue: billFormatted,
+        comision: '10%',
+        ventasTotales: totalSalesFormatted,
         numeroDeReservas: docs.length,
-        aliado: 'Abya Yala Hostel',
+        aliado: 'La reservita',
         mes: monthName,
         secret: secretEmail,
     };
 
     return sendBillEmail(infoEmail);
+
 });
 
 const firestoreTesting = onCall(async () => {
@@ -123,6 +125,7 @@ const firestoreTesting = onCall(async () => {
         email: 'cprada33@hotmail.com',
         documentId: '324234',
         participants: { hola: 'ds' },
+        date: checkin,
         invoice: {},
         fileName: 'reserva',
         fileType: 'jpg',
@@ -130,23 +133,37 @@ const firestoreTesting = onCall(async () => {
         productsPrice: 300000,
         discount: 0,
         products: {
-            1: {
-                act_id: 'arborismo',
+            Arborismo_morning: {
+                act_id: 'Arborismo',
                 date: checkin,
                 schedule: "9 am - 1 pm",
                 spots: 20,
+                quantity: 2,
             }
         },
-        addons: {
-            1: {
-                act_id: 'arborismo',
-                date: checkin,
-                schedule: "9 am - 1 pm",
-                spots: 20,
+        addons:
+        {
+            Transporte: {
+                addonPrice: 200000,
+                amount: 1,
+                description: "Embárcate en una emocionante aventura en las aguas rápidas de los ríos de la región. Perfecto para quienes buscan emociones fuertes, adrenalina y momentos llenos de risas en equipo.",
+                icon: "mdi-car",
+                img: "/booking/taxis.jpg",
+                name: "Transporte",
+                price: 200000,
+            },
+            'Almuerzo saludable': {
+                addonPrice: 18000,
+                amount: 2,
+                description: "Embárcate en una emocionante aventura en las aguas rápidas de los ríos de la región. Perfecto para quienes buscan emociones fuertes, adrenalina y momentos llenos de risas en equipo.",
+                icon: "mdi-car",
+                img: "/booking/taxis.jpg",
+                name: "Transporte",
+                price: 36000,
             }
         },
-        addonsPrice: 200000,
-        precioFinal: 500000,
+        addonsPrice: 236000,
+        finalPrice: 500000,
         bookingId: 'RES000',
         status: "pending",
         createdAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
@@ -204,16 +221,37 @@ const firestoreTesting = onCall(async () => {
             productsPrice: 300000,
             discount: 0,
             products: {
-                1: {
+                Arborismo_morning: {
                     act_id: 'Arborismo',
                     date: checkin,
                     schedule: "9 am - 1 pm",
                     spots: 20,
+                    quantity: 2,
                 }
             },
-            addons: 'dsa',
-            addonsPrice: 200000,
-            precioFinal: 500000,
+            addons:
+            {
+                Transporte: {
+                    addonPrice: 200000,
+                    amount: 1,
+                    description: "Embárcate en una emocionante aventura en las aguas rápidas de los ríos de la región. Perfecto para quienes buscan emociones fuertes, adrenalina y momentos llenos de risas en equipo.",
+                    icon: "mdi-car",
+                    img: "/booking/taxis.jpg",
+                    name: "Transporte",
+                    price: 200000,
+                },
+                'Almuerzo Saludable': {
+                    addonPrice: 18000,
+                    amount: 2,
+                    description: "Embárcate en una emocionante aventura en las aguas rápidas de los ríos de la región. Perfecto para quienes buscan emociones fuertes, adrenalina y momentos llenos de risas en equipo.",
+                    icon: "mdi-car",
+                    img: "/booking/taxis.jpg",
+                    name: "Transporte",
+                    price: 36000,
+                }
+            },
+            addonsPrice: 236000,
+            finalPrice: 500000,
             bookingId: 'RES000',
             status: "pending",
             createdAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
@@ -238,4 +276,4 @@ const firestoreTesting = onCall(async () => {
     });
 });
 
-module.exports = { facturaFinal, facturaManual, firestoreTesting };
+module.exports = { monthlyBill, manualBill, firestoreTesting };

@@ -12,20 +12,20 @@
                 </span>
               </v-col>
               <v-col
-                v-for="(item, key) in Inputs"
-                :cols="item.cols"
-                :sm="item.colsSM"
-                :key="item[0]"
+                v-for="(input, key) in Inputs"
+                :cols="input.cols"
+                :sm="input.colsSM"
+                :key="input[0]"
               >
                 <v-text-field
-                  :label="item.label"
-                  :variant="item.variant"
-                  v-model="dataItem[item.key]"
-                  :prepend-inner-icon="item.prependIcon"
-                  :type="item.type ? item.type : null"
-                  :minlength="item.minl ? item.minl : null"
-                  :min="item.min ? item.min : null"
-                  :hide-spin-buttons="item.spin ? item.spin : null"
+                  :label="input.label"
+                  :variant="input.variant"
+                  v-model="dataItem[input.key]"
+                  :prepend-inner-icon="input.prependIcon"
+                  :type="input.type ? input.type : null"
+                  :minlength="input.minl ? input.minl : null"
+                  :min="input.min ? input.min : null"
+                  :hide-spin-buttons="input.spin ? input.spin : null"
                 >
                 </v-text-field>
               </v-col>
@@ -182,10 +182,11 @@ const Inputs = computed(() => [
 async function initiateCheckout(payment) {
   loading.value = true;
   try {
-    let handler = window.ePayco.checkout.configure({
+    let handler = ePayco.checkout.configure({
       key: '431e83810ea6a56d54fed22b9a434898',
       test: false, // Set to false in production
     });
+    const orderId = 'ORDER' + Date.now() * 1e6;
 
     let item = {
       ...dataItem.value,
@@ -194,11 +195,11 @@ async function initiateCheckout(payment) {
     };
 
     let data = {
-      name: `Reserva ${useBooking.activity}`,
-      description: `Reserva de actividad ${useBooking.activity} el ${useBooking.date} para ${useBooking.quantity} personas`,
-      invoice: `FAC-${useBooking.id}-${useBooking.quantity}`,
+      name: `Reserva ${dataItem.value.name}`,
+      description: `Reserva de actividad extrema`,
+      invoice: `FAC-${orderId}`,
       currency: 'cop',
-      amount: price,
+      amount: price.value,
       tax_base: '0',
       tax: '0',
       tax_ico: '0',

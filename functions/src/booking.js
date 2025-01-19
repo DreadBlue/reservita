@@ -9,9 +9,9 @@ const {
 const { onCall } = require('firebase-functions/v2/https');
 const { FieldValue } = require('firebase-admin/firestore');
 // const { formValidations } = require('./middlewares.js');
-const { sendBookEmail,
-    // addCalendar 
-} = require('./google.js');
+// const { sendBookEmail,
+// addCalendar 
+// } = require('./google.js');
 const dayjs = require('dayjs');
 const { db, bucket } = require('./firebase');
 
@@ -19,9 +19,9 @@ const getAvailability = onCall(async (request) => {
     const data = request.data;
     const availabilityCollection = db.collection('availability');
     const disponibilidad = {
-        arborismo: 0,
-        canyoning: 0,
-        aventura: 0,
+        Arborismo: 0,
+        Canyoning: 0,
+        Aventura: 0,
     };
 
     const availabilityQuery = availabilityCollection.where("date", "==", data.date)
@@ -32,9 +32,9 @@ const getAvailability = onCall(async (request) => {
             id: doc.id,
             ...doc.data(),
         }));
-        disponibilidad.arborismo = [docs[0], docs[1]];
-        disponibilidad.aventura = [docs[2], docs[3]];
-        disponibilidad.canyoning = [docs[4], docs[5]];
+        disponibilidad.Arborismo = { morning: docs[0], afternoon: docs[1] };
+        disponibilidad.Aventura = { morning: docs[2], afternoon: docs[3] };
+        disponibilidad.Canyoning = { morning: docs[4], afternoon: docs[5] };
 
         return disponibilidad;
     } catch (error) {
@@ -146,19 +146,19 @@ const makeReservation = onCall(async (request) => {
         log('Reserva creada con éxito');
         await takeAvailability(item);
         log('Disponibilidad actualizada');
-        const secretEmail = process.env.SECRET_EMAIL;
-        const infoEmail = {
-            name: item.name,
-            email: item.email,
-            products: item.products,
-            date: item.date,
-            bookingId: bookingId,
-            addons: item.addons,
-            subject: 'Confirmación de reserva',
-            bookingPrice: item.bookingPrice,
-            secret: secretEmail,
-        };
-        sendBookEmail(infoEmail);
+        // const secretEmail = process.env.SECRET_EMAIL;
+        // const infoEmail = {
+        //     name: item.name,
+        //     email: item.email,
+        //     products: item.products,
+        //     date: item.date,
+        //     bookingId: bookingId,
+        //     addons: item.addons,
+        //     subject: 'Confirmación de reserva',
+        //     bookingPrice: item.bookingPrice,
+        //     secret: secretEmail,
+        // };
+        // sendBookEmail(infoEmail);
         // const secretCalendar = process.env.SECRET_CALENDAR;
         // const description = `https://www.lareservita.com/admin/reservas/${item.bookingId}-${item.mail}`;
         // const infoEvent = {
