@@ -114,7 +114,6 @@ const manualBill = onCall(async () => {
     };
 
     return sendBillEmail(infoEmail);
-
 });
 
 const firestoreTesting = onCall(async () => {
