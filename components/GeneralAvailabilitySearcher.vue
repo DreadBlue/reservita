@@ -63,10 +63,6 @@ function redirection() {
       query: { date: date.value },
     });
   }
-  router.push({
-    path: '/reservar',
-    query: { date: date.value },
-  });
 }
 
 watch(
