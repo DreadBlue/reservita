@@ -50,7 +50,6 @@ const createDatabase = onCall(async () => {
     // });
 });
 
-
 const adminBookings = onCall(async () => {
     const currentDay = dayjs().subtract(1, 'day').format('YYYY-MM-DD');
     const bookingsCollection = db.collection('bookings');
@@ -82,8 +81,8 @@ const retakeAvailability = async (item) => {
     const availabilityCollection = db.collection('availability');
     const availabilityQuery = availabilityCollection
         .where('date', '==', item.date)
-        .where('act_id', '==', item.actividad.toLowerCase())
-        .where('schedule', '==', item.slot.toLowerCase());
+        .where('act_id', '==', item.actividad)
+        .where('schedule', '==', item.schedule);
 
     try {
         const availabilitySnapshot = await availabilityQuery.get();

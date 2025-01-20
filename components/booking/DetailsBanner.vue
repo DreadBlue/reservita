@@ -82,7 +82,6 @@ const useBooking = useBookingStore();
 const route = useRoute();
 const router = useRouter();
 const date = route.query.date;
-
 const products = computed(() => useBooking.products);
 const addons = computed(() => useBooking.addons);
 const bookingPrice = computed(

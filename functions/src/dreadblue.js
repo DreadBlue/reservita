@@ -175,7 +175,7 @@ const firestoreTesting = onCall(async () => {
         act_id: 'Arborismo',
         date: checkin,
         schedule: "9 am - 1 pm",
-        spots: 20,
+        spots: 22,
     });
     await db.collection('availability').doc(`canyoning${checkin}_morning`).set({
         act_id: 'Canyoning',

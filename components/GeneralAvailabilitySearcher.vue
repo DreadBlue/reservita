@@ -44,6 +44,7 @@ const { smAndUp } = useDisplay();
 const reactiveHeight = ref('max-width: 85%');
 const useBooking = useBookingStore();
 const min = DateTime.local().toString().slice(0, 10);
+// let minMonth = 0;
 const date = ref(props.oldDate);
 
 function redirection() {
@@ -62,6 +63,10 @@ function redirection() {
       query: { date: date.value },
     });
   }
+  router.push({
+    path: '/reservar',
+    query: { date: date.value },
+  });
 }
 
 watch(

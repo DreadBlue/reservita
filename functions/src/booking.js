@@ -9,9 +9,9 @@ const {
 const { onCall } = require('firebase-functions/v2/https');
 const { FieldValue } = require('firebase-admin/firestore');
 // const { formValidations } = require('./middlewares.js');
-// const { sendBookEmail,
-// addCalendar 
-// } = require('./google.js');
+const { sendBookEmail,
+    // addCalendar 
+} = require('./google.js');
 const dayjs = require('dayjs');
 const { db, bucket } = require('./firebase');
 
@@ -146,19 +146,41 @@ const makeReservation = onCall(async (request) => {
         log('Reserva creada con éxito');
         await takeAvailability(item);
         log('Disponibilidad actualizada');
-        // const secretEmail = process.env.SECRET_EMAIL;
-        // const infoEmail = {
-        //     name: item.name,
-        //     email: item.email,
-        //     products: item.products,
-        //     date: item.date,
-        //     bookingId: bookingId,
-        //     addons: item.addons,
-        //     subject: 'Confirmación de reserva',
-        //     bookingPrice: item.bookingPrice,
-        //     secret: secretEmail,
-        // };
-        // sendBookEmail(infoEmail);
+        const secretEmail = process.env.SECRET_EMAIL;
+        let activitiesEmail = '';
+        let quantityEmail = 0;
+        let menuEmail = 0;
+        let transportEmail = 0;
+        for (const addon in item.addons) {
+            if (addon == 'Almuerzo saludable') {
+                menuEmail = menuEmail + item.addons[addon].amount;
+            } else if (addon == 'Almuerzo local') {
+                menuEmail = menuEmail + item.addons[addon].amount;
+            } else if (addon == 'Transporte') {
+                transportEmail = item.addons[addon].amount;
+            }
+        }
+        for (const activity in item.products) {
+            quantityEmail = quantityEmail + item.products[activity].quantity;
+            if (activitiesEmail === '') {
+                activitiesEmail = item.products[activity].act_id + ' a las ' + item.products[activity].schedule;
+            } else {
+                activitiesEmail = activitiesEmail + ', ' + item.products[activity].act_id + ' a las ' + item.products[activity].schedule;
+            }
+        }
+        const infoEmail = {
+            bookingId: bookingId,
+            name: item.name,
+            activities: activitiesEmail,
+            date: item.date,
+            quantity: quantityEmail,
+            menu: menuEmail,
+            transport: transportEmail,
+            subject: 'Confirmación de reserva',
+            secret: secretEmail,
+            email: item.email,
+        };
+        sendBookEmail(infoEmail);
         // const secretCalendar = process.env.SECRET_CALENDAR;
         // const description = `https://www.lareservita.com/admin/reservas/${item.bookingId}-${item.mail}`;
         // const infoEvent = {
@@ -178,8 +200,9 @@ const makeReservation = onCall(async (request) => {
 });
 
 const lookBooking = onCall(async (request) => {
-    const { id, mail } = request.data.bookingInfo;
-    const bookingQuery = db.collection('bookings').where('bookingId', '==', id).where('mail', '==', mail);
+    const { id, email } = request.data.bookingInfo;
+    const bookingQuery = db.collection('bookings').where('bookingId', '==', id).where('email', '==', email);
+
 
     try {
         const availabilitySnapshot = await bookingQuery.get();
