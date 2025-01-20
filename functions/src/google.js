@@ -68,7 +68,6 @@ const sendBookEmail = (data) => {
     correoHtml = correoHtml.replace('{{name}}', data.name);
     correoHtml = correoHtml.replace('{{activity}}', data.activities);
     correoHtml = correoHtml.replace('{{date}}', data.date);
-    // correoHtml = correoHtml.replace('{{schedule}}', data.horario);
     correoHtml = correoHtml.replace('{{quantity}}', data.quantity);
     correoHtml = correoHtml.replace('{{menu}}', data.menu);
     correoHtml = correoHtml.replace('{{transport}}', data.transport);

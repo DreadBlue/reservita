@@ -9,9 +9,9 @@ const {
 const { onCall } = require('firebase-functions/v2/https');
 const { FieldValue } = require('firebase-admin/firestore');
 // const { formValidations } = require('./middlewares.js');
-// const { sendBookEmail,
-// addCalendar 
-// } = require('./google.js');
+const { sendBookEmail,
+    // addCalendar 
+} = require('./google.js');
 const dayjs = require('dayjs');
 const { db, bucket } = require('./firebase');
 
@@ -147,7 +147,7 @@ const makeReservation = onCall(async (request) => {
         await takeAvailability(item);
         log('Disponibilidad actualizada');
         const secretEmail = process.env.SECRET_EMAIL;
-        let horarioEmail = '';
+        let activitiesEmail = '';
         let quantityEmail = 0;
         let menuEmail = 0;
         let transportEmail = 0;
@@ -162,10 +162,10 @@ const makeReservation = onCall(async (request) => {
         }
         for (const activity in item.products) {
             quantityEmail = quantityEmail + item.products[activity].quantity;
-            if (horarioEmail === '') {
-                horarioEmail = item.products[activity].act_id + ' a las ' + item.products[activity].schedule;
+            if (activitiesEmail === '') {
+                activitiesEmail = item.products[activity].act_id + ' a las ' + item.products[activity].schedule;
             } else {
-                horarioEmail = horarioEmail + ' y ' + item.products[activity].act_id + ' a las ' + item.products[activity].schedule;
+                activitiesEmail = activitiesEmail + ', ' + item.products[activity].act_id + ' a las ' + item.products[activity].schedule;
             }
         }
         const infoEmail = {
@@ -173,7 +173,6 @@ const makeReservation = onCall(async (request) => {
             name: item.name,
             activities: activitiesEmail,
             date: item.date,
-            // horario: horarioEmail,
             quantity: quantityEmail,
             menu: menuEmail,
             transport: transportEmail,
