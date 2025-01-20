@@ -40,32 +40,6 @@ export const useBookingStore = defineStore("booking", {
       }
     },
 
-    async createDatabase() {
-      try {
-        const createDatabaseFunction = httpsCallable(
-          functions,
-          'createDatabase',
-        );
-        await createDatabaseFunction();
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
-    },
-
-    async firestoreTesting() {
-      try {
-        const firestoreTesting = httpsCallable(
-          functions,
-          'firestoreTesting',
-        );
-        await firestoreTesting();
-      } catch (error) {
-        console.error(error);
-        return [];
-      }
-    },
-
     async getAvailability(date) {
       try {
         const availabilityFunction = httpsCallable(
