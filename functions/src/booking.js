@@ -149,7 +149,6 @@ const makeReservation = onCall(async (request) => {
         log('Disponibilidad actualizada');
         const secretEmail = process.env.SECRET_EMAIL;
         let activitiesEmail = '';
-
         let quantityEmail = 0;
         let menuEmail = 0;
         let transportEmail = 0;
