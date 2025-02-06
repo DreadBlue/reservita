@@ -20,6 +20,23 @@ const createDatabase = onCall(async () => {
         ) {
             const formattedDate = date.toISOString().split('T')[0];
 
+            await availabilityCollection
+            .doc(`Avanzado_${formattedDate}_morning`)
+            .set({
+                act_id: "Avanzado",
+                date: formattedDate,
+                schedule: "9 am - 1 pm",
+                spots: 10,
+            });
+        await availabilityCollection
+            .doc(`Avanzado__${formattedDate}_afternoon`)
+            .set({
+                act_id: "Avanzado",
+                date: formattedDate,
+                schedule: "1 pm - 5 pm",
+                spots: 10,
+            });
+
             for (const activity of activities) {
                 await availabilityCollection
                     .doc(`${activity}_${formattedDate}_morning`)
