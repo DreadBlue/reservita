@@ -5,6 +5,7 @@
     <GeneralPresentationCard :model="modelOne" />
     <GeneralPresentationCard :model="modelTwo" />
     <GeneralPresentationCard :model="modelThree" />
+    <GeneralPresentationCard :model="modelFive" />
   </section>
 </template>
 
@@ -67,6 +68,28 @@ const modelThree = computed(() => {
     icon: {
       uno: {
         icon: 'mdi-numeric-3-circle',
+        text: t('dificultad'),
+      },
+      dos: {
+        icon: 'mdi-numeric-3-circle',
+        text: t('time'),
+      },
+      tres: {
+        icon: 'mdi-numeric-8-circle',
+        text: t('edad'),
+      },
+    },
+  };
+});
+const modelFive = computed(() => {
+  return {
+    clases: 'order-1',
+    title: 'CANYONING AVANZADO',
+    description: t('canyoningDescription'),
+    image: '/images/avanzado.webp',
+    icon: {
+      uno: {
+        icon: 'mdi-numeric-5-circle',
         text: t('dificultad'),
       },
       dos: {
