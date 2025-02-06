@@ -34,10 +34,10 @@ const getAvailability = onCall(async (request) => {
             ...doc.data(),
         }));
 
-        disponibilidad.Arborismo = { morning: docs[0], afternoon: docs[1] };
-        disponibilidad.Aventura = { morning: docs[2], afternoon: docs[3] };
-        disponibilidad.Canyoning = { morning: docs[4], afternoon: docs[5] };
-        disponibilidad.Avanzado = { morning: docs[6], afternoon: docs[7] };
+        disponibilidad.Arborismo = { morning: docs[1], afternoon: docs[0] };
+        disponibilidad.Avanzado = { morning: docs[3], afternoon: docs[2] };
+        disponibilidad.Aventura = { morning: docs[5], afternoon: docs[4] };
+        disponibilidad.Canyoning = { morning: docs[7], afternoon: docs[6] };
 
         return disponibilidad;
     } catch (error) {
