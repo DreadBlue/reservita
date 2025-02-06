@@ -189,8 +189,8 @@ const firestoreTesting = onCall(async () => {
         schedule: "9 am - 1 pm",
         spots: 20,
     });
-    await db.collection('availability').doc(`canyoningAvanzado_${checkin}_morning`).set({
-        act_id: 'Canyoning Avanzado',
+    await db.collection('availability').doc(`avanzado_${checkin}_morning`).set({
+        act_id: 'Avanzado',
         date: checkin,
         schedule: "9 am - 1 pm",
         spots: 10,
@@ -213,8 +213,8 @@ const firestoreTesting = onCall(async () => {
         schedule: "1 pm - 5 pm",
         spots: 20,
     });
-    await db.collection('availability').doc(`canyoningAvanzado_${checkin}_afternoon`).set({
-        act_id: 'Canyoning Avanzado',
+    await db.collection('availability').doc(`avanzado_${checkin}_afternoon`).set({
+        act_id: 'Avanzado',
         date: checkin,
         schedule: "1 pm - 5 pm",
         spots: 10,

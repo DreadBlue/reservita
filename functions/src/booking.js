@@ -22,7 +22,7 @@ const getAvailability = onCall(async (request) => {
         Arborismo: 0,
         Canyoning: 0,
         Aventura: 0,
-        CanyoningAvanzado: 0,
+        Avanzado: 0,
     };
 
     const availabilityQuery = availabilityCollection.where("date", "==", data.date)
@@ -37,7 +37,7 @@ const getAvailability = onCall(async (request) => {
         disponibilidad.Arborismo = { morning: docs[0], afternoon: docs[1] };
         disponibilidad.Aventura = { morning: docs[2], afternoon: docs[3] };
         disponibilidad.Canyoning = { morning: docs[4], afternoon: docs[5] };
-        disponibilidad.CanyoningAvanzado = { morning: docs[6], afternoon: docs[7] };
+        disponibilidad.Avanzado = { morning: docs[6], afternoon: docs[7] };
 
         return disponibilidad;
     } catch (error) {
