@@ -177,17 +177,23 @@ const firestoreTesting = onCall(async () => {
         schedule: "9 am - 1 pm",
         spots: 22,
     });
-    await db.collection('availability').doc(`canyoning${checkin}_morning`).set({
+    await db.collection('availability').doc(`canyoning_${checkin}_morning`).set({
         act_id: 'Canyoning',
         date: checkin,
         schedule: "9 am - 1 pm",
         spots: 20,
     });
-    await db.collection('availability').doc(`aventura${checkin}_morning`).set({
+    await db.collection('availability').doc(`aventura_${checkin}_morning`).set({
         act_id: 'Aventura',
         date: checkin,
         schedule: "9 am - 1 pm",
         spots: 20,
+    });
+    await db.collection('availability').doc(`canyoningAvanzado_${checkin}_morning`).set({
+        act_id: 'Canyoning Avanzado',
+        date: checkin,
+        schedule: "9 am - 1 pm",
+        spots: 10,
     });
     await db.collection('availability').doc(`arborismo_${checkin}_afternoon`).set({
         act_id: 'Arborismo',
@@ -195,17 +201,23 @@ const firestoreTesting = onCall(async () => {
         schedule: "1 pm - 5 pm",
         spots: 20,
     });
-    await db.collection('availability').doc(`canyoning${checkin}_afternoon`).set({
+    await db.collection('availability').doc(`canyoning_${checkin}_afternoon`).set({
         act_id: 'Canyoning',
         date: checkin,
         schedule: "1 pm - 5 pm",
         spots: 20,
     });
-    await db.collection('availability').doc(`aventura${checkin}_afternoon`).set({
+    await db.collection('availability').doc(`aventura_${checkin}_afternoon`).set({
         act_id: 'Aventura',
         date: checkin,
         schedule: "1 pm - 5 pm",
         spots: 20,
+    });
+    await db.collection('availability').doc(`canyoningAvanzado_${checkin}_afternoon`).set({
+        act_id: 'Canyoning Avanzado',
+        date: checkin,
+        schedule: "1 pm - 5 pm",
+        spots: 10,
     });
     await db.collection('requests').doc('RES000').set({
         newBooking: {
