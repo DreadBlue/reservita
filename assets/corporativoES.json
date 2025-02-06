@@ -51,10 +51,6 @@
                         "icon": "mdi-food",
                         "text": "Almuerzo saludable y refrigerios para mantener la energía durante la jornada."
                     },
-                    "transporte": {
-                        "icon": "mdi-bus",
-                        "text": "Transporte ida y regreso desde Medellín, eliminando cualquier preocupación logística."
-                    },
                     "seguro": {
                         "icon": "mdi-shield-account",
                         "text": "Seguro para garantizar la seguridad de todos los participantes durante la actividad."
@@ -127,10 +123,6 @@
                     "food": {
                         "icon": "mdi-food",
                         "text": "Almuerzo saludable y refrigerios para mantener la energía durante la jornada."
-                    },
-                    "transporte": {
-                        "icon": "mdi-bus",
-                        "text": "Transporte ida y regreso desde Medellín, eliminando cualquier preocupación logística."
                     },
                     "seguro": {
                         "icon": "mdi-shield-account",

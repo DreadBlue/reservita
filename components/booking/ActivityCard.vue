@@ -68,6 +68,16 @@ async function updatePrice(quantity, activity) {
     } else if (quantity <= 20) {
       localProduct.price = 180000 * quantity;
     }
+  } else if (activity == 'Avanzado') {
+    if (quantity <= 2) {
+      localProduct.price = 250000 * quantity;
+    } else if (quantity <= 5) {
+      localProduct.price = 230000 * quantity;
+    } else if (quantity <= 8) {
+      localProduct.price = 210000 * quantity;
+    } else if (quantity <= 10) {
+      localProduct.price = 200000 * quantity;
+    }
   }
 }
 

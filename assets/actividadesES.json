@@ -102,6 +102,41 @@
             "text": "EDAD MINIMA"
           }
         }
+      },
+
+      {
+        "src": "/images/avanzado.webp",
+        "availability": "Avanzado",
+        "actividad": "Canyoning Avanzado",
+        "titulo": "CANYONING AVANZADO",
+        "background": "bg-mywhite",
+        "precio": [
+            "1 a 2 personas: $250.000",
+            "3 a 5 personas: $230.000",
+            "6 a 8 personas: $210.000",
+            "9 a 10 personas: $200.000"
+          ],
+        "descripcion": "El Canyoning Avanzado es para los más aventureros que buscan una experiencia más intensa y prolongada. Son 8 rápeles de diferentes dificultades, diseñados para quienes quieren llevar su adrenalina al máximo. Es importante contar con una buena condición física para disfrutarlo al máximo.",
+        "price": [
+          250000,
+          230000,
+          210000,
+          200000
+        ],
+        "icon": {
+          "uno": {
+            "icon": "mdi-numeric-5-circle",
+            "text": "DIFICULTAD 1-5"
+          },
+          "dos": {
+            "icon": "mdi-numeric-3-circle",
+            "text": "TIEMPO EN H"
+          },
+          "tres": {
+            "icon": "mdi-numeric-8-circle",
+            "text": "EDAD MINIMA"
+          }
+        }
       }
   ]
   
