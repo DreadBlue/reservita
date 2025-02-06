@@ -32,6 +32,7 @@ const getAvailability = onCall(async (request) => {
             id: doc.id,
             ...doc.data(),
         }));
+
         disponibilidad.Arborismo = { morning: docs[0], afternoon: docs[1] };
         disponibilidad.Aventura = { morning: docs[2], afternoon: docs[3] };
         disponibilidad.Canyoning = { morning: docs[4], afternoon: docs[5] };
