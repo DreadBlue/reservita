@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <layout-nav-bar />
-    <language-selector class="top-right" />
+    <!-- <language-selector class="top-right" /> -->
     <slot />
     <layout-footer />
   </v-app>
