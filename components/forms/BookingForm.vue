@@ -127,7 +127,7 @@ const warning = ref(false);
 const loading = ref(false);
 const invoice = ref([]);
 const price = computed(
-  () => useBooking.bookingPrice + useBooking.addonsPrice - useBooking.discount,
+  () => useBooking.productsPrice + useBooking.addonsPrice - useBooking.discount,
 );
 
 const participantes = ref('');
@@ -187,13 +187,13 @@ async function initiateCheckout(payment) {
       test: false, // Set to false in production
     });
     const orderId = 'ORDER' + Date.now() * 1e6;
-
+    
     let item = {
       ...dataItem.value,
       participants: participantes.value,
       invoice: invoice.value,
     };
-
+    
     let data = {
       name: `Reserva ${dataItem.value.name}`,
       description: `Reserva de actividad extrema`,
