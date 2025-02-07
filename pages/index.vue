@@ -7,6 +7,7 @@
     <GeneralPresentationCard :model="modelThree" />
     <GeneralPresentationCard :model="modelFive" />
   </section>
+  <BookingModalPicker/>
 </template>
 
 <script lang="ts" setup>
@@ -93,7 +94,7 @@ const modelFive = computed(() => {
         text: t('dificultad'),
       },
       dos: {
-        icon: 'mdi-numeric-3-circle',
+        icon: 'mdi-numeric-4-circle',
         text: t('time'),
       },
       tres: {

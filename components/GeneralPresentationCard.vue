@@ -11,6 +11,9 @@
                     </div>
                 </div>
                 <p class="text-white text-body-2 text-center">{{$t('timerDisclaimer')}}</p>
+                <div class="d-flex justify-center">
+                    <v-btn @click="useBooking.updateDetails({showModal: true})" class="bg-mywhite color-main w-25">{{$t('reservarCap')}}</v-btn>
+                </div>
             </v-col>
             <v-col cols="6" class="order-1 d-sm-flex d-none">
                 <div>
@@ -20,11 +23,15 @@
     </v-container>
 </template>
 
-<script lang="ts" setup>
+<script setup>
+import { useBookingStore } from '/stores/booking.js';
+
 defineProps({
-  model: {
-    type: Object,
-    required: true,
-  },
+    model: {
+        type: Object,
+        required: true,
+    },
 });
+
+const useBooking = useBookingStore();
 </script>
