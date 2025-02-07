@@ -7,7 +7,7 @@
     <GeneralPresentationCard :model="modelThree" />
     <GeneralPresentationCard :model="modelFive" />
   </section>
-  <BookingModalPicker/>
+  <booking-modal-picker/>
 </template>
 
 <script lang="ts" setup>
