@@ -35,7 +35,7 @@
               </div>
             </v-col>
             <v-col cols="12" sm="5" class="d-flex align-center justify-sm-end justify-center">
-              <v-btn to="/" class="bg-second color-white">{{$t('reservarCap')}}</v-btn>
+              <v-btn @click="useBooking.updateDetails({showModal: true})" class="bg-second color-white">{{$t('reservarCap')}}</v-btn>
             </v-col>
         </v-row>
       </v-col>
@@ -43,7 +43,11 @@
   </v-container>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { useBookingStore } from '/stores/booking.js';
+
+const useBooking = useBookingStore();
+
 defineProps({
   item: {
     type: Object,

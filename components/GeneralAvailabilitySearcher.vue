@@ -49,7 +49,7 @@ const min = DateTime.local().toString().slice(0, 10);
 const date = ref(props.oldDate);
 
 function redirection() {
-  useBooking.updateDetails({ date: date.value });
+  useBooking.updateDetails({ date: date.value, showModal: false });
   if (
     route.path == '/eventos-empresariales' ||
     route.path == '/eventos-empresariales/reservar'
