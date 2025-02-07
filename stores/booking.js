@@ -28,6 +28,7 @@ export const useBookingStore = defineStore("booking", {
       transporte: false,
       almueroLocal: false,
       almuerzoSaludable: false,
+      showModal: false,
     };
   },
   actions: {

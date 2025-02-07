@@ -60,7 +60,7 @@ const addons = reactive({
     name: 'Almuerzo local',
     description: t('almuerzoFiambre'),
     icon: 'mdi-food',
-    price: 18000,
+    price: 20000,
     amount: 0,
   },
   almuerzoSaludable: {
@@ -68,7 +68,7 @@ const addons = reactive({
     name: 'Almuerzo saludable',
     description: t('almuerzoSaludable'),
     icon: 'mdi-food',
-    price: 18000,
+    price: 20000,
     amount: 0,
   },
   transport: {

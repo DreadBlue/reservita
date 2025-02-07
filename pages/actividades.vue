@@ -4,6 +4,7 @@
       <v-col>
         <GeneralBanner :model="presentation"/>
         <GeneralImageDescription v-for="activity in actividades" :item="activity" :key="activity.actividad"/>
+        <BookingModalPicker/>
       </v-col>
     </v-row>
   </v-container>
