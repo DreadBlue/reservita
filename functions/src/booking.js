@@ -25,7 +25,7 @@ const getAvailability = onCall(async (request) => {
         Avanzado: 0,
     };
 
-    const availabilityQuery = availabilityCollection.where("date", "==", data.date)
+    const availabilityQuery = availabilityCollection.where("date", "==", data.date).orderBy("act_id", "asc");
 
     try {
         const availabilitySnapshot = await availabilityQuery.get();
@@ -33,6 +33,8 @@ const getAvailability = onCall(async (request) => {
             id: doc.id,
             ...doc.data(),
         }));
+        
+        log(docs)
 
         disponibilidad.Arborismo = { morning: docs[1], afternoon: docs[0] };
         disponibilidad.Avanzado = { morning: docs[3], afternoon: docs[2] };
