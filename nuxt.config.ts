@@ -41,6 +41,7 @@ export default defineNuxtConfig({
       });
     },
     "@pinia/nuxt",
+    'pinia-plugin-persistedstate/nuxt',
     "dayjs-nuxt",
     "@nuxtjs/i18n",
   ],
