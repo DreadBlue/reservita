@@ -85,7 +85,7 @@ const date = route.query.date;
 const products = computed(() => useBooking.products);
 const addons = computed(() => useBooking.addons);
 const bookingPrice = computed(
-  () => useBooking.addonsPrice + useBooking.productsPrice,
+  () => useBooking.productsPrice + useBooking.addonsPrice - useBooking.discount
 );
 
 watch(products, (newProducts) => {

@@ -182,7 +182,7 @@ const Inputs = computed(() => [
 ]);
 
 async function initiateCheckout(payment) {
-  // loading.value = true;
+  loading.value = true;
   const orderId = 'ORDER' + Date.now() * 1e6;
   const amount = price.value;
 
