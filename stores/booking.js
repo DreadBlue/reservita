@@ -89,7 +89,7 @@ export const useBookingStore = defineStore("booking", {
       };
 
       if (Object.hasOwn(descuentos, code)) {
-        const totalDiscount = (this.bookingPrice * descuentos[code]) / 100;
+        const totalDiscount = (this.productsPrice * descuentos[code]) / 100;
         this.updateDetails({
           discount: totalDiscount,
         });
