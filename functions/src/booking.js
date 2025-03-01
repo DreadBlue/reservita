@@ -25,7 +25,7 @@ const getAvailability = onCall(async (request) => {
         Avanzado: 0,
     };
 
-    const availabilityQuery = availabilityCollection.where("date", "==", data.date)
+    const availabilityQuery = availabilityCollection.where("date", "==", data.date).orderBy("act_id", "asc");
 
     try {
         const availabilitySnapshot = await availabilityQuery.get();
