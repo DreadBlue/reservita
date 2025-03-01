@@ -29,7 +29,12 @@ export const useBookingStore = defineStore("booking", {
       almueroLocal: false,
       almuerzoSaludable: false,
       showModal: false,
+      bookingId: 0,
     };
+  },
+  persist: {
+    storage: sessionStorage,
+    pick: ['bookingId'],
   },
   actions: {
     updateDetails(item) {
