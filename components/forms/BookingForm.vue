@@ -116,6 +116,8 @@
 </template>
 
 <script setup>
+import { httpsCallable } from 'firebase/functions';
+import { functions } from '../../firebase/firebase.config';
 import { useBookingStore } from '/stores/booking.js';
 import { useI18n } from 'vue-i18n';
 
@@ -180,59 +182,38 @@ const Inputs = computed(() => [
 ]);
 
 async function initiateCheckout(payment) {
-  loading.value = true;
+  // loading.value = true;
+  const orderId = 'ORDER' + Date.now() * 1e6;
+  const amount = price.value;
+
+  const generateHash = httpsCallable(functions, 'generateHash');
+
   try {
-    let handler = ePayco.checkout.configure({
-      key: '431e83810ea6a56d54fed22b9a434898',
-      test: false, // Set to false in production
-    });
-    const orderId = 'ORDER' + Date.now() * 1e6;
-    
+    const response = await generateHash({ orderId, amount });
+    const { hash } = response.data;
+
     let item = {
       ...dataItem.value,
       participants: participantes.value,
       invoice: invoice.value,
     };
     
-    let data = {
-      name: `Reserva ${dataItem.value.name}`,
-      description: `Reserva de actividad extrema`,
-      invoice: `FAC-${orderId}`,
-      currency: 'cop',
-      amount: price.value,
-      tax_base: '0',
-      tax: '0',
-      tax_ico: '0',
-      country: 'co',
-      lang: 'es',
-
-      //Onpage="false" - Standard="true"
-      external: 'false',
-
-      //Atributos opcionales
-      extra1: 'extra1',
-      extra2: 'extra2',
-      extra3: 'extra3',
-      confirmation: 'https://www.lareservita.com/reservar/confirmacion',
-      response: 'https://www.lareservita.com/reservar/confirmacion',
-
-      //Atributos cliente
-      name_billing: '',
-      address_billing: '',
-      type_doc_billing: '',
-      mobilephone_billing: '',
-      number_doc_billing: '',
-      email_billing: '',
-
-      //atributo deshabilitación método de pago
-      methodsDisable: ['SP', 'CASH'],
-    };
+    const checkout = new BoldCheckout({
+      orderId: orderId,
+      currency: 'COP',
+      amount: amount,
+      apiKey: 'TIM0Skh1yQ_XuYcmFQICzTV7XtxvWY85Fka-eG5ZNFI',
+      integritySignature: hash,
+      description: 'Pago valor dinámico',
+      redirectionUrl: 'https://lareservita.com/reservar/confirmacion',
+      renderMode: 'embedded',
+    });
 
     if (Object.values(item).every((value) => value !== '')) {
       warning.value = false;
       if (payment == 'card') {
         await useBooking.makeReservation(item);
-        handler.open(data);
+        checkout.open();
       } else if (payment == 'cash') {
         await useBooking.makeReservation(item);
         return navigateTo('/reservar/confirmacion');
