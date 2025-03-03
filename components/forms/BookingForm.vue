@@ -88,8 +88,8 @@
           <div class="w-50">
             <img
               class="w-sm-33 w-75 pt-3 pt-sm-1"
-              src="/images/epayco-logo-fondo-oscuro.png"
-              alt="logo Epayco"
+              src="/images/logo-bold.png"
+              alt="logo bold"
             />
           </div>
         </div>
