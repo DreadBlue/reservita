@@ -18,7 +18,7 @@ export const useBookingStore = defineStore("booking", {
       date: "",
       id: "",
       products: {},
-      discount: 0,
+      discount: 100,
       productsPrice: 0,
       addons: {},
       addonsPrice: 0,
@@ -37,6 +37,10 @@ export const useBookingStore = defineStore("booking", {
     pick: ['bookingId'],
   },
   actions: {
+    resetStates() {
+      this.$reset();
+    },
+
     updateDetails(item) {
       const statesNames = Object.keys(this.$state);
       for (const data in item) {
@@ -61,18 +65,17 @@ export const useBookingStore = defineStore("booking", {
 
     applyDiscount(code) {
       const descuentos = {
-        MAGIARESERVITA: 15,
-        INICIACIONRESERVITA: 10,
-        AVENTURAMEDELLIN: 20,
-        test: 99,
+        MAGIARESERVITA: 85,
+        INICIACIONRESERVITA: 90,
+        AVENTURAMEDELLIN: 80,
+        test: 1,
       };
 
       if (Object.hasOwn(descuentos, code)) {
-        const totalDiscount = (this.productsPrice * descuentos[code]) / 100;
         this.updateDetails({
-          discount: totalDiscount,
+          discount: descuentos[code],
         });
-        return "Descuento del " + descuentos[code] + "% aplicado";
+        return "Descuento del " + (100 - descuentos[code]) + "% aplicado";
       } else {
         return "Código de descuento no válido";
       }

@@ -33,11 +33,7 @@ const loaderText = 'Cargando reservas';
 
 onMounted(async () => {
   bookings.value = await useAdmin.adminBookings();
+  loading.value = false;
   useBooking.currentPath == useRoute().path;
-});
-watchEffect(() => {
-  if (bookings.value.length != 0) {
-    loading.value = false;
-  }
 });
 </script>

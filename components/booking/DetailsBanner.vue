@@ -4,17 +4,17 @@
       <v-col cols="12">
         <div class="d-flex justify-center">
           <span class="color-main text-h5 text-sm-h5">{{
-            $t('detalles')
+            $t("detalles")
           }}</span>
         </div>
         <div class="text-body-1 pt-5 d-flex flex-column ga-1">
           <div class="d-flex pl-2 ga-2 align-center">
             <v-icon icon="mdi-calendar-range"></v-icon>
-            <p>{{ dayjs(date).format('DD-MM-YYYY') }}</p>
+            <p>{{ dayjs(date).format("DD-MM-YYYY") }}</p>
           </div>
           <div>
             <v-card
-              v-if="products.length == 0"
+              v-if="Object.keys(products).length == 0"
               style="height: 120px"
               class="d-flex align-center justify-center elevation-2 my-2"
               ><p>No has seleccionado actividades</p></v-card
@@ -33,9 +33,9 @@
             :key="addon.name"
           />
         </div>
-        <div class="d-flex align-center pt-3 text-body-2 text-sm-body-1">
+        <div v-if="route.path == '/reservar/form'" class="d-flex align-center pt-3 text-body-2 text-sm-body-1">
           <v-col cols="6" class="text-start">
-            <span> {{ $t('codigoPre') }} </span>
+            <span> {{ $t("codigoPre") }} </span>
           </v-col>
           <v-col cols="6">
             <v-text-field
@@ -53,7 +53,7 @@
         <v-col cols="12" class="d-flex">
           <p class="text-subtitle-2">Precio:</p>
           <p class="text-body-1 ml-2">
-            ${{ bookingPrice.toLocaleString('es-co') }}
+            ${{ bookingPrice.toLocaleString("es-co") }}
           </p>
         </v-col>
       </v-col>
@@ -62,6 +62,7 @@
           v-if="props.btn"
           class="bg-main color-white"
           @click="redirection()"
+          :disabled="Object.keys(products).length == 0 ? true : false"
           >Continuar reserva</v-btn
         >
       </v-col>
@@ -70,8 +71,8 @@
 </template>
 
 <script setup>
-import { useBookingStore } from '/stores/booking.js';
-import dayjs from 'dayjs';
+import { useBookingStore } from "/stores/booking.js";
+import dayjs from "dayjs";
 
 const props = defineProps({
   btn: {
@@ -85,7 +86,9 @@ const date = route.query.date;
 const products = computed(() => useBooking.products);
 const addons = computed(() => useBooking.addons);
 const bookingPrice = computed(
-  () => useBooking.productsPrice + useBooking.addonsPrice - useBooking.discount
+  () =>
+    (useBooking.productsPrice * useBooking.discount) / 100 +
+    useBooking.addonsPrice
 );
 
 watch(products, (newProducts) => {
@@ -96,26 +99,31 @@ watch(products, (newProducts) => {
   return (useBooking.productsPrice = sum.value);
 });
 
-watch(addons, (newProducts) => {
-  const sum = ref(0);
-  for (const addon in newProducts) {
-    sum.value = sum.value + newProducts[addon].price;
-  }
-  return (useBooking.addonsPrice = sum.value);
-});
+watch(
+  addons,
+  (newProducts) => {
+    console.log(newProducts)
+    const sum = ref(0);
+    for (const addon in newProducts) {
+      sum.value = sum.value + newProducts[addon].addonPrice;
+    }
+    return (useBooking.addonsPrice = sum.value);
+  },
+  { deep: true }
+);
 
 function redirection() {
   const data = route.query;
-  if (route.path == '/reservar') {
+  if (route.path == "/reservar") {
     router.push({
-      path: '/reservar/addons',
+      path: "/reservar/addons",
       query: {
         ...data,
       },
     });
-  } else if (route.path == '/reservar/addons') {
+  } else if (route.path == "/reservar/addons") {
     router.push({
-      path: '/reservar/form',
+      path: "/reservar/form",
       query: {
         ...data,
       },
@@ -123,8 +131,8 @@ function redirection() {
   }
 }
 
-const voucher = ref('');
-const codeVerification = ref('');
+const voucher = ref("");
+const codeVerification = ref("");
 function discounts(discount) {
   codeVerification.value = useBooking.applyDiscount(discount);
 }
