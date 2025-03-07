@@ -9,9 +9,9 @@ const {
   const generateHash = onCall(async (request) => {
     try {
       const datos = request.data;
-      const boldPrivateKey = process.env.BOLD_PRIVATE_KEY;
+      const boldPrivateKeyTest = process.env.BOLD_PRIVATE_KEY_TEST;
   
-      const cadenaConcatenada = `${datos.orderId}${datos.amount}COP${boldPrivateKey}`;
+      const cadenaConcatenada = `${datos.orderId}${datos.amount}COP${boldPrivateKeyTest}`;
   
       const hash = crypto
         .createHash("sha256")

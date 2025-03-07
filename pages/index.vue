@@ -133,5 +133,6 @@ import { useBookingStore } from '@/stores/booking';
 const useBooking = useBookingStore();
 onMounted(async () => {
   useBooking.resetStates();
+  await useBooking.firestoreTesting();
 });
 </script>

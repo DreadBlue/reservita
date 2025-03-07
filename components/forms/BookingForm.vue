@@ -202,7 +202,7 @@ async function initiateCheckout(payment) {
       orderId: orderId,
       currency: 'COP',
       amount: amount,
-      apiKey: 'Uxnc8auoaAsx-hxHeeTH1T_mZ9HBhuKSx1lM7N5LbWs',
+      apiKey: 'TIM0Skh1yQ_XuYcmFQICzTV7XtxvWY85Fka-eG5ZNFI',
       integritySignature: hash,
       description: 'Pago valor dinámico',
       redirectionUrl: 'https://lareservita.com/reservar/confirmacion',
