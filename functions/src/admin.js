@@ -77,6 +77,28 @@ const adminBookings = onCall(async () => {
     }
 });
 
+const extraBookings = onCall(async (request) => {
+    const lastDate = request.data;
+    const bookingsCollection = db.collection('bookings');
+    try {
+        const bookingsQuery = bookingsCollection
+            .orderBy("date", "desc")
+            .startAfter(lastDate)
+            .limit(10)
+
+        const bookingsSnapshot = await bookingsQuery.get();
+        const docs = bookingsSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+        }));
+        log(docs)
+        return docs;
+    } catch (error) {
+        console.log("error trayendo las reservas: ", error);
+        throw error;
+    }
+});
+
 const retakeAvailability = async (item) => {
     const availabilityCollection = db.collection('availability');
     const availabilityQuery = availabilityCollection
@@ -188,4 +210,4 @@ const manageChangeRequest = onCall(async (req) => {
     return log('reserva updated');
 });
 
-module.exports = { createDatabase, deleteBooking, adminBookings, createRequest, fetchRequests, manageChangeRequest };
+module.exports = { createDatabase, deleteBooking, adminBookings, createRequest, fetchRequests, manageChangeRequest, extraBookings };

@@ -3,10 +3,7 @@ import {
   getDocs,
   collection,
   where,
-  query,
-  startAfter,
-  orderBy,
-  limit,
+  query
 } from "firebase/firestore";
 import { db } from "/firebase/firebase.config.js";
 import { httpsCallable } from "firebase/functions";
@@ -38,6 +35,7 @@ export const useAdminStore = defineStore('admin', {
           'adminBookings',
         );
         const bookings = await adminBookings();
+        this.lastBooking = bookings.data[bookings.data.length - 1].date;
         return bookings.data
       } catch (error) {
         console.log("error fetching booking: ", error);
@@ -75,22 +73,16 @@ export const useAdminStore = defineStore('admin', {
 
     async cargarReservas() {
       try {
-        const reservaDB = query(
-          collection(db, "reservas"),
-          orderBy("Check in", "desc"),
-          startAfter(this.lastBooking),
-          limit(10)
+        const extraBookings = httpsCallable(
+          functions,
+          'extraBookings',
         );
-        let snapshot = await getDocs(reservaDB);
-        const docs = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        this.lastBooking = docs[docs.length - 1]["Check in"];
-
-        return docs;
+        const bookings = await extraBookings(this.lastBooking);
+        this.lastBooking = bookings.data[bookings.data.length - 1].date;
+        return bookings.data
       } catch (error) {
-        console.log("Más reservas error: ", error);
+        console.log("error fetching booking: ", error);
+        throw error;
       }
     },
   },
