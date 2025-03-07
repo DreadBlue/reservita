@@ -6,7 +6,7 @@ const { generateHash, paymentReceiver } = require('./payments.js');
 // const { paymentReceiver } = require('./payments.js');
 const { manualBill, monthlyBill, firestoreTesting } = require('./dreadblue.js');
 // const { deleteBooking, createDatabase, adminBookings, createRequest, fetchRequests, manageChangeRequest } = require('./admin.js');
-const { createDatabase, adminBookings, deleteBooking } = require('./admin.js');
+const { createDatabase, adminBookings, deleteBooking, extraBookings } = require('./admin.js');
 
 module.exports = {
   getAvailability,
@@ -20,6 +20,7 @@ module.exports = {
   deleteBooking,
   createDatabase,
   adminBookings,
+  extraBookings,
   // createRequest,
   lookBooking,
   // fetchRequests,

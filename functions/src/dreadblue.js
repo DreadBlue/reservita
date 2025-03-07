@@ -171,6 +171,58 @@ const firestoreTesting = onCall(async () => {
         billPath: 'comprobantes/RES000',
 
     });
+    await db.collection('bookings').doc('RES001').set({
+        name: 'Cristian',
+        phone: '30080',
+        email: 'cprada33@hotmail.com',
+        documentId: '324234',
+        participants: { hola: 'ds' },
+        date: '2025-03-03',
+        invoice: {},
+        fileName: 'reserva',
+        fileType: 'jpg',
+        fileData: 'dsadadasdasd',
+        productsPrice: 300000,
+        discount: 0,
+        products: {
+            Arborismo_morning: {
+                act_id: 'Arborismo',
+                date: checkin,
+                schedule: "9 am - 1 pm",
+                spots: 20,
+                quantity: 2,
+            }
+        },
+        addons:
+        {
+            Transporte: {
+                addonPrice: 200000,
+                amount: 1,
+                description: "Embárcate en una emocionante aventura en las aguas rápidas de los ríos de la región. Perfecto para quienes buscan emociones fuertes, adrenalina y momentos llenos de risas en equipo.",
+                icon: "mdi-car",
+                img: "/booking/taxis.jpg",
+                name: "Transporte",
+                price: 200000,
+            },
+            'Almuerzo saludable': {
+                addonPrice: 18000,
+                amount: 2,
+                description: "Embárcate en una emocionante aventura en las aguas rápidas de los ríos de la región. Perfecto para quienes buscan emociones fuertes, adrenalina y momentos llenos de risas en equipo.",
+                icon: "mdi-car",
+                img: "/booking/taxis.jpg",
+                name: "Transporte",
+                price: 36000,
+            }
+        },
+        addonsPrice: 236000,
+        finalPrice: 500000,
+        bookingId: 'RES000',
+        status: "pending",
+        createdAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+        updatedAt: dayjs().format("YYYY-MM-DD HH:mm:ss"),
+        billPath: 'comprobantes/RES000',
+
+    });
     await db.collection('availability').doc(`arborismo_${checkin}_morning`).set({
         act_id: 'Arborismo',
         date: checkin,
